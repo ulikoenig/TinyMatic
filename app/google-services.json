@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "878405319154",
+    "firebase_url": "https://tinymatic-c9e68.firebaseio.com",
+    "project_id": "tinymatic-c9e68",
+    "storage_bucket": "tinymatic-c9e68.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:878405319154:android:87a08e560ee072f3",
+        "android_client_info": {
+          "package_name": "de.ebertp.HomeDroid"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "878405319154-k2mh3avavrm052hqn1js33qen8orbvjh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA1T_k0HZMxmwoQKcGMb_Fb9Ltg93xtAcM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="intervals">
+        <item>1 Min</item>
+        <item>5 Min</item>
+        <item>15 Min</item>
+        <item>30 Min</item>
+        <item>1 Stunde</item>
+        <item>6 Stunden</item>
+    </string-array>
+    <string-array name="widget_control_modes">
+        <item>Normal</item>
+        <item>Nur Popup</item>
+        <item>Nur Schnellaktion</item>
+        <item>Bedienung sperren</item>
+    </string-array>
+</resources>

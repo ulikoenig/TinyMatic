@@ -1,0 +1,393 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Loading Screen -->
+    <string name="refresh_successful">Synchronisierung erfolgreich</string>
+    <string name="refresh_failed">Synchronisierung fehlgeschlagen</string>
+
+    <!-- First Start Dialog -->
+    <string name="first_start_title">Willkommen zu TinyMatic!</string>
+
+    <!-- Changelog -->
+    <string name="changelog_title">Änderungen in dieser Version</string>
+
+    <!-- Tabs -->
+    <string name="rooms">Räume</string>
+    <string name="favs">Favoriten</string>
+    <string name="categories">Gewerke</string>
+    <string name="scripts">Programme</string>
+    <string name="channels">Kanäle</string>
+    <string name="datapoints">Datenpunkte</string>
+    <string name="variables">Systemvariablen</string>
+    <string name="programs">Programme</string>
+
+    <!-- Context Menu -->
+    <string name="select_icon_internal">Icon auswählen</string>
+    <string name="select_icon_external">Icon von Gerät wählen</string>
+    <string name="remove_icon">Icon entfernen</string>
+    <string name="email">Email senden</string>
+    <string name="unsupported">Bisher nicht unterstützt, hier klicken für mehr Informationen</string>
+    <string name="unsupported_message">Dieses Gerät wird (noch) nicht unterstützt.\n\nWenn Sie möchten, dass das Gerät unterstützt wird, benutzen Sie bitte den Email-Button. Die benötigten Informationen werden automatisch an die Mail angehängt.</string>
+
+    <!-- Rooms Context Menu -->
+    <string name="add_favs">Zu Schnellzugriff hinzufügen</string>
+    <string name="rem_favs">Aus Schnellzugriff entfernen</string>
+
+    <!-- Options Menu -->
+    <string name="refresh_db">Synchronisieren</string>
+    <string name="refresh_cancel">Synchronisierung abbrechen ?</string>
+    <string name="sync_running">Sync läuft…</string>
+    <string name="db_refresh">Datenbank wird synchronisiert</string>
+    <string name="wait_for_refresh">Bitte warten Sie, bis die Synchronisierung abgeschlossen ist und versuchen Sie es erneut.</string>
+    <string name="virtual_remote">Fernbedienung</string>
+    <string name="notifications">Meldungen</string>
+    <string name="protocol">Protokoll</string>
+    <string name="cleaning_db">Datenbank wird geleert</string>
+    <string name="update_stop">Update-Dienst wird gestoppt</string>
+    <string name="update_service_active">Aktiv</string>
+    <string name="update_service_error">Fehler</string>
+    <string name="update_service">Update-Dienst</string>
+    <string name="update_service_started">Gestartet</string>
+    <string name="next_update">Nächstes Update</string>
+    <string name="help">Hilfe</string>
+    <string name="configuration">Einstellungen</string>
+
+    <!-- Room Controls -->
+    <string name="cancel">Abbrechen</string>
+    <string name="close">Schließen</string>
+    <string name="short_click">Kurz</string>
+    <string name="long_click">Lang</string>
+    <string name="on">An</string>
+    <string name="off">Aus</string>
+    <string name="lock">Zu</string>
+    <string name="unlock">Auf</string>
+    <string name="open">Öffnen</string>
+    <string name="run_program">Ausführen</string>
+    <string name="activate">Aktivierung senden</string>
+    <string name="opened">Offen</string>
+    <string name="tilted">Gekippt</string>
+    <string name="closed">Geschlossen</string>
+    <string name="active">Aktiv</string>
+    <string name="inactive">Inaktiv</string>
+    <string name="smoke">Rauch</string>
+    <string name="no_smoke">Kein Rauch</string>
+    <string name="rain">Regen</string>
+    <string name="no_rain">Kein Regen</string>
+
+    <!-- Weather Station -->
+    <string name="temperature">Temperatur</string>
+    <string name="mode">Modus</string>
+    <string name="mode_auto">Auto</string>
+    <string name="mode_manu">Manuell</string>
+    <string name="mode_lowering">Urlaub/Party</string>
+    <string name="mode_boost">Boost</string>
+
+
+    <!-- Icon Gallery -->
+    <string name="gallery_title">Icon auswählen</string>
+
+    <!-- Configuration -->
+    <string name="config_title">Einstellungen</string>
+    <string name="full_refresh">Vollsynchronisation</string>
+    <string name="full_refresh_description">Nach Änderungen an der Konfiguration von Geräten und Räumen ausführen</string>
+    <string name="server_address">Serveradresse</string>
+    <string name="enter_ip">IP-Adresse der CCU</string>
+    <string name="default_tab">Startbildschirm</string>
+    <string name="app_settings">Benutzeroberfläche</string>
+    <string name="reset_favs">Favoriten löschen</string>
+    <string name="reset_favs_sum">Schnellzugriff löschen</string>
+    <string name="reset_icons">Icons zurücksetzen</string>
+    <string name="reset_icons_sum">Alle Icons zurücksetzen</string>
+    <string name="syncAtStart">Beim Start synchronisieren</string>
+    <string name="syncProtocol">Protokoll synchronisieren</string>
+    <string name="syncProtocolDesc">Nur für CCU2 geeignet</string>
+    <string name="showNotifications">Benachrichtigungen anzeigen</string>
+    <string name="showErrorMessages">Fehlermeldungen anzeigen</string>
+    <string name="hideNotVisible">Versteckte Einträge ausblenden</string>
+    <string name="disableNotOperate">Deaktivierte Einträge sperren</string>
+    <string name="hideNotVisibleDesc">Einträge verstecken, die auf der CCU als nicht sichtbar markiert sind</string>
+    <string name="disableNotOperateDesc">Einträge sperren, die auf der CCU als nicht steuerbar markiert sind</string>
+    <string name="mhm_enable_title">Aktivieren</string>
+    <string name="mhm_enable_text">CloudMatic aktivieren</string>
+    <string name="username">Benutzername</string>
+    <string name="mhm_username_desc">Die Benutzerdaten für die Anmeldung im Webportal müssen mit denen für den Login für den Fernzugriff auf die CCU übereinstimmen.</string>
+    <string name="password">Passwort</string>
+    <string name="mhm_id">CloudMatic-ID</string>
+    <string name="yousure">Sind Sie sicher?</string>
+    <string name="update_enable_text">Warnung: Nur auf Geräte nutzen, die PERMANENT mit dem Heimnetz verbunden sind, es kann sonst zu Abstürzen der CCU kommen!</string>
+    <string name="enable_periodic_updates">Periodische Updates</string>
+    <string name="periodic_updates">Synchronisierung</string>
+    <string name="syncOnFailureDesc">Bei Fehler periodische Synchronisierung nicht unterbrechen</string>
+    <string name="syncOnFailure">Bei Fehler erneut versuchen</string>
+    <string name="update_interval">Synchronisierungsintervall</string>
+    <string name="periodic_datapoints_note">Wird nicht benötigt wenn Update-Dienst aktiv ist</string>
+    <string name="profile">Profile</string>
+    <string name="profiles">Profile</string>
+    <string name="profile_saved">Profil gespeichert:</string>
+    <string name="create_new_profile">Neues Profil erstellen</string>
+    <string name="add_new_profile">Neues Profil</string>
+    <string name="default_profile">Profil #1</string>
+    <string name="activate_profile">Profil aktivieren ?</string>
+    <string name="delete_profile_question">Profil löschen ?</string>
+    <string name="profile_settings">Profiloptionen</string>
+    <string name="delete_profile">Löschen</string>
+    <string name="rename">Umbenennen</string>
+    <string name="new_profile_name">Neuer Profilname</string>
+    <string name="profile_created">Profil erstellt und aktiviert</string>
+    <string name="max_number_of_profiles">Maximal 10 Profile möglich</string>
+    <string name="advanced_network">Erweitere Netzwerksicherheit</string>
+    <string name="use_https">HTTPS verwenden</string>
+    <string name="use_https_desc">Wird für Fernzugriff und lokale Verbindungen aktiviert. Bei Synchronisierungsfehlern deaktiveren.</string>
+    <string name="use_remote">Fernzugriff aktivieren</string>
+    <string name="remote_access">Fernzugriff</string>
+    <string name="use_remote_desc">Bitte prüfen Sie die korrekte Konfiguration ihres Routers. Weitere Informationen zur Einrichtung im Support Center im Hilfe-Menü</string>
+    <string name="remote_ccu_desc">Beispielkonfiguration mit HTTPS für \'https://homematic.dyndns.org:1234\'\nEntf. CCU: homematic.dyndns.org\nPort verwenden, Port 1234\nHTTPS aktiviert.</string>
+    <string name="remote_ccu">Entfernte CCU-Adresse</string>
+    <string name="use_remote_port">Port verwenden</string>
+    <string name="remote_port">Port</string>
+    <string name="grid_break_limit_desc">Umbruch der Tablet-Ansicht auf zwei Spalten ab dieser Anzahl Elemente</string>
+    <string name="grid_break_limit">Anzahl Elemente für zwei Spalten</string>
+    <string name="useDarkTheme">Dunkles Design</string>
+
+    <!-- AppState -->
+    <string name="appstate_title">Status</string>
+    <string name="appstate_dbtitle">Datenbank</string>
+    <string name="appstate_synctitle">Synchronisierung</string>
+    <string name="appstate_success">Synchronisierung erfolgreich</string>
+    <string name="appstate_background">Update-Dienst</string>
+    <string name="appstate_updatecount">Anzahl Updates</string>
+    <string name="lastSync">Letzte Synchronisierung</string>
+
+    <!-- Empty Messages -->
+    <string name="nofavs">Keine Einträge angelegt.\n\n\ Führen Sie einen langen Klick auf ein Objekt aus um es zum Schnellzugriff hinzuzufügen.</string>
+    <string name="no_elements">Keine Elemente gefunden</string>
+
+    <!-- Control -->
+    <string name="send_successfully">Erfolgreich gesendet</string>
+    <string name="not_send_successfully">Keine Antwort der CCU, Befehl möglicherweise nicht gesendet</string>
+    <string name="yes">Ja</string>
+    <string name="no">Nein</string>
+    <string name="quit">Beenden</string>
+    <string name="quit_message">Wollen Sie das Programm wirklich beenden?</string>
+    <string name="licence_information">Lizenzinformationen</string>
+    <string name="click_to_unlock">Aktivieren</string>
+    <string name="commands_sent">Befehle gesendet</string>
+    <string name="commands_left">Befehle übrig</string>
+    <string name="licence_state">"Lizenzstatus</string>
+    <string name="licence_unlocked">aktiviert</string>
+    <string name="licence_locked">nicht aktiviert</string>
+    <string name="unlock_app">Aktivieren</string>
+    <string name="unlock_title">So aktivieren Sie TinyMatic</string>
+    <string name="unlock_dialog">TinyMatic ist nach einer Abstimmung der Nutzer kostenpflichtig.\n\nSie können die Funktionalität der App vollständig nutzen und eine limitierte Anzahl von Kommandos pro Gerät an die CCU senden, bis Sie die App aktivieren müssen. Die Synchronisierung ist auch nach der Erreichung des Kommando-Limits uneingeschränkt möglich. Eine Neuinstallation der App setzt das Limit zurück.\n\nDie Freischaltung erfolgt über die Installation der ehemaligen Donation App, jetzt \'TinyMatic Unlocker\'. Nach der Installation müssen Sie die Aktivierung einmalig über den Konfigurationsbildschirm durchführen oder die App neu starten\n\nDer Download ist über Google Play oder Amazon möglich.\n\nWeitere Informationen zur Installation auf mehreren Geräten gibt es im Blog. Bitte erwerben Sie den Unlocker erst, wenn Sie mit der Funktionalität der App zufrieden sind!</string>
+    <string name="command_limit_reached">Kommando konnte nicht gesendet werden da das Kommandolimit erreicht ist. Bitte erwerben Sie TinyMatic Unlocker um die App zu aktivieren. Mehr Informationen unter \"Aktivieren\" im Optionsmenü</string>
+    <string name="activation_successful">TinyMatic Unlocker - Aktivierung erfolgreich!</string>
+    <string name="activation_not_successful">Aktivierung fehlgeschlagen, bitte stellen Sie sicher, dass TinyMatic Unlocker installiert und aktuell ist</string>
+    <string name="widget_select_channel">Objekt auswählen</string>
+    <string name="widget_status_small">TinyMatic Status Klein</string>
+    <string name="widget_status_med">TinyMatic Status Mittel</string>
+    <string name="widget_status_big">TinyMatic Status Groß</string>
+    <string name="sync_widget">TinyMatic Synchronisierung</string>
+    <string name="speech_widget">TinyMatic Spracheingabe"</string>
+    <string name="search">Suchen</string>
+    <string name="child_protection">Kindersicherung</string>
+    <string name="automation">Automatisierung</string>
+    <string name="child_protect_state_on">Status: Aktiviert</string>
+    <string name="child_protect_state_off">Status: Deaktiviert</string>
+    <string name="password_quest">Bitte geben Sie das Passwort ein</string>
+    <string name="password_wrong">Falsches Passwort</string>
+    <string name="password_new">Passwort festlegen</string>
+    <string name="default_password">Standartpasswort: test</string>
+    <string name="backup">Backup</string>
+    <string name="backup_export">Backup exportieren</string>
+    <string name="backup_import">Backup importieren</string>
+    <string name="backup_export_sum">Export nach /HomeDroidBackup/</string>
+    <string name="backup_import_sum">Import aus /HomeDroidBackup/</string>
+    <string name="backup_import_quest">Sind Sie sicher ? Dies überschreibt die aktuelle Datenbank der App!</string>
+    <string name="backup_export_quest">Sind Sie sicher ? Das vorherige Backup wird überschrieben.</string>
+    <string name="backup_export_successful">Export erfolgreich</string>
+    <string name="backup_export_failed">"Export fehlgeschlagen</string>
+    <string name="backup_card_error">Fehler beim Zugriff auf Speichermedium</string>
+    <string name="backup_import_successful">Import erfolgreich, TinyMatic wird neu gestartet…</string>
+    <string name="backup_import_failed">Import fehlgeschlagen, Backup konnte nicht gefunden werden</string>
+    <string name="refresh_state">Status aktualisieren</string>
+    <string name="disclaimer_title">Haftungsausschluss</string>
+    <string name="disclaimer_text">Jede Version von TinyMatic wird vor der Veröffentlichung sorgfältig getestet, dennoch kann nicht ausgeschlossen werden, dass Fehlfunktionen auftreten. Der Einsatz erfolgt deshalb auf eigene Gefahr. Der Autor übernimmt keine Garantie für die Funktionsfähigkeit und kann für evtl. Folgeschäden nicht haftbar gemacht werden.</string>
+    <string name="reset_settings">Einstellungen zurücksetzen</string>
+    <string name="hide_unsupported">Nicht unterstützte Geräte ausblenden</string>
+    <string name="needs_refresh">Synchronisierung läuft, Status möglicherweise nicht aktuell</string>
+    <string name="sync_error">TinyMatic Sync-Fehler</string>
+    <string name="sync_error_help">Siehe Hilfe-Fenster</string>
+    <string name="xml_version_error">XML-API Versionen stimmt nicht überein, bitte installieren Sie mindestens Version </string>
+    <string name="xml_not_found">Zugriff auf XML-API nicht möglich, bitte CCU-Adresse überprüfen</string>
+    <string name="connection_failed">Verbindungsfehler - Server wurde nicht gefunden</string>
+    <string name="installed_question">Server nicht gefunden oder XML-API nicht installiert.</string>
+    <string name="error_code">Fehlercode </string>
+    <string name="quick_access">Schnellzugriff</string>
+    <string name="legacy_layout">Einfaches Tablet-Layout</string>
+    <string name="sort_by_name">Einträge nach Namen sortieren</string>
+    <string name="last_commands_desc">Letzte abgeschickte Befehle, für Tools wie Tasker</string>
+    <string name="confirm_all">Alle bestätigen</string>
+    <string name="delete_all">Alle löschen</string>
+
+
+    <string name="speed">Geschwindigkeit</string>
+    <string name="vane_position">Vane Position</string>
+    <string name="room_occupancy">Raumbelegung</string>
+
+
+    <string name="room">Raum</string>
+    <string name="category">Gewerk</string>
+    <string name="script">Skript</string>
+    <string name="device">Gerät</string>
+    <string name="variable">Systemvariable</string>
+    <string name="new_layer">Neue Ebene</string>
+    <string name="existing_layer">Bestehende Ebene</string>
+    <string name="new_item">Neues Objekt</string>
+
+    <string name="add_layer">Layer hinzufügen</string>
+    <string name="toggle_creation">Bearbeitungsmodus</string>
+    <string name="set_background">Hintergrund auswählen</string>
+    <string name="rename_layer">Ebene umbenennen</string>
+    <string name="delete_layer">Ebene löschen</string>
+    <string name="set_default_layer">Als Startebene</string>
+    <string name="saved">Gespeichert</string>
+
+
+    <string name="layer_welcome_title">Grundriss-Ansicht</string>
+    <string name="layer_welcome_message">Willkommen in der Grundriss-Ansicht! Diese Ansicht erlaubt es, HomeMatic-Objekte auf einem Hintergrund zu platzieren, zB auf einem Grundriss für jedes Stockwerk. Diese Ansicht ist für Tablets gebaut. Für Smartphones oder Anlagen mit vielen Geräten eignet sich der Minimal-Modus. Diese Einstellung kann jederzeit geändert werden.</string>
+    <string name="name">Name</string>
+    <string name="remove">Löschen</string>
+
+    <string name="layer1">Ebene 1</string>
+    <string name="immersive_mode">Vollbild-Modus</string>
+    <string name="layer_mode_minimal">Kompakter Grundriss-Modus</string>
+    <string name="error_background">Fehler beim Laden des Hintergrund-Bildes</string>
+
+    <string name="do_not_show">Diese Meldung nicht mehr anzeigen</string>
+
+    <string name="speech_commands">Spracheingabe</string>
+    <string name="floor_plan">Grundriss</string>
+    <string name="speech_command">Sprachkommando</string>
+    <string name="value">Wert</string>
+    <string name="select_command">Kommando aus Verlauf wählen</string>
+    <string name="imcomplete_input">Unvollständige Eingabe</string>
+    <string name="invalid_input">Invalide Eingabe</string>
+    <string name="command_not_found">Kommando \'%s\' wurde nicht gefunden</string>
+    <string name="edit_command_hint">z.B. \"Licht an\"</string>
+    <string name="set_to">Gesetzt auf</string>
+    <string name="no_speech_commands_hint">Keine Sprachkommandos gefunden. Bitte legen Sie zuerst ein Sprachkommando an.</string>
+    <string name="delete">Löschen</string>
+    <string name="history">Verlauf</string>
+    <string name="add_speech_command">Neuer Sprachbefehl</string>
+    <string name="send_again">Erneut senden</string>
+    <string name="speech_command_recognized">Kommando \'%s\' erkannt</string>
+
+    <string name="executed_last">Zuletzt ausgeführt:\n</string>
+    <string name="advanced_settings">Erweiterte Einstellungen</string>
+    <string name="enable_update_service">Update-Service aktivieren</string>
+
+    <string name="wizard_tutorial_intro">Für die Kommunikation mit dem HomeMatic-System muss der XML-API Patch auf die HomeMatic CCU installiert werden. Zur Anleitung: www.tinymatic.de/installation</string>
+    <string name="wizard_tutorial_installation_btn">Anleitung</string>
+    <string name="wizard_tutorial_licence">TinyMatic ist nicht kostenlos, sie können die App aber unbegrenzt testen.</string>
+    <string name="wizard_tutorial_licence_btn">Mehr Informationen</string>
+    <string name="wizard_tutorial_help">Weitere Informationen finden Sie in der Hilfe. Viel Spaß mit TinyMatic!</string>
+    <string name="wizard_tutorial_btn">Hilfe &amp; Feedback</string>
+    <string name="wizard_terms_text">Willkommen zu TinyMatic! Mit dem Klick auf Weiter akzeptieren Sie die Nutzungbedingungen</string>
+    <string name="wizard_terms_btn">Nutzungsbedingungen</string>
+    <string name="welcome_to_homedroid">Willkommen zu TinyMatic!</string>
+    <string name="back">Zurück</string>
+    <string name="next">Weiter</string>
+    <string name="done">Schließen</string>
+    <string name="show_command">Kommando anzeigen</string>
+    <string name="help_goto_support_center">Bei Fragen zur App oder Verbesserungsvorschlägen öffnen Sie bitte das Support-Center</string>
+    <string name="help_goto_email">Email-Kontakt: support@tinymatic.de</string>
+    <string name="changelog">Letzte Änderungen</string>
+    <string name="database_status">Datenbank-Status</string>
+    <string name="recents">Zuletzt</string>
+    <string name="auto_switch_network_mode">WLAN-Erkennung</string>
+    <string name="auto_switch_network_mode_desc">Verwende lokale Adresse im eigenen WLAN</string>
+    <string name="select_wifi">Heimnetzwerk auswählen</string>
+    <string name="enable_wifi">Fehler: WLAN ist deaktiviert</string>
+    <string name="detectUnrenamedChannelsDesc">Kanalnamen ersetzen</string>
+    <string name="detectUnrenamedChannels">Gerätenamen für Kanäle verwenden die nicht umbenannt wurden</string>
+    <string name="webcam_info">Vollständige URL zum Abruf des Bildes von der Webcam ein. Bisher werden nur Bilder unterstützt, keine Videos</string>
+    <string name="webcam_failed">Fehler beim Abruf des Webcam-Bilds, bitte Daten überprüfen</string>
+    <string name="syncOnHomeWifiOnly">Nur im Heimnetzwerk synchronisieren</string>
+    <string name="pref_enable_http_auth_title">HTTP-Authentifizierung</string>
+    <string name="pref_enable_http_auth_desc">Muss zuerst auf CCU aktiviert werden</string>
+    <string name="network">Netzwerkeinstellungen</string>
+    <string name="webcam_auth_optional">Authentifizierung (Optional)</string>
+    <string name="added_to_favs">Wird hinzugefügt</string>
+    <string name="remove_from_favs">Wird entfernt</string>
+    <string name="mode_compact">Kompakt</string>
+    <string name="select_orientation">Orientierung wählen</string>
+    <string name="select_orientation_desc">Bitte wählen Sie aus, ob sie die Grundriss-Ansicht im Hochkantformat oder im Querfomat nutzen möchten. Auch diese Option können Sie später ändern</string>
+    <string name="orientation_landscape">Querformat</string>
+    <string name="orientation_portrait">Hochformat</string>
+    <string name="permission_denied">Berechtigung wurde verweigert</string>
+    <string name="options">Optionen</string>
+    <string name="alarm_off">Deaktivert</string>
+    <string name="alarm_external">Extern scharf</string>
+    <string name="alarm_internal">Intern scharf</string>
+    <string name="alarm_blocked">Blockiert</string>
+    <string name="sysvar_quickaccess">Schnellaktionen für schaltbare Systemvariablen</string>
+    <string name="work_in_progress">Unterstützung ist in Arbeit</string>
+    <string name="lightify_in_progress">Lightify-Geräte werden derzeit von der XML-API noch nicht vollständig unterstützt. Ich arbeite an einer Lösung.</string>
+    <string name="reset_sort">Einträge zurücksetzen</string>
+    <string name="widget_text_size">Textgröße von Widgets</string>
+    <string name="experimental">Experimentale Funktionen</string>
+    <string name="hide">Ausblenden</string>
+    <string name="vpn_settings">VPN Einstellungen</string>
+    <string name="xml_api_112_required">Benötigt Update auf XML-API 1.2</string>
+    <string name="reboot_ccu">Bitte CCU neustarten</string>
+    <string name="reboot_ccu_explanation">Die von der XML-API ausgegebenen Daten sind nicht valide. Bitte starten Sie die CCU neu und führen Sie eine Vollsynchronisation in der Konfiguration von TinyMatic durch.</string>
+    <string name="update_cuxd">Bitte CuXD aktualisieren</string>
+    <string name="refresh">Aktualisieren</string>
+    <string name="set">Übernehmen</string>
+    <string name="invalid_value">Gesendeter Wert außerhalb des definierten Bereichs</string>
+    <string name="lamella">Lamellen</string>
+    <string name="deactivate_background_sync">Hintergrund-Synchronisierung deaktivieren</string>
+    <string name="deactivate_background_sync_desc">Nur synchronisieren wenn App aktiv ist</string>
+    <string name="tinymatic_intro_title">HomeDroid heißt jetzt TinyMatic!</string>
+    <string name="tinymatic_intro_desc">HomeDroid hat einen neuen Namen: TinyMatic. Der Name ändert sich aus rechtlichen Gründen, sonst bleibt alles beim Alten!</string>
+    <string name="ccu_cloudmatic_erroc">CCU ist nicht mit CloudMatic verbunden, bitte Verbindung prüfen oder CCU neustarten</string>
+    <string name="last_change">Letzte Änderung</string>
+    <string name="connecting">Verbinde...</string>
+    <string name="disable_child_protection">Bitte Kindersicherung deaktivieren</string>
+    <string name="error_hiding_default_item">Fehler: Startseite kann nicht versteckt werden</string>
+    <string name="menu_entries">Navigationsleiste anpassen</string>
+    <string name="help_community">Hier finden Sie außerdem die Community im HomeMatic-Forum: https://bit.ly/2NNYcIU</string>
+    <string name="full_sync_tip">Status wird synchronisiert.\n\nGedrückt halten für Vollsynchronisation</string>
+    <string name="widget_text_size_small">Klein</string>
+    <string name="widget_text_size_normal">Mittel</string>
+    <string name="widget_text_size_big">Groß</string>
+    <string name="widget_text_size_very_big">Sehr groß</string>
+    <string name="widget_text_size_huge">Riesengroß</string>
+    <string name="color_off">Aus</string>
+    <string name="color_blue">Blau</string>
+    <string name="color_green">Grün</string>
+    <string name="color_turquiose">Türkis</string>
+    <string name="color_red">Rot</string>
+    <string name="color_purple">Violett</string>
+    <string name="color_yellow">Gelb</string>
+    <string name="color_white">Weiß</string>
+    <string name="color">Farbe</string>
+    <string name="location_permission_missing">TinyMatic: Standort-Zugriff für WLAN-Erkennung nicht möglich.\n\n Bitte unter Einstellungen > Netzwerkeinstellungen erlauben.</string>
+    <string name="validate_ssl">SSL Zertifikat prüfen</string>
+    <string name="fix_wifi">Standort-Zugriff erlauben</string>
+    <string name="wifi_fix_explanation">Wird für WLAN-Erkennung benötigt</string>
+    <string name="permission_granted">Zugriff erlaubt</string>
+    <string name="ventilate">Lüften</string>
+    <string name="stop">Stop</string>
+    <string name="rating_positive">Gut!</string>
+    <string name="rating_question">Hallo! Entschuldigen Sie die Störung, aber wie gefällt Ihnen TinyMatic?</string>
+    <string name="rating_response_good">Gut!</string>
+    <string name="rating_response_bad">Geht so.</string>
+    <string name="rating_response_dont_ask_again">Nicht mehr fragen</string>
+    <string name="rating_negative_feedback_question">Oh, schade! Ich würd mich trotzdem über Feedback freuen!</string>
+    <string name="rating_button_send_feedback">Feedback senden</string>
+    <string name="rating_button_no">Nein Danke</string>
+    <string name="rating_positive_rate_now_question">Super! Es würde mich sehr freuen wenn Sie kurz eine Bewertung im Google Play Store abgeben würden!</string>
+    <string name="rating_already_done">Schon erledigt!</string>
+    <string name="rating_button_go_to_playstore">Zum Play Store</string>
+</resources>

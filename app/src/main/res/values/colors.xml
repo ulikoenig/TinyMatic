@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="white">#ffffff</color>
+    <color name="holo_cyan">#33b5e5</color>
+    <color name="highlight_blue">#33B5E5</color>
+    <color name="homedroid_primary">#124768</color>
+    <color name="dark_gray">#414141</color>
+    <color name="light_gray">#F0F0F0</color>
+    <color name="orange">#ff8c00</color>
+
+    <color name="new_blue">#2c95bc</color>
+
+</resources>

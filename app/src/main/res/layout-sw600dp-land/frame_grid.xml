@@ -1,0 +1,25 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/gridparent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal" >
+
+    <GridView
+        android:id="@+id/rooms_grid"
+        android:layout_width="0px"
+        android:layout_height="match_parent"
+        android:layout_weight="3"
+        android:horizontalSpacing="10dp"
+        android:numColumns="1"
+        android:padding="10dp"
+        android:stretchMode="columnWidth"
+        android:verticalSpacing="10dp" >
+    </GridView>
+
+    <FrameLayout
+        android:id="@+id/rooms_list"
+        android:paddingLeft="10dp"
+        android:layout_width="0px"
+        android:layout_height="match_parent"
+        android:layout_weight="4" />
+</LinearLayout>

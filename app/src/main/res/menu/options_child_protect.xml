@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:hd="http://schemas.android.com/apk/res-auto">
+    <item
+        android:title="Speech"
+        android:id="@+id/speech"
+        android:icon="@drawable/ic_action_menu_mic"
+        hd:showAsAction="always" />
+    <item
+        android:id="@+id/configuration"
+        android:icon="@android:drawable/ic_menu_preferences"
+        hd:showAsAction="ifRoom"
+        android:title="@string/configuration"/>
+    <item
+        android:id="@+id/refresh"
+        android:icon="@drawable/ic_action_menu_sync"
+        hd:showAsAction="always"
+        android:title="@string/refresh_db"/>
+    <item
+        android:id="@+id/help"
+        hd:showAsAction="never"
+        android:title="@string/help"/>
+    <item
+        android:id="@+id/unlock"
+        hd:showAsAction="never"
+        android:title="@string/unlock_app"/>
+    <item
+        android:id="@+id/vpn_settings"
+        hd:showAsAction="never"
+        android:title="@string/vpn_settings"/>
+    <item
+        android:id="@+id/quit"
+        android:icon="@drawable/ic_menu_star"
+        hd:showAsAction="never"
+        android:title="@string/quit"/>
+</menu>

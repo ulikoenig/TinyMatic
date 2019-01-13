@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+    <de.ebertp.HomeDroid.Activities.Wizard.WizardViewPager
+      android:id="@+id/pager"
+      android:layout_above="@+id/footer"
+      android:layout_width="fill_parent"
+      android:layout_height="fill_parent"/>
+
+      <LinearLayout
+        android:id="@+id/footer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal">
+            <Button
+              android:id="@+id/btn_left"
+              android:text="@string/back"
+              android:layout_weight="1"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"/>
+            <Button
+              android:id="@+id/btn_right"
+              android:text="@string/next"
+              android:layout_weight="1"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"/>
+        </LinearLayout>
+</RelativeLayout>

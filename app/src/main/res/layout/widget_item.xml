@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/widgetItemLL"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:orientation="horizontal"
+    android:padding="1dp">
+
+    <ImageView
+        android:id="@+id/value_icon"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:paddingRight="4dp"
+        android:visibility="gone" />
+
+    <ImageView
+        android:id="@+id/value_icon_big"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:visibility="gone"
+        android:paddingRight="4dp"/>
+
+    <TextView
+        android:id="@+id/label"
+        style="@style/device_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/value"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:textSize="@dimen/widget_textsize_content_small"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/boolValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:paddingRight="2dp"
+        android:textColor="@color/white"
+        android:textSize="@dimen/widget_textsize_content_small"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/boolImage"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/boolValueBelow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:paddingTop="2dp"
+            android:textColor="@color/white"
+            android:textSize="@dimen/widget_textsize_content_small"
+            android:visibility="gone" />
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,417 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <EditTextPreference
+        android:name="@string/enter_ip"
+        android:defaultValue="homematic-ccu2"
+        android:inputType="textFilter|textNoSuggestions"
+        android:key="server"
+        android:summary="@string/enter_ip"
+        android:title="@string/server_address" />
+
+    <PreferenceScreen android:title="@string/app_settings">
+
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="dark_theme"
+            android:title="@string/useDarkTheme" />
+
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="showNotifications"
+            android:title="@string/showNotifications" />
+
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="showErrorMessages"
+            android:title="@string/showErrorMessages" />
+
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="is_immersive"
+            android:title="@string/immersive_mode" />
+
+        <ListPreference
+            android:defaultValue="2"
+            android:entries="@array/widget_sizes"
+            android:entryValues="@array/widget_sizes_values"
+            android:key="widgetTextSize"
+            android:title="@string/widget_text_size" />
+
+        <ListPreference
+            android:defaultValue="0"
+            android:entries="@array/tabs"
+            android:entryValues="@array/tabs_values"
+            android:key="default_tab"
+            android:title="@string/default_tab" />
+
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="layer_is_minimalmode"
+            android:title="@string/layer_mode_minimal" />
+
+        <CheckboxLongSummaryPreference
+            android:defaultValue="true"
+            android:key="detectUnrenamedChannels"
+            android:summary="@string/detectUnrenamedChannels"
+            android:title="@string/detectUnrenamedChannelsDesc" />
+
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="hide_not_visible"
+            android:summary="@string/hideNotVisibleDesc"
+            android:title="@string/hideNotVisible" />
+
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="disable_not_operate"
+            android:summary="@string/disableNotOperateDesc"
+            android:title="@string/disableNotOperate" />
+
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="hideUnsupported"
+            android:title="@string/hide_unsupported" />
+
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="sysvarQuickAccess"
+            android:title="@string/sysvar_quickaccess" />
+
+        <PreferenceScreen android:title="@string/advanced_settings">
+
+            <EditTextPreference
+                android:defaultValue="12"
+                android:key="grid_break_limit"
+                android:maxLength="2"
+                android:numeric="integer"
+                android:summary="@string/grid_break_limit_desc"
+                android:title="@string/grid_break_limit" />
+
+            <CheckBoxPreference
+                android:defaultValue="false"
+                android:key="legacy_layout"
+                android:title="@string/legacy_layout" />
+
+            <CheckBoxPreference
+                android:defaultValue="true"
+                android:key="sort_by_name"
+                android:title="@string/sort_by_name" />
+
+            <Preference
+                android:key="reset_favs"
+                android:summary="@string/reset_favs_sum"
+                android:title="@string/reset_favs" />
+
+            <Preference
+                android:key="reset_icons"
+                android:summary="@string/reset_icons_sum"
+                android:title="@string/reset_icons" />
+        </PreferenceScreen>
+
+
+    </PreferenceScreen>
+
+    <PreferenceScreen android:title="@string/network">
+
+        <PreferenceCategory android:title="@string/periodic_updates">
+
+            <CheckBoxPreference
+                android:defaultValue="true"
+                android:key="periodicUpdatesEnabled"
+                android:title="@string/enable_periodic_updates" />
+
+            <CheckBoxPreference
+                android:key="syncOnHomeWifiOnly"
+                android:title="@string/syncOnHomeWifiOnly" />
+
+            <Preference
+                android:key="select_wifi"
+                android:summary=""
+                android:title="@string/select_wifi" />
+
+            <PreferenceScreen
+                android:dependency="periodicUpdatesEnabled"
+                android:title="@string/advanced_settings">
+
+                <CheckBoxPreference
+                    android:defaultValue="true"
+                    android:key="syncAtStart"
+                    android:title="@string/syncAtStart" />
+
+                <CheckBoxPreference
+                    android:key="foregroundOnly"
+                    android:summary="@string/deactivate_background_sync_desc"
+                    android:title="@string/deactivate_background_sync" />
+
+                <CheckBoxPreference
+                    android:defaultValue="true"
+                    android:dependency="periodicUpdatesEnabled"
+                    android:key="sync_on_failure"
+                    android:summary="@string/syncOnFailureDesc"
+                    android:title="@string/syncOnFailure" />
+
+                <CheckBoxPreference
+                    android:defaultValue="true"
+                    android:dependency="periodicUpdatesEnabled"
+                    android:key="per_datapoints"
+                    android:summary="@string/periodic_datapoints_note"
+                    android:title="@string/datapoints" />
+
+                <CheckBoxPreference
+                    android:defaultValue="true"
+                    android:dependency="periodicUpdatesEnabled"
+                    android:key="per_variables"
+                    android:title="@string/variables" />
+
+                <CheckBoxPreference
+                    android:defaultValue="true"
+                    android:dependency="periodicUpdatesEnabled"
+                    android:key="per_programs"
+                    android:title="@string/programs" />
+
+                <ListPreference
+                    android:defaultValue="5"
+                    android:dependency="periodicUpdatesEnabled"
+                    android:entries="@array/intervals"
+                    android:entryValues="@array/intervals_values"
+                    android:key="periodicUpdateInterval"
+                    android:title="@string/update_interval" />
+
+                <CheckboxLongSummaryPreference
+                    android:defaultValue="false"
+                    android:key="updateServiceEnabled"
+                    android:summary="@string/update_enable_text"
+                    android:title="@string/enable_update_service" />
+            </PreferenceScreen>
+        </PreferenceCategory>
+
+        <PreferenceCategory android:title="@string/remote_access">
+
+            <CheckboxLongSummaryPreference
+                android:name="useRemoteServer"
+                android:defaultValue="false"
+                android:description="@string/use_remote_desc"
+                android:key="useRemoteServer"
+                android:summary="@string/use_remote_desc"
+                android:title="@string/use_remote" />
+
+            <CheckBoxPreference
+                android:name="autoSwitchMode"
+                android:defaultValue="false"
+                android:dependency="useRemoteServer"
+                android:key="autoSwitchMode"
+                android:summary="@string/auto_switch_network_mode_desc"
+                android:title="@string/auto_switch_network_mode" />
+
+            <EditTextLongSummaryPreference
+                android:dependency="useRemoteServer"
+                android:inputType="textFilter|textNoSuggestions"
+                android:key="remoteServer"
+                android:summary="@string/remote_ccu_desc"
+                android:title="@string/remote_ccu" />
+
+            <CheckBoxPreference
+                android:name="useRemotePort"
+                android:defaultValue="false"
+                android:dependency="useRemoteServer"
+                android:key="useRemotePort"
+                android:summary=""
+                android:title="@string/use_remote_port" />
+
+            <EditTextPreference
+                android:dependency="useRemoteServer"
+                android:inputType="textFilter|textNoSuggestions"
+                android:key="serverPort"
+                android:summary=""
+                android:title="@string/remote_port" />
+
+            <CheckBoxPreference
+                android:defaultValue="false"
+                android:key="httpsOn"
+                android:summary="@string/use_https_desc"
+                android:title="@string/use_https" />
+
+            <!--<CheckBoxPreference-->
+                <!--android:defaultValue="false"-->
+                <!--android:key="sslCheckOn"-->
+                <!--android:dependency="httpsOn"-->
+                <!--android:visibility="gone"-->
+                <!--android:title="@string/validate_ssl" />-->
+
+        </PreferenceCategory>
+
+        <PreferenceCategory android:title="CloudMatic (meine-homematic.de">
+
+            <CheckBoxPreference
+                android:name="meineHomematic"
+                android:defaultValue="false"
+                android:key="meineHomematic"
+                android:title="@string/mhm_enable_text" />
+
+            <EditTextPreference
+                android:capitalize="none"
+                android:dependency="meineHomematic"
+                android:inputType="textFilter|textNoSuggestions"
+                android:key="mhId"
+                android:title="@string/mhm_id" />
+
+            <EditTextPreference
+                android:dependency="meineHomematic"
+                android:inputType="textCapSentences|textFilter|textNoSuggestions"
+                android:key="mhUser"
+                android:title="@string/username" />
+
+            <EditTextPreference
+                android:name="Password"
+                android:capitalize="none"
+                android:dependency="meineHomematic"
+                android:inputType="textPassword"
+                android:key="mhPass"
+                android:password="true"
+                android:summary=""
+                android:title="@string/password" />
+        </PreferenceCategory>
+
+        <PreferenceCategory android:title="@string/advanced_network">
+
+            <CheckBoxPreference
+                android:defaultValue="false"
+                android:key="enableHttpAuth"
+                android:summary="@string/pref_enable_http_auth_desc"
+                android:title="@string/pref_enable_http_auth_title" />
+            <EditTextPreference
+                android:dependency="enableHttpAuth"
+                android:inputType="textFilter|textNoSuggestions"
+                android:key="httpAuthUser"
+                android:title="@string/username" />
+            <EditTextPreference
+                android:dependency="enableHttpAuth"
+                android:inputType="textPassword"
+                android:key="httpAuthPw"
+                android:title="@string/password" />
+        </PreferenceCategory>
+
+        <Preference
+            android:key="requestLocation"
+            android:summary="@string/wifi_fix_explanation"
+            android:title="@string/fix_wifi" />
+
+    </PreferenceScreen>
+
+    <Preference
+        android:key="licence_info"
+        android:title="@string/licence_information">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetClass="de.ebertp.HomeDroid.Activities.Preferences.LicenceActivity"
+            android:targetPackage="de.ebertp.HomeDroid" />
+    </Preference>
+
+    <Preference
+        android:key="help"
+        android:title="@string/help">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetClass="de.ebertp.HomeDroid.Activities.HelpActivity"
+            android:targetPackage="de.ebertp.HomeDroid" />
+    </Preference>
+
+    <Preference
+        android:key="last_commands"
+        android:title="@string/automation">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetClass="de.ebertp.HomeDroid.Activities.Preferences.LastCommandsActivity"
+            android:targetPackage="de.ebertp.HomeDroid" />
+    </Preference>
+
+    <PreferenceScreen android:title="@string/backup">
+        <Preference
+            android:key="backup_export"
+            android:summary="@string/backup_export_sum"
+            android:title="@string/backup_export" />
+        <Preference
+            android:key="backup_import"
+            android:summary="@string/backup_import_sum"
+            android:title="@string/backup_import" />
+    </PreferenceScreen>
+
+
+    <PreferenceScreen android:title="@string/child_protection">
+        <Preference
+            android:key="enableChildProtection"
+            android:summary="Deaktiviert"
+            android:title="@string/child_protection" />
+        <EditTextPreference
+            android:name="Password"
+            android:inputType="textFilter|textNoSuggestions"
+            android:key="childProtectPW"
+            android:summary="@string/default_password"
+            android:title="@string/password_new" />
+
+    </PreferenceScreen>
+
+    <PreferenceScreen android:title="@string/experimental">
+
+        <Preference
+            android:defaultValue="false"
+            android:key="visibleDrawerItems"
+            android:title="@string/menu_entries" />
+
+        <PreferenceCategory android:title="Geofencing">
+
+            <CheckBoxPreference
+                android:defaultValue="false"
+                android:key="enableLocation"
+                android:title="Enable Geofencing" />
+            <Preference
+                android:dependency="enableLocation"
+                android:key="homeLocation"
+                android:summary="Best result if GPS is enabled"
+                android:title="Define Current Location as Home" />
+            <EditTextPreference
+                android:dependency="enableLocation"
+                android:inputType="number"
+                android:key="homeProximity"
+                android:summary="Default Value 500 (m)"
+                android:title="Proximity Trigger" />
+            <Preference
+                android:dependency="enableLocation"
+                android:key="startOnArrical"
+                android:summary="Name of Script to run"
+                android:title="Run Program on Arrival" />
+            <Preference
+                android:dependency="enableLocation"
+                android:key="startOnDeparture"
+                android:summary="Name of Script to run"
+                android:title="Run Program on Departure" />
+
+        </PreferenceCategory>
+
+        <PreferenceCategory android:title="@string/advanced_network">
+
+            <CheckBoxPreference
+                android:defaultValue="false"
+                android:key="enableClientAuth"
+                android:title="@string/prefs_enable_client_auth_title" />
+            <EditTextPreference
+                android:dependency="enableClientAuth"
+                android:inputType="textFilter|textNoSuggestions"
+                android:key="clientCertPath"
+                android:summary="@string/prefs_client_cert_desc"
+                android:title="@string/prefs_client_cert_path" />
+            <EditTextPreference
+                android:dependency="enableClientAuth"
+                android:inputType="textFilter|textNoSuggestions"
+                android:key="clientAuthPwd"
+                android:title="@string/password" />
+        </PreferenceCategory>
+
+    </PreferenceScreen>
+
+    <Preference
+        android:key="resetSettings"
+        android:title="@string/reset_settings" />
+
+</PreferenceScreen>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <item name="match_parent" type="dimen">-1</item>
+    <item name="wrap_content" type="dimen">-2</item>
+
+    <dimen name="widget_textsize">13sp</dimen>
+    <dimen name="widget_textsize_content_tiny">9sp</dimen>
+    <dimen name="widget_textsize_content_small">11sp</dimen>
+    <dimen name="widget_textsize_content_medium">13sp</dimen>
+    <dimen name="widget_textsize_content_big">17sp</dimen>
+    <dimen name="widget_textsize_content_very_big">25sp</dimen>
+    <dimen name="widget_textsize_content_huge">30sp</dimen>
+
+    <dimen name="grid_cell_width">80dp</dimen>
+    <dimen name="grid_item_image_size">60dp</dimen>
+    <dimen name="grid_item_image_padding">0dp</dimen>
+    <dimen name="grid_item_text_size">14dp</dimen>
+
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <!--
+         Per the design guidelines, navigation drawers should be between 240dp and 320dp:
+         https://developer.android.com/design/patterns/navigation-drawer.html
+    -->
+    <dimen name="navigation_drawer_width">240dp</dimen>
+    <dimen name="grid_item_padding">0dp</dimen>
+    <dimen name="dialog_btn_min_width">120dp</dimen>
+    <dimen name="dialog_btn_height">60dp</dimen>
+    <dimen name="seek_button_size">56dp</dimen>
+
+</resources>

@@ -1,0 +1,28 @@
+package de.ebertp.HomeDroid.Communication.Control;
+
+public enum HmType {
+    PROGRAM,
+    PASSIV,
+    TASTER,
+    SWITCH,
+    VARIABLETEMP,
+    SYSVARIABLE,
+    WINDOW,
+    ACTIVATE,
+    DIMMER,
+    DIMMER_IP,
+    BLIND,
+    BLIND_WITH_LAMELLA_IP,
+    LAMELLA_IP,
+    DOORBELL,
+    COLOR,
+    COLOR_PROGAM,
+    VARIABLECLIMATE,
+    VARIABLECLIMATE_IP,
+    LIGHTIFY_PLUG,
+    LIGHTIFY_DIMMER,
+    LIGHTIFY_DIMMER_RGBW,
+    BLIND_WITH_LAMELLA,
+    LAMELLA, ALARM,
+    DIMMER_IP_COLOR
+}

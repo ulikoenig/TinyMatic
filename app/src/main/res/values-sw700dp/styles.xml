@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <style name="device_textview">
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="device_checkbox" parent="@style/device_textview">
+        <item name="android:layout_marginRight">10sp</item>
+    </style>
+
+    <style name="device_imageview">
+        <item name="android:layout_height">60dp</item>
+        <item name="android:layout_width">60dp</item>
+        <item name="android:scaleType">fitCenter</item>
+        <item name="android:padding">10sp</item>
+    </style>
+
+    <style name="widget_imageview" parent="@style/device_imageview">
+        <item name="android:layout_height">48sp</item>
+        <item name="android:layout_width">48sp</item>
+    </style>
+
+</resources>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:padding="1dp">
+
+    <ImageView
+        android:id="@+id/value_icon"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:visibility="gone"
+        android:paddingRight="4dp"/>
+
+    <ImageView
+        android:id="@+id/value_icon_big"
+        android:layout_width="27dp"
+        android:layout_height="27dp"
+        android:visibility="gone"
+        android:paddingRight="4dp"/>
+
+    <TextView
+        android:id="@+id/label"
+        style="@style/device_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingRight="4dp"
+        android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/value"
+        style="@style/device_textview"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <CheckedTextView
+            android:id="@+id/check"
+            style="@style/device_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:button="@drawable/btn_radio_holo_dark_hm"
+            android:checkMark="@drawable/btn_radio_holo_dark_hm"
+            android:gravity="center_vertical"
+            android:textAlignment="center"
+            android:visibility="gone"/>
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:button="@drawable/btn_default_holo_dark_hm"
+            android:visibility="gone"/>
+    </LinearLayout>
+</LinearLayout>

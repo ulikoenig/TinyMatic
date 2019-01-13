@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:hd="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/add_layer"
+        android:icon="@android:drawable/ic_menu_add"
+        android:title="@string/add_layer"
+        hd:showAsAction="always" />
+    <item
+        android:id="@+id/toggle_creation"
+        android:icon="@android:drawable/ic_menu_edit"
+        android:title="@string/toggle_creation"
+        hd:showAsAction="always" />
+    <item
+        android:id="@+id/set_orientation"
+        android:title="@string/select_orientation"
+        hd:showAsAction="never" />
+    <item
+        android:id="@+id/set_background"
+        android:icon="@android:drawable/ic_menu_gallery"
+        android:title="@string/set_background"
+        hd:showAsAction="never" />
+    <item
+        android:id="@+id/rename_layer"
+        android:title="@string/rename_layer"
+        hd:showAsAction="never" />
+    <item
+        android:id="@+id/delete_layer"
+        android:title="@string/delete_layer"
+        hd:showAsAction="never" />
+    <item
+        android:id="@+id/set_default_layer"
+        android:title="@string/set_default_layer"
+        hd:showAsAction="never" />
+</menu>

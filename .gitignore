@@ -1,0 +1,11 @@
+.gradle
+/local.properties
+.idea/*
+/build/*
+/*/build
+/*/*.iml
+HomeDroid.iml
+app/app-release.apk
+sh.exe.stackdump
+app/release/app-release.apk
+app/release/output.json

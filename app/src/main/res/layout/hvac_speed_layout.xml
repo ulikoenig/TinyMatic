@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:weightSum="5" >
+
+    <ImageView
+        android:id="@+id/hvac_speed_1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="7dp"
+        android:layout_weight="1"
+        android:src="@drawable/hvac_speed_1"
+        android:padding="7dp"/>
+    
+     <ImageView
+        android:id="@+id/hvac_speed_2"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="7dp"
+        android:layout_weight="1"
+        android:src="@drawable/hvac_speed_2"
+        android:padding="7dp"/>
+     
+      <ImageView
+        android:id="@+id/hvac_speed_3"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="7dp"
+        android:layout_weight="1"
+        android:src="@drawable/hvac_speed_3"
+        android:padding="7dp"/>
+    
+       <ImageView
+        android:id="@+id/hvac_speed_4"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="7dp"
+        android:layout_weight="1"
+        android:src="@drawable/hvac_speed_4"
+        android:padding="7dp"/>
+        
+         <ImageView
+        android:id="@+id/hvac_speed_auto"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="7dp"
+        android:layout_weight="1"
+        android:src="@drawable/hvac_fanmode_0"
+        android:padding="7dp"/>
+   
+</LinearLayout>

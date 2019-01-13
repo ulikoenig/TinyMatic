@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:text="@string/speech_command" />
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/edit_command"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@+id/button_speech"
+            android:padding="8dp"
+            android:gravity="center_vertical"
+            android:hint="@string/edit_command_hint"
+            android:maxLines="1" />
+
+        <ImageView
+            android:id="@id/button_speech"
+            android:layout_alignParentRight="true"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@drawable/menu_speech" />
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/edit_value_label"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:text="@string/value" />
+
+    <EditText
+        android:id="@+id/edit_value"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:maxLines="1" />
+
+</LinearLayout>

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item type="bool" name="isTabletLand">false</item>
+    <item type="bool" name="isTablet">false</item>
+</resources>

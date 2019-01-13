@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:hd="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/add_speech_command"
+        android:icon="@android:drawable/ic_menu_add"
+        android:title="Add"
+        hd:showAsAction="always" />
+
+</menu>

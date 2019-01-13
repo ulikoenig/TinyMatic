@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="layer_items">
+        <item>@string/new_layer</item>
+        <item>@string/existing_layer</item>
+        <item>@string/room</item>
+        <item>@string/category</item>
+        <item>@string/device</item>
+        <item>@string/variable</item>
+        <item>@string/script</item>
+        <item>@string/webcam</item>
+    </string-array>
+
+    <string-array name="colors">
+        <item>@string/color_off</item>
+        <item>@string/color_blue</item>
+        <item>@string/color_green</item>
+        <item>@string/color_turquiose</item>
+        <item>@string/color_red</item>
+        <item>@string/color_purple</item>
+        <item>@string/color_yellow</item>
+        <item>@string/color_white</item>
+    </string-array>
+
+    <string-array name="tabs">
+        <item>@string/rooms</item>
+        <item>@string/favs</item>
+        <item>@string/variables</item>
+        <item>@string/categories</item>
+        <item>@string/scripts</item>
+        <item>@string/virtual_remote</item>
+        <item>@string/recents</item>
+        <item>@string/quick_access</item>
+        <item>@string/floor_plan</item>
+    </string-array>
+    <string-array name="tabs_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>10</item>
+        <item>11</item>
+        <item>6</item>
+    </string-array>
+    <string-array name="intervals">
+        <item>1 Min</item>
+        <item>5 Min</item>
+        <item>15 Min</item>
+        <item>30 Min</item>
+        <item>1 Hour</item>
+        <item>6 Hours</item>
+    </string-array>
+    <string-array name="intervals_values">
+        <item>1</item>
+        <item>5</item>
+        <item>15</item>
+        <item>30</item>
+        <item>60</item>
+        <item>360</item>
+    </string-array>
+    <string-array name="widget_sizes">
+        <item>@string/widget_text_size_small</item>
+        <item>@string/widget_text_size_normal</item>
+        <item>@string/widget_text_size_big</item>
+        <item>@string/widget_text_size_very_big</item>
+        <item>@string/widget_text_size_huge</item>
+    </string-array>
+    <string-array name="widget_sizes_values">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+    </string-array>
+    <string-array name="hvac_vane_labels">
+        <item>Auto</item>
+        <item>Horizontal</item>
+        <item>Position 2</item>
+        <item>Position 3</item>
+        <item>Position 4</item>
+        <item>Swing</item>
+        <item>Vertical Swing</item>
+        <item>Horizontal Swing</item>
+        <item>Horizontal And Vertical Swing</item>
+        <item>Stop Swing</item>
+    </string-array>
+    <string-array name="climate_mode_labels">
+        <item>@string/mode_auto</item>
+        <item>@string/mode_manu</item>
+        <item>@string/mode_lowering</item>
+        <item>@string/mode_boost</item>
+    </string-array>
+    <string-array name="climate_mode_labels_ip">
+        <item>@string/mode_auto</item>
+        <item>@string/mode_manu</item>
+        <item>@string/mode_lowering</item>
+    </string-array>
+    <string-array name="webcam_types">
+        <item>@string/JPEG</item>
+        <item>@string/MPEG</item>
+    </string-array>
+    <!--- TODO change to english values -->
+    <string-array name="color_programs">
+        <item>Aus</item>
+        <item>Langsamer Durchlauf</item>
+        <item>Normaler Durchlauf</item>
+        <item>Schneller Durchlauf</item>
+        <item>Lagerfeuer</item>
+        <item>Wasserfall</item>
+        <item>TV-Simulation</item>
+    </string-array>
+    <string-array name="widget_control_modes">
+        <item>All control options</item>
+        <item>Dialog only</item>
+        <item>Quick commmand only</item>
+        <item>Passive</item>
+    </string-array>
+    <string-array name="alarm_states">
+        <item>@string/alarm_off</item>
+        <item>@string/alarm_internal</item>
+        <item>@string/alarm_external</item>
+        <item>@string/alarm_blocked</item>
+    </string-array>
+</resources>

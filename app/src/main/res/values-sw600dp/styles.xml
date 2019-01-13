@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="device_textview">
+        <item name="android:textSize">17sp</item>
+    </style>
+
+    <style name="device_checkbox" parent="@style/device_textview"></style>
+
+    <style name="device_imageview">
+        <item name="android:layout_height">42sp</item>
+        <item name="android:layout_width">42sp</item>
+        <item name="android:scaleType">fitCenter</item>
+        <item name="android:padding">3sp</item>
+    </style>
+
+    <style name="widget_imageview" parent="@style/device_imageview">
+        <item name="android:layout_height">30sp</item>
+        <item name="android:layout_width">30sp</item>
+    </style>
+
+</resources>

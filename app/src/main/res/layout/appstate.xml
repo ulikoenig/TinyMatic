@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:id="@+id/aboutscrollview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/StateTitle"
+                style="@style/AppStateTitle"
+                android:layout_width="match_parent"
+                android:text="@string/appstate_synctitle" />
+
+            <TableLayout
+                android:id="@+id/TableLayout01"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#6D6A6A"
+                android:stretchColumns="0">
+                <!-- Synchronisation-->
+                <TableRow
+                    android:id="@+id/SyncStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/SyncStatusLabel"
+                        style="@style/AppStateRow"
+                        android:text="@string/appstate_success" />
+
+                    <CheckBox
+                        android:id="@+id/SyncStatusContent"
+                        style="@style/AppStateRow"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="right"
+                        android:button="@drawable/check_checkbox_red"
+                        android:clickable="false" />
+                </TableRow>
+                <!-- RPC Service -->
+                <TableRow
+                    android:id="@+id/RPCStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/RPCStatusLabel"
+                        style="@style/AppStateRow"
+                        android:text="@string/appstate_background" />
+
+                    <CheckBox
+                        android:id="@+id/RPCStatusContent"
+                        style="@style/AppStateRow"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:button="@drawable/check_checkbox_red"
+                        android:layout_gravity="right"
+                        android:clickable="false" />
+                </TableRow>
+                <!-- RPC Write Count -->
+                <TableRow
+                    android:id="@+id/RPCUpdates"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/RPCUpdatesLabel"
+                        style="@style/AppStateRow"
+                        android:text="@string/appstate_updatecount" />
+
+                    <TextView
+                        android:id="@+id/RPCUpdatesCount"
+                        style="@style/AppStateRow"
+                        android:gravity="right" />
+                </TableRow>
+
+                <TableRow
+                    android:id="@+id/LastSync"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/LastSyncLabel"
+                        style="@style/AppStateRow"
+                        android:text="@string/lastSync" />
+
+                    <TextView
+                        android:id="@+id/LastSyncString"
+                        style="@style/AppStateRow"
+                        android:gravity="right" />
+                </TableRow>
+            </TableLayout>
+
+
+            <TextView
+                android:id="@+id/DbTitle"
+                style="@style/AppStateTitle"
+                android:layout_width="match_parent"
+                android:text="@string/appstate_dbtitle" />
+
+
+            <TableLayout
+                android:id="@id/TableLayout01"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#6D6A6A"
+                android:stretchColumns="0">
+                <!-- Rooms -->
+                <TableRow
+                    android:id="@+id/Rooms"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/RoomsLabel"
+                        style="@style/AppStateRow"
+                        android:text="@string/rooms" />
+
+                    <TextView
+                        android:id="@+id/RoomsContent"
+                        style="@style/AppStateRow"
+                        android:gravity="right" />
+                    <!-- Gewerke -->
+                </TableRow>
+
+                <TableRow
+                    android:id="@+id/Gewerke"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/GewerkeLabel"
+                        style="@style/AppStateRow"
+                        android:text="@string/categories" />
+
+                    <TextView
+                        android:id="@+id/GewerkeContent"
+                        style="@style/AppStateRow"
+                        android:gravity="right" />
+                </TableRow>
+                <!-- Channels -->
+                <TableRow
+                    android:id="@+id/Channels"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/ChannelsLabel"
+                        style="@style/AppStateRow"
+                        android:text="@string/channels" />
+
+                    <TextView
+                        android:id="@+id/ChannelsContent"
+                        style="@style/AppStateRow"
+                        android:gravity="right" />
+                </TableRow>
+                <!-- Datapoints -->
+                <TableRow
+                    android:id="@+id/Datapoints"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/DatapointsLabel"
+                        style="@style/AppStateRow"
+                        android:text="@string/datapoints" />
+
+                    <TextView
+                        android:id="@+id/DatapointsContent"
+                        style="@style/AppStateRow"
+                        android:gravity="right" />
+                </TableRow>
+                <!-- Programs -->
+                <TableRow
+                    android:id="@+id/Programs"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/ProgramsLabel"
+                        style="@style/AppStateRow"
+                        android:text="@string/scripts" />
+
+                    <TextView
+                        android:id="@+id/ProgramsContent"
+                        style="@style/AppStateRow"
+                        android:gravity="right" />
+                </TableRow>
+                <!-- Variables -->
+                <TableRow
+                    android:id="@+id/Variables"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/VariablesLabel"
+                        style="@style/AppStateRow"
+                        android:text="@string/variables" />
+
+                    <TextView
+                        android:id="@+id/VariablesContent"
+                        style="@style/AppStateRow"
+                        android:gravity="right" />
+                </TableRow>
+
+
+            </TableLayout>
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

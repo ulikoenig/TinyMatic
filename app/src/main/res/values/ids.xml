@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="details_rooms" type="id"/>
+    <item name="details_categories" type="id"/>
+    <item name="details_favs" type="id"/>
+</resources>

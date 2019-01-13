@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:seekarc="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:descendantFocusability="beforeDescendants"
+        android:focusableInTouchMode="true"
+        android:minWidth="250dp"
+        android:orientation="vertical"
+        android:padding="8dp">
+
+        <FrameLayout
+            android:id="@+id/seekArcContainer"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:visibility="gone">
+
+            <com.triggertrap.seekarc.SeekArc
+                android:id="@+id/seekArc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:padding="30dp"
+                seekarc:rotation="180"
+                seekarc:startAngle="30"
+                seekarc:sweepAngle="300"
+                seekarc:touchInside="true" />
+
+            <LinearLayout
+                android:id="@+id/layout_progress_arc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp">
+
+                <EditText
+                    android:id="@+id/progressTextArc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:inputType="numberDecimal|numberSigned"
+                    android:text="0"
+                    android:textSize="35dp" />
+
+                <TextView
+                    android:id="@+id/progressUnitArc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="marquee"
+                    android:textSize="35dp" />
+            </LinearLayout>
+        </FrameLayout>
+
+        <LinearLayout
+            android:id="@+id/progressLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="24dp"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/buttonMinus"
+                android:layout_width="@dimen/seek_button_size"
+                android:layout_height="@dimen/seek_button_size"
+                android:gravity="center"
+                android:src="@drawable/flat_minus" />
+
+            <LinearLayout
+                android:id="@+id/layout_progress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp">
+
+                <EditText
+                    android:id="@+id/progressText"
+                    style="@style/device_textview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:inputType="numberDecimal|numberSigned"
+                    android:background="@android:color/transparent"/>
+
+                <TextView
+                    android:id="@+id/progressUnit"
+                    style="@style/device_textview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="marquee" />
+            </LinearLayout>
+
+            <ImageButton
+                android:id="@+id/buttonPlus"
+                android:layout_width="@dimen/seek_button_size"
+                android:layout_height="@dimen/seek_button_size"
+                android:src="@drawable/flat_plus" />
+        </LinearLayout>
+
+        <SeekBar
+            android:id="@+id/seekBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:max="100" />
+
+        <Button
+            android:id="@+id/button_set"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="16dp"
+            android:text="@string/set" />
+
+        <LinearLayout
+            android:id="@+id/layout_color_white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingBottom="8dp"
+            android:visibility="gone"
+            android:weightSum="1">
+
+            <ImageButton
+                android:id="@+id/buttonColorWhite"
+                android:layout_width="@dimen/seek_button_size"
+                android:layout_height="@dimen/seek_button_size"
+                android:src="@drawable/white_circle" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_climate_mode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingBottom="8dp"
+            android:visibility="gone"
+            android:weightSum="1"
+            tools:visibility="visible">
+
+            <Button
+                android:id="@+id/buttonMode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/mode" />
+
+            <Button
+                android:id="@+id/buttonBoost"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/mode_boost"
+                android:visibility="gone" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_lamella"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingBottom="8dp"
+            android:visibility="gone"
+            android:weightSum="1"
+            tools:visibility="visible">
+
+            <Button
+                android:id="@+id/button_lamella"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/lamella" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_color"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingBottom="8dp"
+            android:visibility="gone"
+            android:weightSum="1"
+            tools:visibility="visible">
+
+            <Button
+                android:id="@+id/button_color"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/color" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_up_down"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingBottom="8dp"
+            android:visibility="gone"
+            android:weightSum="1"
+            tools:visibility="visible">
+
+            <ImageButton
+                android:id="@+id/buttonMin"
+                android:layout_width="@dimen/seek_button_size"
+                android:layout_height="@dimen/seek_button_size"
+                android:src="@drawable/flat_min" />
+
+            <ImageButton
+                android:id="@+id/buttonStop"
+                android:layout_width="@dimen/seek_button_size"
+                android:layout_height="@dimen/seek_button_size"
+                android:src="@drawable/flat_stop" />
+
+            <ImageButton
+                android:id="@+id/buttonMax"
+                android:layout_width="@dimen/seek_button_size"
+                android:layout_height="@dimen/seek_button_size"
+                android:src="@drawable/flat_max" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_open_close"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingBottom="8dp"
+            android:visibility="gone"
+            android:weightSum="1"
+            tools:visibility="visible">
+
+            <ImageButton
+                android:id="@+id/buttonOpen"
+                android:layout_width="@dimen/seek_button_size"
+                android:layout_height="@dimen/seek_button_size"
+                android:layout_marginRight="8dp"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:src="@drawable/flat_double_left" />
+
+            <ImageButton
+                android:id="@+id/buttonReset"
+                android:layout_width="@dimen/seek_button_size"
+                android:layout_height="@dimen/seek_button_size"
+                android:layout_marginRight="8dp"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:src="@drawable/flat_revert"
+                android:visibility="gone"
+                tools:visibility="visible" />
+
+            <ImageButton
+                android:id="@+id/buttonClose"
+                android:layout_width="@dimen/seek_button_size"
+                android:layout_height="@dimen/seek_button_size"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:src="@drawable/flat_double_right" />
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

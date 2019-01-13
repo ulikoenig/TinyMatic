@@ -1,0 +1,427 @@
+<?xml version="1.0" encoding="utf-8"?>
+<changelog>
+    <release
+        version="2.14.2"
+        versioncode="2142000">
+        <change>HmIPW-DRS4</change>
+        <change>Kleinere Bugfixes</change>
+    </release>
+    <release
+        version="2.14.1"
+        versioncode="2141000">
+        <change>Bewertungsdialog hinzugefügt</change>
+    </release>
+    <release
+        version="2.14.0"
+        versioncode="2140000">
+        <change>Unterstützung für Aktivieren und Deaktivieren von Programmen</change>
+        <change>Bugfix für Crash auf Android 9 mit aktiviertem Update-Dienst</change>
+    </release>
+    <release
+        version="2.13.4"
+        versioncode="2134000">
+        <change>HmIP-SCI</change>
+        <change>HmIP-FC*</change>
+        <change>HmIPW-FIO6</change>
+    </release>
+    <release
+        version="2.13.3"
+        versioncode="2133000">
+        <change>HmIP-ASIR-B1</change>
+        <change>Links zum HomeMatic-Forum anstatt zu Google+</change>
+    </release>
+    <release
+        version="2.13.2"
+        versioncode="2132000">
+        <change>Fehlerbehebung für WLAN-Erkennung auf Android 8+</change>
+        <change>Weitere Fehlerbehebungen</change>
+        <change>HmIP-MOD-TM</change>
+        <change>HmIP-WHS2</change>
+    </release>
+    <release
+        version="2.13.1"
+        versioncode="2131000">
+        <change>HmIPW-DRI16</change>
+        <change>HmIPW-DRS8</change>
+        <change>HmIPW-DRBL4</change>
+    </release>
+    <release
+        version="2.13.0"
+        versioncode="2130000">
+        <change>Fehlerbehebung für Heimnetzwerk-Erkennung mit Android 8+</change>
+        <change>Vollsynchronisierung bei langem Tastendruck auf Sync-Icon</change>
+        <change>HmIP-BSL (Beta)</change>
+    </release>
+    <release
+        version="2.12.1"
+        versioncode="2121000">
+        <change>HmIP-BRC2</change>
+        <change>HmIP-MOD-RC8</change>
+        <change>HmIP-DBB</change>
+    </release>
+    <release
+        version="2.12.0"
+        versioncode="2120000">
+        <change>HmIP-PCBS2</change>
+        <change>HmIP-PMFS</change>
+    </release>
+    <release
+        version="2.11.1"
+        versioncode="2111000">
+        <change>HmIP-SLO</change>
+    </release>
+    <release
+        version="2.11.0"
+        versioncode="2110000">
+        <change>HBW-IO-12-1W-UP</change>
+        <change>HB-UNI-Sen-TEMP-DS18B20</change>
+    </release>
+    <release
+        version="2.10.2"
+        versioncode="2102000">
+        <change>HB-UNI-Sen-TEMP-DS18B20</change>
+        <change>Windrichtung HmIP-SWO-PR</change>
+        <change>HmIP-WGC</change>
+    </release>
+    <release
+        version="2.10.0"
+        versioncode="2100000">
+        <change>Unterstützung für Android 8</change>
+        <change>HmIP-SMI55</change>
+        <change>HmIP-SWO-PL</change>
+        <change>HmIP-SWO-B</change>
+    </release>
+    <release
+        version="2.04.0"
+        versioncode="2040000">
+        <change>Lamellensteuerung HM-LC-Ja1PBU-FM</change>
+        <change>Fehlerbehebungen und kleinere Verbesserungen</change>
+    </release>
+    <release
+        version="2.03.0"
+        versioncode="2030000">
+        <change>Mehrere Heimnetzwerke auswählen</change>
+        <change>Experimentell: Navigationsleiste anpassen</change>
+        <change>Fehlerbehebungen und kleinere Verbesserungen</change>
+    </release>
+    <release
+        version="2.02.0"
+        versioncode="2020000">
+        <change>Letzte Änderung des Objekts im Kontextmenu</change>
+        <change>HmIP-SAM</change>
+        <change>Fehlerbehebung bei Nutzung von Sortierung und Ausblenden von Geräten</change>
+        <change>Rudimentäre Unterstützung für EasyLED 1/2</change>
+    </release>
+    <release
+        version="2.01.0"
+        versioncode="2010000">
+        <change>Neues Logo!</change>
+    </release>
+    <release
+        version="2.01.0"
+        versioncode="2010000">
+        <change>Neues Logo!</change>
+    </release>
+    <release
+        version="2.00.1"
+        versioncode="2001000">
+        <change>Verbesserte Fehlermeldung bei CloudMatic Verbindungsproblemen</change>
+        <change>HmIP-MOD-OC8</change>
+    </release>
+    <release
+        version="2.00.0"
+        versioncode="2000000">
+        <change>Namesänderung zu TinyMatic</change>
+    </release>
+    <release
+        version="1.99.0"
+        versioncode="1990000">
+        <change>Fehlerbehebungen</change>
+    </release>
+    <release
+        version="1.98.9"
+        versioncode="1989000">
+        <change>HmIP-SWDO-I</change>
+        <change>HmIP-eTRV-2</change>
+    </release>
+    <release
+        version="1.98.8"
+        versioncode="1988000">
+        <change>Verbesserte Kindersicherung</change>
+        <change>HM-EM-CMM</change>
+        <change>HmIP-FAL24-C6</change>
+    </release>
+    <release
+        version="1.98.7"
+        versioncode="1987000">
+        <change>HM-DW-WM</change>
+        <change>HmIP-PCBS</change>
+        <change>HmIP-KRC4</change>
+    </release>
+    <release
+        version="1.98.6"
+        versioncode="1986000">
+        <change>HmIP-BBL</change>
+        <change>HmIP-FBL</change>
+        <change>HmIP-BWTH</change>
+        <change>HmIP-FROLL</change>
+        <change>HmIP-BROLL</change>
+        <change>HM-LC-DW-WM</change>
+        <change>HmIP-PSM-PE</change>
+        <change>HBW-SD6-Multikey</change>
+    </release>
+    <release
+        version="1.98.5"
+        versioncode="1985000">
+        <change>HmIP-FDT</change>
+        <change>Fehlerbehebung für Webcams in Schnellzugriff</change>
+    </release>
+    <release
+        version="1.98.4"
+        versioncode="1984000">
+        <change>VIR-LG-ONOFF</change>
+        <change>HmIP-eTRV-2</change>
+        <change>HmIP-RC8</change>
+        <change>HmIP-PDT</change>
+        <change>ALPHA-IP-RBG</change>
+    </release>
+    <release
+        version="1.98.3"
+        versioncode="1983000">
+        <change>Verbesserte Dialoge</change>
+        <change>HmIP-FSM16</change>
+    </release>
+    <release
+        version="1.98.2"
+        versioncode="1982000">
+        <change>Fehlerbehebung für Farbauswahl bei Lightifiy-Geräten</change>
+        <change>Suche beim Erstellen von Widgets und in Grundriß verbessert</change>
+        <change>HM-ES-PMSwX</change>
+        <change>VIR-LG-GROUP</change>
+        <change>Protokoll wird unabhängig von Synchronisierung abgerufen</change>
+    </release>
+    <release
+        version="1.98.1"
+        versioncode="1981000">
+        <change>Fehlerbehebung für Email-Funktion von nicht unterstützen Geräten</change>
+        <change>VIR-LG-DIM</change>
+        <change>VIR-LG-RGB-DIM</change>
+    </release>
+    <release
+        version="1.98.0"
+        versioncode="1980000">
+        <change>Unterstützung für Osram Lightify</change>
+        <change>Verbesserte Dialoge</change>
+        <change>Schnellaktion-Widgets jetzt vollständig klickbar</change>
+        <change>Neue Statusymbole für Rolladen-Aktoren (Danke an Kai)</change>
+    </release>
+    <release
+        version="1.97.6"
+        versioncode="1976000">
+        <change>Kleinere Anpassungen</change>
+    </release>
+    <release
+        version="1.97.6"
+        versioncode="1976000">
+        <change>Fehlerbehebungen für seltenen Absturz</change>
+    </release>
+    <release
+        version="1.97.5"
+        versioncode="1975000">
+        <change>Absturz beim Öffnen der VPN-Einstellungen auf einigen Geräten behoben</change>
+        <change>Fix für HmIP-STH</change>
+        <change>Fehlerbehebungen für seltene Abstürze</change>
+    </release>
+    <release
+        version="1.97.3"
+        versioncode="1973000">
+        <change>Verschieben von Einträgen über Pfeil-Icon (Erlaubt Scrollen beim Verschieben)
+        </change>
+        <change>Fehler bei Sortierung von Favoriten behoben</change>
+        <change>Absturz nach Export von Backups behoben</change>
+        <change>Ausblenden von einzelnen Einträgen aus Listen</change>
+        <change>Experimentelles(!) Feature: Sprachsteuerung über Schlüsselwort aktiveren</change>
+        <change>HmIP-KRCA</change>
+        <change>HmIP-ASIR</change>
+    </release>
+    <release
+        version="1.97.2"
+        versioncode="1972000">
+        <change>Neu: Sortierung von allen Listen mit HomeMatic-Objekten: Räume, Gewerke,
+            Systemvariablen und Programme!
+        </change>
+        <change>HmIP-PSM-CH</change>
+        <change>HmIP-STHD</change>
+        <change>HmIP-STH</change>
+    </release>
+    <release
+        version="1.97.1"
+        versioncode="1971000">
+        <change>Neu: Objekte umbenennen! (Räume, Geräte, etc)</change>
+    </release>
+    <release
+        version="1.97.0"
+        versioncode="1970001">
+        <change>Fehlerbehebungen</change>
+        <change>Kleine Designanpassungen</change>
+    </release>
+    <release
+        version="1.96.1"
+        versioncode="196100">
+        <change>HmIP-BDT</change>l
+        <change>HmIP-FAL230-C6 + HmIP-FAL230-C10</change>
+        <change>Abstürze in Konfiguration behoben</change>
+    </release>
+    <release
+        version="1.96.0"
+        versioncode="196000">
+        <change>HmIP-SMO</change>
+        <change>HmIP-FSM</change>
+        <change>HmIP-BSM</change>
+    </release>
+    <release
+        version="1.95.9"
+        versioncode="195900">
+        <change>HmIP-WRC6</change>
+        <change>HmIP-WTH-2</change>
+    </release>
+    <release
+        version="1.95.8"
+        versioncode="195800">
+        <change>HM-LC-AO-SM</change>
+        <change>HM-RC-Key4-3</change>
+        <change>Fehlerbehebungen für HMIP-PS und HMIP-PSM</change>
+        <change>Mehr Daten bei HM-WDS100-C6-O-2</change>
+    </release>
+    <release
+        version="1.95.7"
+        versioncode="195700">
+        <change>Verbesserter Dialog für Rolladen-Aktoren</change>
+    </release>
+    <release
+        version="1.95.6"
+        versioncode="195600">
+        <change>HM-WDS30-OT2-SM-2</change>
+        <change>HM-Dis-EP-WM55</change>
+    </release>
+    <release
+        version="1.95.5"
+        versioncode="195500">
+        <change>HM-WDS100-C6-O-2</change>
+        <change>HM-RC-Sec4-3</change>
+        <change>HmIP-SMI</change>
+        <change>HM-Sec-Sir-WM</change>
+        <change>Lizenzaktivierung beim Start der App</change>
+    </release>
+    <release
+        version="1.95.4"
+        versioncode="195400">
+        <change>Fehlerbehebung bei Bilderauswahl auf Android 6.0</change>
+        <change>HM-Sec-RHS-2</change>
+        <change>Fix für HMIP-eTRV</change>
+    </release>
+    <release
+        version="1.95.3"
+        versioncode="195300">
+        <change>HMIP-WTH</change>
+        <change>HMIP-TRV</change>
+        <change>HM-Sen-LI-O</change>
+    </release>
+    <release
+        version="1.95.1"
+        versioncode="195100">
+        <change>HMIP-SWDO</change>
+        <change>HM-Sec-SD-2</change>
+        <change>Unterstützung für Berechtigungsmodell von Android 6.0</change>
+    </release>
+    <release
+        version="1.95.0"
+        versioncode="195000">
+        <change>HM-OU-CFM-TW</change>
+        <change>HMIP-PS</change>
+        <change>HMIP-PSM</change>
+        <change>HMIP-SWD</change>
+        <change>HMIP-WRC2</change>
+        <change>OLIGO.smart.iq.HM</change>
+    </release>
+    <release
+        version="1.94.3"
+        versioncode="194300">
+        <change>Inhalte von Widgets werden an Größe des Widgets angepasst - Mehr Informationen bei
+            größeren Widgets
+        </change>
+        <change>Orientierung in Grundriss-Ansicht einstellbar</change>
+    </release>
+    <!--<release-->
+    <!--version="1.94.2"-->
+    <!--versioncode="194200">-->
+    <!--<change>Unterstützung für HM-LC-RGBW-WM</change>-->
+    <!--<change>Batterieladung wird in Widgets und Grundriss-Ansicht-->
+    <!--ausgeblendet -->
+    <!--</change>-->
+    <!--</release>-->
+    <!--<release-->
+    <!--version="1.94.1"-->
+    <!--versioncode="194100">-->
+    <!--<change>Neue Icons - Danke an Benjamin Gahle!</change>-->
+    <!--<change>Fehlerbehebungen</change>-->
+    <!--</release>-->
+    <!--<release-->
+    <!--version="1.94.0"-->
+    <!--versioncode="194000">-->
+    <!--<change>Neue Option: Nur im Heimnetzwerk synchronisieren</change>-->
+    <!--<change>Webcams zu Schnellzugriff hinzufügen</change>-->
+    <!--<change>Authentifizierung für Webcams</change>-->
+    <!--<change>Bestätigungsdialog vor Öffnen von KeyMatic Türaktoren</change>-->
+    <!--<change>HM-RC-2-PBU-FM</change>-->
+    <!--</release>-->
+    <!--<release-->
+    <!--version="1.93.1"-->
+    <!--versioncode="193013">-->
+    <!--<change>Lösch-Option für Webcams</change>-->
+    <!--<change>HM-RC-Dis-H-x-EU</change>-->
+    <!--</release>-->
+    <!--<release-->
+    <!--version="1.93"-->
+    <!--versioncode="193000">-->
+    <!--<change>Webcam-Support</change>-->
+    <!--<change>Sortierfunktion für Schnellzugriff</change>-->
+    <!--</release>-->
+    <!--<release-->
+    <!--version="1.92.1"-->
+    <!--versioncode="192100">-->
+    <!--<change>Heim-WLAN-Erkennung für meine-homematic.de</change>-->
+    <!--<change>Fehlerbehebungen für Dialoge</change>-->
+    <!--<change>Fehler bei der WLAN-Erkennung behoben</change>-->
+    <!--</release>-->
+    <!--<release-->
+    <!--version="1.92.0"-->
+    <!--versioncode="19200">-->
+    <!--<change>Schnellzugriff als Menüeintrag (Lokale Favoriten)</change>-->
+    <!--<change>Zuletzt genutzte Geräte als Menüeintrag</change>-->
+    <!--<change>Heim-WLAN-Erkennung</change>-->
+    <!--<change>Neues Benachrichtungs-Icon für Android 5.0</change>-->
+    <!--<change>Grundriss-Ansicht, Schnellzugriff und letzte Geräte als Startbildschirm</change>-->
+    <!--<change>Schöneres Menü</change>-->
+    <!--<change>HM-PB-4Dis-WM-2</change>-->
+    <!--</release>-->
+    <!--<release-->
+    <!--version="1.91.0"-->
+    <!--versioncode="19100">-->
+    <!--<change>Ein bißchen Material Design</change>-->
+    <!--<change>Splash-Screen entfernt</change>-->
+    <!--<change>Konfiguration neu geordnet</change>-->
+    <!--<change>Neuer Support-Dialog mit UserVoice-Integration</change>-->
+    <!--<change>Neuer Changelog</change>-->
+    <!--<change>Standart-Icons für Raumen und Gewerke</change>-->
+    <!--<change>HM-Dis-WM55</change>-->
+    <!--<change>HM-ES-TX-WM</change>-->
+    <!--<change>PicoTracker</change>-->
+    <!--</release>-->
+    <!--<release-->
+    <!--version="1.90.3"-->
+    <!--versioncode="18025">-->
+    <!--<change>HM-MOD-EM-8</change>-->
+    <!--<change>HM-Sen-DB-PCB</change>-->
+    <!--</release>-->
+</changelog>

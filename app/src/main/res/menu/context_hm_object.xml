@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/change_icon_internal"
+        android:title="@string/select_icon_internal" />
+    <item
+        android:id="@+id/change_icon_external"
+        android:title="@string/select_icon_external" />
+    <item
+        android:id="@+id/rename_object"
+        android:title="@string/rename" />
+</menu>

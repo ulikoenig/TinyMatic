@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@id/footer"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:paddingTop="5dp"
+    android:paddingLeft="2dp"
+    android:paddingRight="2dp"
+    android:paddingBottom="5dp"
+    android:weightSum="1">
+
+    <ImageView
+        android:id="@+id/imageview_sync_error"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:scaleType="fitCenter"
+        android:visibility="gone"
+        android:src="@drawable/warning_triangle" />
+
+    <TextView
+        android:id="@+id/syncTimeTitle"
+        style="@style/device_textview"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.4"
+        android:maxLines="1"
+        android:text="@string/lastSync" />
+
+    <TextView
+        android:id="@+id/syncTime"
+        style="@style/device_textview"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.6"
+        android:gravity="right"
+        android:maxLines="1"
+        android:text="---" />
+</LinearLayout>
