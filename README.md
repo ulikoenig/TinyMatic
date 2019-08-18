@@ -15,9 +15,9 @@ Any CCU datapoint is parsed and translated into UI by `ListViewGenerator`, inclu
 
 ## Licence information
 
-*TinyMatic is #All rights reserved', meaning it is NOT licenced under an open-source licence (yet) and permission is explicitly NOT given to redistribute or share any of the code in this repository or publish binaries based on said code. By pushing code to this repository, you transfer ownership of said code to the owner of this repository.*
+*TinyMatic is 'All rights reserved', meaning it is NOT licenced under an open-source licence (yet) and permission is explicitly NOT given to redistribute or share any of the code in this repository or publish binaries based on said code. By pushing code to this repository, you transfer ownership of said code to the owner of this repository.*
 
-(This sounds scary but I just want to avoid that someone steals the app)
+(This sounds scary but I just want to avoid that someone steals the app.)
 
 ## How to contribute: 
 
