@@ -354,7 +354,7 @@ public class ListViewGenerator {
             if (hmc.channelIndex <= 14) {
                 SwitchView(v, hmc);
             } else if (hmc.channelIndex <= 20) {
-                StateView(v, hmc, R.drawable.flat_locked, R.drawable.flat_unlocked);
+                StateView(v, hmc, R.drawable.flat_unlocked, R.drawable.flat_locked);
             } else if (hmc.channelIndex > 20) {
                 Int1000ViewVent(v, hmc);
             }
