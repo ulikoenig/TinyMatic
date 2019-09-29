@@ -2,10 +2,14 @@ package de.ebertp.HomeDroid.DbAdapter;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
+
+import java.util.ArrayList;
 
 import de.ebertp.HomeDroid.HomeDroidApp;
+import de.ebertp.HomeDroid.Model.HMObject;
+import de.ebertp.HomeDroid.Model.HMVariable;
 import de.ebertp.HomeDroid.Utils.PreferenceHelper;
+import de.ebertp.HomeDroid.ViewAdapter.CursorToObjectHelper;
 import timber.log.Timber;
 
 public class DbUtil {
@@ -93,6 +97,11 @@ public class DbUtil {
             cursor.close();
         }
         return null;
+    }
+
+    public static ArrayList<HMObject> getConnectedVariables(int rowId) {
+        Cursor cursor = HomeDroidApp.db().varsDbAdapter.fetchConnectedVariables(rowId);
+        return CursorToObjectHelper.convertCursorToVariables(cursor);
     }
 
     public static Double getDatapointDoubleByName(int rowId, String name) {

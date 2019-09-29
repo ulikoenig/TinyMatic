@@ -2,7 +2,6 @@ package de.ebertp.HomeDroid.ViewAdapter;
 
 import android.database.Cursor;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;

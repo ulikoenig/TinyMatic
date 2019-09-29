@@ -4,6 +4,9 @@
         version="2.14.2"
         versioncode="2142000">
         <change>HmIPW-DRS4</change>
+        <change>HmIP-FALMOT-C12</change>
+        <change>HmIP-MOD-HO</change>
+        <change>HmIP-ASIR-O</change>
         <change>Small bug fixes</change>
     </release>
     <release
@@ -61,270 +64,270 @@
         <change>HmIP-MOD-RC8</change>
         <change>HmIP-DBB</change>
     </release>
-    <release
-        version="2.12.0"
-        versioncode="2120000">
-        <change>HmIP-PCBS2</change>
-        <change>HmIP-PMFS</change>
-    </release>
-    <release
-        version="2.11.0"
-        versioncode="2110000">
-        <change>HBW-IO-12-1W-UP</change>
-        <change>HB-UNI-Sen-TEMP-DS18B20</change>
-    </release>
-    <release
-        version="2.10.2"
-        versioncode="2102000">
-        <change>HB-UNI-Sen-TEMP-DS18B20</change>
-        <change>Wind direction for HmIP-SWO-PR</change>
-        <change>HmIP-WGC</change>
-    </release>
-    <release
-        version="2.10.1"
-        versioncode="2101000">
-        <change>Bug fixes for update service and synchronization</change>
-        <change>HmIP-SPDR</change>
-    </release>
-    <release
-        version="2.10.0"
-        versioncode="2100000">
-        <change>Support for Android 8</change>
-        <change>HmIP-SMI55</change>
-        <change>HmIP-SWO-PL</change>
-        <change>HmIP-SWO-B</change>
-    </release>
-    <release
-        version="2.04.0"
-        versioncode="2040000">
-        <change>Lamellar control for HM-LC-Ja1PBU-FM</change>
-        <change>Bug fixes and small improvements</change>
-    </release>
-    <release
-        version="2.03.0"
-        versioncode="2030000">
-        <change>Select multiple home networks</change>
-        <change>Experimental setting: Customize navigation menu</change>
-        <change>Bug fixes and small improvements</change>
-    </release>
-    <release
-        version="2.02.0"
-        versioncode="2020000">
-        <change>Show last change per object shown in context menu</change>
-        <change>HmIP-SAM</change>
-        <change>Fixes bug when combining sorting and hiding entries</change>
-        <change>Basic support for EasyLED 1/2</change>
-    </release>
-    <release
-        version="2.01.0"
-        versioncode="2010000">
-        <change>New app icon!</change>
-    </release>
-    <release
-        version="2.00.1"
-        versioncode="2001000">
-        <change>Improved CloudMatic error message</change>
-        <change>HmIP-MOD-OC8</change>
-    </release>
-    <release
-        version="2.00.0"
-        versioncode="2000000">
-        <change>Changes app name to TinyMatic</change>
-    </release>
-    <release
-        version="1.99.0"
-        versioncode="1990000">
-        <change>Bugfixes</change>
-    </release>
-    <release
-        version="1.98.9"
-        versioncode="1989000">
-        <change>HmIP-SWDO-I</change>
-        <change>HmIP-eTRV-2</change>
-    </release>
-    <release
-        version="1.98.8"
-        versioncode="1988000">
-        <change>Improved Child Protection</change>
-        <change>HM-EM-CMM</change>
-        <change>HmIP-FAL24-C6</change>
-    </release>
-    <release
-        version="1.98.6"
-        versioncode="1986000">
-        <change>HmIP-BBL</change>
-        <change>HmIP-FBL</change>
-        <change>HmIP-BWTH</change>
-        <change>HmIP-FROLL</change>
-        <change>HmIP-BROLL</change>
-        <change>HM-LC-DW-WM</change>
-        <change>HmIP-PSM-PE</change>
-        <change>HBW-SD6-Multikey</change>
-    </release>
-    <release
-        version="1.98.5"
-        versioncode="1985000">
-        <change>HmIP-FDT</change>
-        <change>Bugfix for webcams in quick access</change>
-    </release>
-    <release
-        version="1.98.4"
-        versioncode="1984000">
-        <change>VIR-LG-ONOFF</change>
-        <change>HmIP-eTRV-2</change>
-        <change>HmIP-RC8</change>
-        <change>HmIP-PDT</change>
-        <change>ALPHA-IP-RBG</change>
-    </release>
-    <release
-        version="1.98.3"
-        versioncode="1983000">
-        <change>Improved Dialogs</change>
-        <change>HmIP-FSM16</change>
-    </release>
-    <release
-        version="1.98.2"
-        versioncode="1982000">
-        <change>Fix lightify color selection</change>
-        <change>Improve search when creating widgets and in floorplan screen</change>
-        <change>HM-ES-PMSwX</change>
-        <change>VIR-LG-GROUP</change>
-        <change>Protocol not part of sync anymore</change>
-    </release>
-    <release
-        version="1.98.0"
-        versioncode="1980000">
-        <change>Support for Osram Lightify</change>
-        <change>Improved dialogs</change>
-        <change>Quick command widget now fully clickable</change>
-        <change>New status symbols for blind actuators (thx Kai)</change>
-    </release>
-    <release
-        version="1.97.6"
-        versioncode="1976000">
-        <change>Fix rare crash</change>
-    </release>
-    <release
-        version="1.97.5"
-        versioncode="1975000">
-        <change>Fix crash when opening VPN settings on some devices</change>
-        <change>Fix for HmIP-STH</change>
-        <change>Fix rare crashes</change>
-    </release>
-    <release
-        version="1.97.4"
-        versioncode="1974000">
-        <change>Bugfixes</change>
-    </release>
-    <release
-        version="1.97.3"
-        versioncode="1973000">
-        <change>Drag-And-Drop sorting now attached to icon instead of whole card</change>
-        <change>Fix sorting for favorites</change>
-        <change>Fix crash after exporting backup</change>
-        <change>Hide single entries from any list</change>
-        <change>Experimental(!) feature: Sync only while app is foreground</change>
-        <change>HmIP-KRCA</change>
-        <change>HmIP-ASIR</change>
-    </release>
-    <release
-        version="1.97.2"
-        versioncode="1972000">
-        <change>New: Sort any list of HomeMatic objects: Rooms, Functions, Variables and Scripts!
-        </change>
-        <change>HmIP-PSM-CH</change>
-        <change>HmIP-STHD</change>
-        <change>HmIP-STH</change>
-    </release>
-    <release
-        version="1.97.1"
-        versioncode="1971000">
-        <change>New Feature: Rename all types of objects</change>
-    </release>
-    <release
-        version="1.97.0"
-        versioncode="197000">
-        <change>Bug fixes</change>
-        <change>Minor design changes</change>
-    </release>
-    <release
-        version="1.96.0"
-        versioncode="196000">
-        <change>HmIP-SMO</change>
-        <change>HmIP-FSM</change>
-        <change>HmIP-BSM</change>
-    </release>
-    <release
-        version="1.95.9"
-        versioncode="195900">
-        <change>HmIP-WRC6</change>
-        <change>HmIP-WTH-2</change>
-    </release>
-    <release
-        version="1.95.8"
-        versioncode="195800">
-        <change>HM-LC-AO-SM</change>
-        <change>HM-RC-Key4-3</change>
-        <change>Bug fixes for HMIP-PS and HMIP-PSM</change>
-        <change>More data displayed for HM-WDS100-C6-O-2</change>
-    </release>
-    <release
-        version="1.95.6"
-        versioncode="195600">
-        <change>HM-WDS30-OT2-SM-2</change>
-        <change>HM-Dis-EP-WM55</change>
-    </release>
-    <release
-        version="1.95.5"
-        versioncode="195500">
-        <change>HM-WDS100-C6-O-2</change>
-        <change>HM-RC-Sec4-3</change>
-        <change>HmIP-SMI</change>
-        <change>HM-Sec-Sir-WM</change>
-        <change>Licence check on app start</change>
-    </release>
-    <release
-        version="1.95.4"
-        versioncode="195400">
-        <change>Bugfix for issue with image selection on Android 6.0</change>
-        <change>HM-Sec-RHS-2</change>
-        <change>Fix for HMIP-eTRV</change>
-    </release>
-    <release
-        version="1.95.3"
-        versioncode="195300">
-        <change>HMIP-WTH</change>
-        <change>HMIP-TRV</change>
-        <change>HM-Sen-LI-O</change>
-    </release>
-    <release
-        version="1.95.2"
-        versioncode="195200">
-        <change>New options for widgets: Control lock, popup only, quick action only</change>
-    </release>
-    <release
-        version="1.95.1"
-        versioncode="195100">
-        <change>HMIP-SWDO</change>
-        <change>HM-Sec-SD-2</change>
-        <change>Support for Android 6.0 permission model</change>
-    </release>
-    <release
-        version="1.95.0"
-        versioncode="195000">
-        <change>HM-OU-CFM-TW</change>
-        <change>HMIP-PS</change>
-        <change>HMIP-PSM</change>
-        <change>HMIP-SWD</change>
-        <change>HMIP-WRC2</change>
-        <change>OLIGO.smart.iq.HM</change>
-    </release>
-    <release
-        version="1.94.3"
-        versioncode="194300">
-        <change>Responsive Widgets - Adapt content to widget size</change>
-        <change>Orientation change in floor plan</change>
-    </release>
+<!--    <release-->
+<!--        version="2.12.0"-->
+<!--        versioncode="2120000">-->
+<!--        <change>HmIP-PCBS2</change>-->
+<!--        <change>HmIP-PMFS</change>-->
+<!--    </release>-->
+<!--    <release-->
+<!--        version="2.11.0"-->
+<!--        versioncode="2110000">-->
+<!--        <change>HBW-IO-12-1W-UP</change>-->
+<!--        <change>HB-UNI-Sen-TEMP-DS18B20</change>-->
+<!--    </release>-->
+<!--    <release-->
+<!--        version="2.10.2"-->
+<!--        versioncode="2102000">-->
+<!--        <change>HB-UNI-Sen-TEMP-DS18B20</change>-->
+<!--        <change>Wind direction for HmIP-SWO-PR</change>-->
+<!--        <change>HmIP-WGC</change>-->
+<!--    </release>-->
+<!--    <release-->
+<!--        version="2.10.1"-->
+<!--        versioncode="2101000">-->
+<!--        <change>Bug fixes for update service and synchronization</change>-->
+<!--        <change>HmIP-SPDR</change>-->
+<!--    </release>-->
+<!--    <release-->
+<!--        version="2.10.0"-->
+<!--        versioncode="2100000">-->
+<!--        <change>Support for Android 8</change>-->
+<!--        <change>HmIP-SMI55</change>-->
+<!--        <change>HmIP-SWO-PL</change>-->
+<!--        <change>HmIP-SWO-B</change>-->
+<!--    </release>-->
+<!--    <release-->
+<!--        version="2.04.0"-->
+<!--        versioncode="2040000">-->
+<!--        <change>Lamellar control for HM-LC-Ja1PBU-FM</change>-->
+<!--        <change>Bug fixes and small improvements</change>-->
+<!--    </release>-->
+<!--    <release-->
+<!--        version="2.03.0"-->
+<!--        versioncode="2030000">-->
+<!--        <change>Select multiple home networks</change>-->
+<!--        <change>Experimental setting: Customize navigation menu</change>-->
+<!--        <change>Bug fixes and small improvements</change>-->
+<!--    </release>-->
+<!--    <release-->
+<!--        version="2.02.0"-->
+<!--        versioncode="2020000">-->
+<!--        <change>Show last change per object shown in context menu</change>-->
+<!--        <change>HmIP-SAM</change>-->
+<!--        <change>Fixes bug when combining sorting and hiding entries</change>-->
+<!--        <change>Basic support for EasyLED 1/2</change>-->
+<!--    </release>-->
+<!--    <release-->
+<!--        version="2.01.0"-->
+<!--        versioncode="2010000">-->
+<!--        <change>New app icon!</change>-->
+<!--    </release>-->
+<!--    <release-->
+<!--        version="2.00.1"-->
+<!--        versioncode="2001000">-->
+<!--        <change>Improved CloudMatic error message</change>-->
+<!--        <change>HmIP-MOD-OC8</change>-->
+<!--    </release>-->
+<!--    <release-->
+<!--        version="2.00.0"-->
+<!--        versioncode="2000000">-->
+<!--        <change>Changes app name to TinyMatic</change>-->
+<!--    </release>-->
+<!--    <release-->
+<!--        version="1.99.0"-->
+<!--        versioncode="1990000">-->
+<!--        <change>Bugfixes</change>-->
+<!--    </release>-->
+<!--    <release-->
+<!--        version="1.98.9"-->
+<!--        versioncode="1989000">-->
+<!--        <change>HmIP-SWDO-I</change>-->
+<!--        <change>HmIP-eTRV-2</change>-->
+<!--    </release>-->
+<!--    <release-->
+<!--        version="1.98.8"-->
+<!--        versioncode="1988000">-->
+<!--        <change>Improved Child Protection</change>-->
+<!--        <change>HM-EM-CMM</change>-->
+<!--        <change>HmIP-FAL24-C6</change>-->
+<!--    </release>-->
+<!--    <release-->
+<!--        version="1.98.6"-->
+<!--        versioncode="1986000">-->
+<!--        <change>HmIP-BBL</change>-->
+<!--        <change>HmIP-FBL</change>-->
+<!--        <change>HmIP-BWTH</change>-->
+<!--        <change>HmIP-FROLL</change>-->
+<!--        <change>HmIP-BROLL</change>-->
+<!--        <change>HM-LC-DW-WM</change>-->
+<!--        <change>HmIP-PSM-PE</change>-->
+<!--        <change>HBW-SD6-Multikey</change>-->
+<!--    </release>-->
+<!--    <release-->
+<!--        version="1.98.5"-->
+<!--        versioncode="1985000">-->
+<!--        <change>HmIP-FDT</change>-->
+<!--        <change>Bugfix for webcams in quick access</change>-->
+<!--    </release>-->
+<!--    <release-->
+<!--        version="1.98.4"-->
+<!--        versioncode="1984000">-->
+<!--        <change>VIR-LG-ONOFF</change>-->
+<!--        <change>HmIP-eTRV-2</change>-->
+<!--        <change>HmIP-RC8</change>-->
+<!--        <change>HmIP-PDT</change>-->
+<!--        <change>ALPHA-IP-RBG</change>-->
+<!--    </release>-->
+<!--    <release-->
+<!--        version="1.98.3"-->
+<!--        versioncode="1983000">-->
+<!--        <change>Improved Dialogs</change>-->
+<!--        <change>HmIP-FSM16</change>-->
+<!--    </release>-->
+<!--    <release-->
+<!--        version="1.98.2"-->
+<!--        versioncode="1982000">-->
+<!--        <change>Fix lightify color selection</change>-->
+<!--        <change>Improve search when creating widgets and in floorplan screen</change>-->
+<!--        <change>HM-ES-PMSwX</change>-->
+<!--        <change>VIR-LG-GROUP</change>-->
+<!--        <change>Protocol not part of sync anymore</change>-->
+<!--    </release>-->
+<!--    <release-->
+<!--        version="1.98.0"-->
+<!--        versioncode="1980000">-->
+<!--        <change>Support for Osram Lightify</change>-->
+<!--        <change>Improved dialogs</change>-->
+<!--        <change>Quick command widget now fully clickable</change>-->
+<!--        <change>New status symbols for blind actuators (thx Kai)</change>-->
+<!--    </release>-->
+<!--    <release-->
+<!--        version="1.97.6"-->
+<!--        versioncode="1976000">-->
+<!--        <change>Fix rare crash</change>-->
+<!--    </release>-->
+<!--    <release-->
+<!--        version="1.97.5"-->
+<!--        versioncode="1975000">-->
+<!--        <change>Fix crash when opening VPN settings on some devices</change>-->
+<!--        <change>Fix for HmIP-STH</change>-->
+<!--        <change>Fix rare crashes</change>-->
+<!--    </release>-->
+<!--    <release-->
+<!--        version="1.97.4"-->
+<!--        versioncode="1974000">-->
+<!--        <change>Bugfixes</change>-->
+<!--    </release>-->
+<!--    <release-->
+<!--        version="1.97.3"-->
+<!--        versioncode="1973000">-->
+<!--        <change>Drag-And-Drop sorting now attached to icon instead of whole card</change>-->
+<!--        <change>Fix sorting for favorites</change>-->
+<!--        <change>Fix crash after exporting backup</change>-->
+<!--        <change>Hide single entries from any list</change>-->
+<!--        <change>Experimental(!) feature: Sync only while app is foreground</change>-->
+<!--        <change>HmIP-KRCA</change>-->
+<!--        <change>HmIP-ASIR</change>-->
+<!--    </release>-->
+<!--    <release-->
+<!--        version="1.97.2"-->
+<!--        versioncode="1972000">-->
+<!--        <change>New: Sort any list of HomeMatic objects: Rooms, Functions, Variables and Scripts!-->
+<!--        </change>-->
+<!--        <change>HmIP-PSM-CH</change>-->
+<!--        <change>HmIP-STHD</change>-->
+<!--        <change>HmIP-STH</change>-->
+<!--    </release>-->
+<!--    <release-->
+<!--        version="1.97.1"-->
+<!--        versioncode="1971000">-->
+<!--        <change>New Feature: Rename all types of objects</change>-->
+<!--    </release>-->
+<!--    <release-->
+<!--        version="1.97.0"-->
+<!--        versioncode="197000">-->
+<!--        <change>Bug fixes</change>-->
+<!--        <change>Minor design changes</change>-->
+<!--    </release>-->
+<!--    <release-->
+<!--        version="1.96.0"-->
+<!--        versioncode="196000">-->
+<!--        <change>HmIP-SMO</change>-->
+<!--        <change>HmIP-FSM</change>-->
+<!--        <change>HmIP-BSM</change>-->
+<!--    </release>-->
+<!--    <release-->
+<!--        version="1.95.9"-->
+<!--        versioncode="195900">-->
+<!--        <change>HmIP-WRC6</change>-->
+<!--        <change>HmIP-WTH-2</change>-->
+<!--    </release>-->
+<!--    <release-->
+<!--        version="1.95.8"-->
+<!--        versioncode="195800">-->
+<!--        <change>HM-LC-AO-SM</change>-->
+<!--        <change>HM-RC-Key4-3</change>-->
+<!--        <change>Bug fixes for HMIP-PS and HMIP-PSM</change>-->
+<!--        <change>More data displayed for HM-WDS100-C6-O-2</change>-->
+<!--    </release>-->
+<!--    <release-->
+<!--        version="1.95.6"-->
+<!--        versioncode="195600">-->
+<!--        <change>HM-WDS30-OT2-SM-2</change>-->
+<!--        <change>HM-Dis-EP-WM55</change>-->
+<!--    </release>-->
+<!--    <release-->
+<!--        version="1.95.5"-->
+<!--        versioncode="195500">-->
+<!--        <change>HM-WDS100-C6-O-2</change>-->
+<!--        <change>HM-RC-Sec4-3</change>-->
+<!--        <change>HmIP-SMI</change>-->
+<!--        <change>HM-Sec-Sir-WM</change>-->
+<!--        <change>Licence check on app start</change>-->
+<!--    </release>-->
+<!--    <release-->
+<!--        version="1.95.4"-->
+<!--        versioncode="195400">-->
+<!--        <change>Bugfix for issue with image selection on Android 6.0</change>-->
+<!--        <change>HM-Sec-RHS-2</change>-->
+<!--        <change>Fix for HMIP-eTRV</change>-->
+<!--    </release>-->
+<!--    <release-->
+<!--        version="1.95.3"-->
+<!--        versioncode="195300">-->
+<!--        <change>HMIP-WTH</change>-->
+<!--        <change>HMIP-TRV</change>-->
+<!--        <change>HM-Sen-LI-O</change>-->
+<!--    </release>-->
+<!--    <release-->
+<!--        version="1.95.2"-->
+<!--        versioncode="195200">-->
+<!--        <change>New options for widgets: Control lock, popup only, quick action only</change>-->
+<!--    </release>-->
+<!--    <release-->
+<!--        version="1.95.1"-->
+<!--        versioncode="195100">-->
+<!--        <change>HMIP-SWDO</change>-->
+<!--        <change>HM-Sec-SD-2</change>-->
+<!--        <change>Support for Android 6.0 permission model</change>-->
+<!--    </release>-->
+<!--    <release-->
+<!--        version="1.95.0"-->
+<!--        versioncode="195000">-->
+<!--        <change>HM-OU-CFM-TW</change>-->
+<!--        <change>HMIP-PS</change>-->
+<!--        <change>HMIP-PSM</change>-->
+<!--        <change>HMIP-SWD</change>-->
+<!--        <change>HMIP-WRC2</change>-->
+<!--        <change>OLIGO.smart.iq.HM</change>-->
+<!--    </release>-->
+<!--    <release-->
+<!--        version="1.94.3"-->
+<!--        versioncode="194300">-->
+<!--        <change>Responsive Widgets - Adapt content to widget size</change>-->
+<!--        <change>Orientation change in floor plan</change>-->
+<!--    </release>-->
     <!--<release-->
     <!--version="1.94.2"-->
     <!--versioncode="194200">-->

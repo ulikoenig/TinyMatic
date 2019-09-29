@@ -151,6 +151,20 @@ public class VariableDbAdapter extends BaseRelationsDbAdapter {
 
     }
 
+    public Cursor fetchConnectedVariables(int channelId) {
+//        String query = "SELECT * FROM system_variables, datapoints WHERE datapoints.channel_id = ? AND datapoints._id = system_variables._id";
+
+        String query = "SELECT * FROM system_variables JOIN datapoints ON datapoints._id = system_variables._id  WHERE datapoints.channel_id = ? AND datapoints. point_type= ''";
+
+        String[] select = {Integer.toString(channelId)};
+        Cursor mCursor = mDb.rawQuery(query, select);
+
+        if (mCursor != null) {
+            mCursor.moveToFirst();
+        }
+        return mCursor;
+    }
+
     @Override
     public Cursor fetchItemsByGroup(int mRoomId) {
         String query = "SELECT filter.*, s.sort_order as sort_order FROM " +

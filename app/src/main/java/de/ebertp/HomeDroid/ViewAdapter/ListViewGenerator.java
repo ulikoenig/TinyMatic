@@ -44,6 +44,7 @@ import de.ebertp.HomeDroid.DbAdapter.DbUtil;
 import de.ebertp.HomeDroid.HomeDroidApp;
 import de.ebertp.HomeDroid.Model.HMChannel;
 import de.ebertp.HomeDroid.Model.HMHvac;
+import de.ebertp.HomeDroid.Model.HMObject;
 import de.ebertp.HomeDroid.Model.HMScript;
 import de.ebertp.HomeDroid.Model.HMVariable;
 import de.ebertp.HomeDroid.Model.WebCam;
@@ -443,6 +444,8 @@ public class ListViewGenerator {
         } else if (type.equalsIgnoreCase("HMIP-WTH") || type.equalsIgnoreCase("HMIP-WTH-2") || Util.startsWithIgnoreCase(type, "HmIP-BWTH") || type.startsWith("HmIP-STH") || type.equals("ALPHA-IP-RBG")) {
             if (hmc.channelIndex == 1) {
                 ClimateControlIpView(v, hmc, 6, 30, "°C");
+            } else if (hmc.channelIndex >= 9) {
+                StateView(v, hmc, R.drawable.btn_check_on_holo_dark_hm, R.drawable.btn_check_off_holo_dark_hm);
             } else {
                 v = null;
             }
@@ -453,6 +456,10 @@ public class ListViewGenerator {
                 WindowView(v, hmc);
             } else if (hmc.channelIndex == 4) {
                 StateView(v, hmc, R.drawable.btn_check_on_holo_dark_hm, R.drawable.btn_check_off_holo_dark_hm);
+            }
+        } else if (type.equals("HmIP-FALMOT-C12")) {
+            if (hmc.channelIndex <= 12) {
+                FloorHeatingLevel(v, hmc);
             }
         } else if (type.equalsIgnoreCase("HMIP-PS")) {
             if (hmc.channelIndex == 3) {
@@ -519,6 +526,12 @@ public class ListViewGenerator {
             } else if (hmc.channelIndex == 3) {
                 StateView(v, hmc, R.drawable.flat_alarm, R.drawable.flat_unlocked);
                 setIcon(v, R.drawable.icon_gahle1);
+            }
+        } else if (type.equals("HmIP-ASIR-O")) {
+            if (hmc.channelIndex == 3) {
+                AlarmStateView(v, hmc);
+            } else {
+                v = null;
             }
         } else if (Util.startsWithIgnoreCase(type, "HmIP-KRC")) {
             TasterView(v, hmc);
@@ -642,7 +655,7 @@ public class ListViewGenerator {
             } else {
                 SwitchView(v, hmc);
             }
-        } else if (type.equals("HmIP-MOD-TM")) {
+        } else if (type.equals("HmIP-MOD-TM") || type.equals("HmIP-MOD-HO")) {
             if (hmc.channelIndex == 1) {
                 GarageDoorIpView(v, hmc);
             } else if (hmc.channelIndex == 2) {
@@ -680,14 +693,13 @@ public class ListViewGenerator {
             }
         } else if (type.equals("HmIP-SLO")) {
             LuxIPView(v, hmc);
-        }  else if (type.equals("HmIPW-DRS4")) {
+        } else if (type.equals("HmIPW-DRS4")) {
             if (hmc.channelIndex == 17) {
                 IpWeekProgramView(v, hmc);
             } else {
                 SwitchView(v, hmc);
             }
-        }
-        else if (type.equals("HmIPW-DRS8")) {
+        } else if (type.equals("HmIPW-DRS8")) {
             if (hmc.channelIndex == 33) {
                 IpWeekProgramView(v, hmc);
             } else {
@@ -735,7 +747,76 @@ public class ListViewGenerator {
             }
         }
 
+        if (v != null) {
+            addConnectedVariables(v, hmc);
+        }
+
         return v;
+    }
+
+    @SuppressWarnings("DuplicateBranchesInSwitch")
+    private void addConnectedVariables(View v, HMChannel hmc) {
+        for (HMObject hmObject : DbUtil.getConnectedVariables(hmc.rowId)) {
+
+            HMVariable hmv = (HMVariable) hmObject;
+            switch (hmv.vartype) {
+                case "2": {
+                    CheckedTextView cb = mViewAdder.addNewCheckedView(v).findViewById(R.id.check);
+                    if (hmv.value.equals("true")) {
+                        cb.setChecked(true);
+                    } else if (hmv.value.equals("false")) {
+                        cb.setChecked(false);
+                    } else {
+                        cb.setChecked(false);
+                    }
+                    break;
+                }
+                case "4": {
+                    String value = hmv.value;
+
+                    if (Integer.parseInt(hmv.vartype) == 4) {
+                        Float d;
+                        try {
+                            d = Float.parseFloat(value);
+                            value = Double.toString(Math.round(d * 100) / 100.);
+                        } catch (Exception e) {
+                            d = 0f;
+                        }
+
+                        if (hmv.min == -1) {
+                            hmv.min = 0;
+                            hmv.max = 100;
+                        }
+
+                        mViewAdder.addNewValue(v, value + " " + hmv.unit);
+                    } else {
+                        mViewAdder.addNewValue(v, value);
+                    }
+                    break;
+                }
+                case "16": {
+                    try {
+                        int index = Integer.parseInt(hmv.value.replaceAll("[^\\d.]", ""));
+                        String[] values = hmv.value_list.split(";");
+                        mViewAdder.addNewValue(v, values[index] + " " + hmv.unit);
+                    } catch (Exception e) {
+                        Timber.e(e);
+                    }
+                    break;
+                }
+                case "20": {
+                    String value = Html.fromHtml(hmv.value).toString();
+                    if (hmv.value.matches(".*\\<[^>]+>.*")) {
+                        WebView webView = new WebView(ctx);
+                        webView.loadDataWithBaseURL(null, hmv.value, "text/html", "utf-8", null);
+                        ((LinearLayout) v.findViewById(R.id.valueLL)).addView(webView);
+                    } else {
+                        mViewAdder.addNewValue(v, value + " " + hmv.unit);
+                    }
+                    break;
+                }
+            }
+        }
     }
 
     private void HumidityView(View v, HMChannel hmc) {
@@ -1941,6 +2022,21 @@ public class ListViewGenerator {
         return v;
     }
 
+    private View AlarmStateView(View v, HMChannel hmc) {
+        Boolean accoustic = DbUtil.getDatapointBoolean(hmc.rowId, "ACOUSTIC_ALARM_ACTIVE");
+        Boolean optical = DbUtil.getDatapointBoolean(hmc.rowId, "OPTICAL_ALARM_ACTIVE");
+
+        if (accoustic != null && optical != null) {
+            if (accoustic || optical) {
+                mViewAdder.addNewValue(v, R.drawable.flat_alarm, ViewAdder.IconSize.SMALL);
+            }
+        }
+
+        setIcon(v, R.drawable.icon_gahle1);
+        v.setTag(new HMControllable(hmc.rowId, hmc.name, HmType.PASSIV));
+        return v;
+    }
+
     private View DirectionIPView(View v, HMChannel hmc) {
         Boolean current = DbUtil.getDatapointBoolean(hmc.rowId, "CURRENT_PASSAGE_DIRECTION");
         if (current != null) {
@@ -2571,6 +2667,17 @@ public class ListViewGenerator {
         }
 
         setIcon(v, R.drawable.icon13);
+        v.setTag(new HMControllable(hmc.rowId, hmc.name, HmType.PASSIV));
+        return v;
+    }
+
+    private View FloorHeatingLevel(View v, HMChannel hmc) {
+        Double level = DbUtil.getDatapointDouble(hmc.rowId, "LEVEL");
+        if (level != null) {
+            mViewAdder.addNewValue(v, R.drawable.flat_valve,
+                    Double.toString(Math.round(level * 100)) + "%");
+        }
+        setIcon(v, R.drawable.icon10);
         v.setTag(new HMControllable(hmc.rowId, hmc.name, HmType.PASSIV));
         return v;
     }
