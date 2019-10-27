@@ -3,10 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="de.ebertp.HomeDroid"
     android:installLocation="auto"
-    android:versionCode="2150000"
+    android:versionCode="2150003"
     android:versionName="2.15.0">
 
-l
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission
         android:name="android.permission.ACCESS_WIFI_STATE"
@@ -20,6 +19,7 @@ l
         android:required="false" />
 
     <uses-permission
+
         android:name="android.permission.ACCESS_FINE_LOCATION"
         android:required="false" />
     <uses-permission

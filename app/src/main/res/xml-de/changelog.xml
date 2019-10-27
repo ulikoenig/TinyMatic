@@ -1,12 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <changelog>
     <release
+        version="2.15.0"
+        versioncode="2150000">
+        <change>HmIP-ASIR-2</change>
+        <change>HMIP-WTH</change>
+        <change>Unterstützung von Wochenprofilen</change>
+    </release>
+    <release
         version="2.14.2"
         versioncode="2142000">
         <change>HmIPW-DRS4</change>
         <change>HmIP-FALMOT-C12</change>
         <change>HmIP-MOD-HO</change>
         <change>HmIP-ASIR-O</change>
+        <change>HM-RC-2-PBU-FM-2</change>
         <change>Kleinere Bugfixes</change>
     </release>
     <release

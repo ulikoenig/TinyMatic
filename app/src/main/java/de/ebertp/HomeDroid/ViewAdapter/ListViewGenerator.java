@@ -275,7 +275,7 @@ public class ListViewGenerator {
                 || type.equalsIgnoreCase("HM-RC-12-SW") || type.equalsIgnoreCase("HM-PBI-X") || type.equalsIgnoreCase(
                 "HM-RC-4-2") || type.equalsIgnoreCase("HM-PB-6-WM55") || type.equalsIgnoreCase("ZEL STG RM WT 2")
                 || type.equalsIgnoreCase("ZEL STG RM FST UP4") || type.equalsIgnoreCase("ZEL STG RM HS 4")
-                || type.equalsIgnoreCase("HM-RC-SB-X") || type.equalsIgnoreCase("BRC-H") || type.equalsIgnoreCase("HM-Dis-WM55") || type.equals("HM-RC-2-PBU-FM")
+                || type.equalsIgnoreCase("HM-RC-SB-X") || type.equalsIgnoreCase("BRC-H") || type.equalsIgnoreCase("HM-Dis-WM55") || type.startsWith("HM-RC-2-PBU-FM")
                 || type.equalsIgnoreCase("HM-RCV-50") || type.equals("HMW-RCV-50")) {
             TasterView(v, hmc);
         } else if (type.startsWith("HM-MOD-EM-8")) {
@@ -441,7 +441,7 @@ public class ListViewGenerator {
             } else {
                 v = null;
             }
-        } else if (type.equalsIgnoreCase("HMIP-WTH") || type.equalsIgnoreCase("HMIP-WTH-2") || Util.startsWithIgnoreCase(type, "HmIP-BWTH") || type.startsWith("HmIP-STH") || type.equals("ALPHA-IP-RBG")) {
+        } else if (type.equalsIgnoreCase("HMIP-WTH") || type.equalsIgnoreCase("HMIPW-WTH") || type.equalsIgnoreCase("HMIP-WTH-2") || Util.startsWithIgnoreCase(type, "HmIP-BWTH") || type.startsWith("HmIP-STH") || type.equals("ALPHA-IP-RBG")) {
             if (hmc.channelIndex == 1) {
                 ClimateControlIpView(v, hmc, 6, 30, "°C");
             } else if (hmc.channelIndex >= 9) {
@@ -527,7 +527,7 @@ public class ListViewGenerator {
                 StateView(v, hmc, R.drawable.flat_alarm, R.drawable.flat_unlocked);
                 setIcon(v, R.drawable.icon_gahle1);
             }
-        } else if (type.equals("HmIP-ASIR-O")) {
+        } else if (type.equals("HmIP-ASIR-O") || type.equals("HmIP-ASIR-2")) {
             if (hmc.channelIndex == 3) {
                 AlarmStateView(v, hmc);
             } else {
@@ -712,7 +712,7 @@ public class ListViewGenerator {
                 IpWeekProgramView(v, hmc);
             }
         } else if (type.equals("HmIP-SCI")) {
-            SwitchView(v, hmc);
+            StateView(v, hmc, R.drawable.btn_check_on_holo_dark_hm, R.drawable.btn_check_off_holo_dark_hm);
         } else if (type.startsWith("HmIP-FCI")) {
             TasterView(v, hmc);
         } else if (type.equals("HmIPW-FIO6")) {
@@ -754,14 +754,15 @@ public class ListViewGenerator {
         return v;
     }
 
-    @SuppressWarnings("DuplicateBranchesInSwitch")
     private void addConnectedVariables(View v, HMChannel hmc) {
         for (HMObject hmObject : DbUtil.getConnectedVariables(hmc.rowId)) {
 
             HMVariable hmv = (HMVariable) hmObject;
+
+            String name = isWidget ? null : hmv.name;
             switch (hmv.vartype) {
                 case "2": {
-                    CheckedTextView cb = mViewAdder.addNewCheckedView(v).findViewById(R.id.check);
+                    CheckedTextView cb = mViewAdder.addNewChildView(v, null, null, name, null, true, false).findViewById(R.id.check);
                     if (hmv.value.equals("true")) {
                         cb.setChecked(true);
                     } else if (hmv.value.equals("false")) {
@@ -775,7 +776,7 @@ public class ListViewGenerator {
                     String value = hmv.value;
 
                     if (Integer.parseInt(hmv.vartype) == 4) {
-                        Float d;
+                        float d;
                         try {
                             d = Float.parseFloat(value);
                             value = Double.toString(Math.round(d * 100) / 100.);
@@ -788,9 +789,9 @@ public class ListViewGenerator {
                             hmv.max = 100;
                         }
 
-                        mViewAdder.addNewValue(v, value + " " + hmv.unit);
+                        mViewAdder.addNewChildView(v, null, null, name, value + " " + hmv.unit, false, false);
                     } else {
-                        mViewAdder.addNewValue(v, value);
+                        mViewAdder.addNewChildView(v, null, null, name, value, false, false);
                     }
                     break;
                 }
@@ -798,7 +799,8 @@ public class ListViewGenerator {
                     try {
                         int index = Integer.parseInt(hmv.value.replaceAll("[^\\d.]", ""));
                         String[] values = hmv.value_list.split(";");
-                        mViewAdder.addNewValue(v, values[index] + " " + hmv.unit);
+
+                        mViewAdder.addNewChildView(v, null, null, name, values[index] + " " + hmv.unit, false, false);
                     } catch (Exception e) {
                         Timber.e(e);
                     }
@@ -811,7 +813,7 @@ public class ListViewGenerator {
                         webView.loadDataWithBaseURL(null, hmv.value, "text/html", "utf-8", null);
                         ((LinearLayout) v.findViewById(R.id.valueLL)).addView(webView);
                     } else {
-                        mViewAdder.addNewValue(v, value + " " + hmv.unit);
+                        mViewAdder.addNewChildView(v, null, null, name, value + " " + hmv.unit, false, false);
                     }
                     break;
                 }
@@ -1687,6 +1689,7 @@ public class ListViewGenerator {
                     mViewAdder.addNewValue(v, R.drawable.flat_window_open, ViewAdder.IconSize.BIG, ctx.getString(R.string.tilted));
                     break;
                 default:
+                    mViewAdder.addNewValue(v, R.drawable.flat_window_open, ViewAdder.IconSize.BIG, "?");
                     break;
             }
         }
@@ -2375,8 +2378,12 @@ public class ListViewGenerator {
 
         Double setTemperature = DbUtil.getDatapointDouble(hmc.rowId, "SET_POINT_TEMPERATURE");
         if (setTemperature != null) {
-            mViewAdder.addNewValue(v, R.drawable.flat_counter,
+            View setPointView = mViewAdder.addNewValue(v, R.drawable.flat_counter,
                     Double.toString(Math.round(setTemperature * 10) / 10.) + unit);
+
+            if (setTemperature > min) {
+                ((TextView) setPointView.findViewById(R.id.value)).setTextColor(ctx.getResources().getColor(R.color.orange));
+            }
         }
 
         Integer datapointId = DbUtil.getDatapointId(hmc.rowId, "SET_POINT_TEMPERATURE");
@@ -2429,8 +2436,12 @@ public class ListViewGenerator {
 
         Double setTemperature = DbUtil.getDatapointDouble(hmc.rowId, "SET_POINT_TEMPERATURE");
         if (setTemperature != null) {
-            mViewAdder.addNewValue(v, R.drawable.flat_counter,
+            View setPointView = mViewAdder.addNewValue(v, R.drawable.flat_counter,
                     Double.toString(Math.round(setTemperature * 10) / 10.) + unit);
+
+            if (setTemperature > min) {
+                ((TextView) setPointView.findViewById(R.id.value)).setTextColor(ctx.getResources().getColor(R.color.orange));
+            }
         }
 
         Double level = DbUtil.getDatapointDouble(hmc.rowId, "LEVEL");
@@ -2469,7 +2480,7 @@ public class ListViewGenerator {
         }
 
         setIcon(v, R.drawable.icon10);
-        v.setTag(new HMControllableVar(hmc.rowId, hmc.name, unit, HmType.VARIABLECLIMATE_IP, min, max, false, unit,
+        v.setTag(new HMControllableVar(hmc.rowId, hmc.name, unit, HmType.VARIABLETHERMOSTATE_IP, min, max, false, unit,
                 setTemperature == null ? 0 : setTemperature, datapointId));
         return v;
     }

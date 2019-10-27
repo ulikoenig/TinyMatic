@@ -12,14 +12,18 @@ import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.RectShape;
 import android.os.Bundle;
 import android.os.Handler;
+
 import androidx.appcompat.view.ContextThemeWrapper;
+
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.GridLayout;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
@@ -62,6 +66,7 @@ import static de.ebertp.HomeDroid.Communication.Control.HmType.SYSVARIABLE;
 import static de.ebertp.HomeDroid.Communication.Control.HmType.VARIABLECLIMATE;
 import static de.ebertp.HomeDroid.Communication.Control.HmType.VARIABLECLIMATE_IP;
 import static de.ebertp.HomeDroid.Communication.Control.HmType.VARIABLETEMP;
+import static de.ebertp.HomeDroid.Communication.Control.HmType.VARIABLETHERMOSTATE_IP;
 import static de.ebertp.HomeDroid.Communication.Control.HmType.WINDOW;
 
 public class SeekBarWithButtonsDialog extends ThemedDialogActivity {
@@ -103,6 +108,8 @@ public class SeekBarWithButtonsDialog extends ThemedDialogActivity {
     Button mButtonMode;
     @BindView(R.id.buttonBoost)
     Button mButtonBoost;
+    @BindView(R.id.buttonProfile)
+    Button mButtonProfile;
     @BindView(R.id.buttonColorWhite)
     ImageButton mButtonColorWhite;
 
@@ -154,7 +161,7 @@ public class SeekBarWithButtonsDialog extends ThemedDialogActivity {
 
         setTitle(hms.name);
 
-        if (hms.type == VARIABLECLIMATE || hms.type == VARIABLETEMP || hms.type == VARIABLECLIMATE_IP) {
+        if (hms.type == VARIABLECLIMATE || hms.type == VARIABLETEMP || hms.type == VARIABLECLIMATE_IP || hms.type == VARIABLETHERMOSTATE_IP) {
             mProgressText = (EditText) findViewById(R.id.progressTextArc);
             mProgressUnit = (TextView) findViewById(R.id.progressUnitArc);
             findViewById(R.id.seekArcContainer).setVisibility(View.VISIBLE);
@@ -181,7 +188,7 @@ public class SeekBarWithButtonsDialog extends ThemedDialogActivity {
         hms.min = hms.min * mNumOfDecimalPoints;
         hms.max = hms.max * mNumOfDecimalPoints;
 
-        if (hms.type == VARIABLECLIMATE || hms.type == VARIABLETEMP || hms.type == VARIABLECLIMATE_IP) {
+        if (hms.type == VARIABLECLIMATE || hms.type == VARIABLETEMP || hms.type == VARIABLECLIMATE_IP || hms.type == VARIABLETHERMOSTATE_IP) {
             mIncrementStep = 0.5;
         }
 
@@ -228,14 +235,18 @@ public class SeekBarWithButtonsDialog extends ThemedDialogActivity {
         }
 
 
-        if (hms.type == VARIABLECLIMATE || hms.type == VARIABLECLIMATE_IP) {
+        if (hms.type == VARIABLECLIMATE || hms.type == VARIABLECLIMATE_IP || hms.type == VARIABLETHERMOSTATE_IP) {
             mLayoutClimateMode.setVisibility(View.VISIBLE);
             setupClimateControlMode();
 
-            if (hms.type == VARIABLECLIMATE_IP) {
+            if (hms.type == VARIABLECLIMATE_IP || hms.type == VARIABLETHERMOSTATE_IP) {
                 mButtonBoost.setVisibility(View.VISIBLE);
                 addBoostButtonHandling();
+
+                mButtonProfile.setVisibility(View.VISIBLE);
+                addProfileButtonHandling();
             }
+
         }
 
         if (hms.type == COLOR) {
@@ -548,8 +559,28 @@ public class SeekBarWithButtonsDialog extends ThemedDialogActivity {
         });
     }
 
+    private void addProfileButtonHandling() {
+        mButtonBoost.setOnClickListener(view -> {
+            ViewGroup dialogView = (ViewGroup) getLayoutInflater().inflate(R.layout.dialog_grid, null);
+            for (int i = 0; i < 3; i++) {
+                int profile = i + 1;
+                View child = getLayoutInflater().inflate(R.layout.grid_button, null);
+                child.setOnClickListener(view1 -> {
+                            int datapointId = DbUtil.getDatapointId(hms.rowId, "ACTIVE_PROFILE");
+                            ControlHelper.sendOrder(SeekBarWithButtonsDialog.this, datapointId, Integer.toString(profile), toastHandler, false, true);
+                        }
+                );
+                dialogView.addView(child);
+            }
+
+            final AlertDialog alertDialog = new AlertDialog.Builder(SeekBarWithButtonsDialog.this).setView(dialogView).create();
+
+            finishOnSent();
+        });
+    }
+
     private void setupClimateControlMode() {
-        Cursor dData = dBm.datapointDbAdapter.fetchItemsByChannelAndType(hms.rowId, hms.type == VARIABLECLIMATE_IP ? "SET_POINT_MODE" : "CONTROL_MODE");
+        Cursor dData = dBm.datapointDbAdapter.fetchItemsByChannelAndType(hms.rowId, (hms.type == VARIABLECLIMATE_IP || hms.type == VARIABLETHERMOSTATE_IP) ? "SET_POINT_MODE" : "CONTROL_MODE");
         if (dData.getCount() != 0) {
             String controlMode = dData.getString(dData.getColumnIndex("value"));
             try {
@@ -567,7 +598,7 @@ public class SeekBarWithButtonsDialog extends ThemedDialogActivity {
 
                 DialogInterface.OnClickListener listener = getClimateControlListener();
                 builder.setTitle(getString(R.string.mode));
-                builder.setSingleChoiceItems(getResources().getStringArray(hms.type == VARIABLECLIMATE_IP ? R.array.climate_mode_labels_ip : R.array.climate_mode_labels), mClimateControlModeIndex, listener)
+                builder.setSingleChoiceItems(getResources().getStringArray((hms.type == VARIABLECLIMATE_IP || hms.type == VARIABLETHERMOSTATE_IP) ? R.array.climate_mode_labels_ip : R.array.climate_mode_labels), mClimateControlModeIndex, listener)
                         .setCancelable(true).setPositiveButton("Ok", listener)
                         .setNegativeButton(getString(R.string.cancel), listener);
                 builder.create().show();
@@ -689,7 +720,7 @@ public class SeekBarWithButtonsDialog extends ThemedDialogActivity {
 
     private DialogInterface.OnClickListener getClimateControlListener() {
 
-        if (hms.type == VARIABLECLIMATE_IP) {
+        if (hms.type == VARIABLECLIMATE_IP || hms.type == VARIABLETHERMOSTATE_IP) {
             return new DialogInterface.OnClickListener() {
 
                 int newIndex = mClimateControlModeIndex;

@@ -405,6 +405,7 @@
     <string name="rating_positive_rate_now_question">Awesome! It would be great if you could quickly rate the app on the Play Store!</string>
     <string name="rating_already_done">Already did!</string>
     <string name="rating_button_go_to_playstore">Play Store</string>
+    <string name="profil">Profile</string>
 
 
 </resources>
