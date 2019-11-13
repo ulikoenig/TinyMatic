@@ -623,11 +623,17 @@ public class ListViewGenerator {
             VariableView(v, hmc, 0, 100, "%", HmType.LIGHTIFY_DIMMER, R.drawable.flat_light_off_2, R.drawable.flat_light_on_2);
         } else if (type.equals("VIR-LG-RGBW-DIM") || type.equals("VIR-LG-RGB-DIM") || type.equals("VIR-LG-GROUP")) {
             VariableView(v, hmc, 0, 100, "%", HmType.LIGHTIFY_DIMMER_RGBW, R.drawable.flat_light_off_2, R.drawable.flat_light_on_2);
-        } else if (type.startsWith("HmIP-FAL230-C") || type.startsWith("HmIP-FAL24")) {
+        } else if (type.startsWith("HmIP-FAL230-C") || type.startsWith("HmIPW-FAL230-C") || type.startsWith("HmIP-FAL24")) {
             StateView(v, hmc, R.drawable.btn_check_on_holo_dark_hm, R.drawable.btn_check_off_holo_dark_hm);
         } else if (type.equals("HmIP-PMFS")) {
             PowerFailureView(v, hmc);
         } else if (type.equals("HmIP-MIOB")) {
+            if (hmc.channelIndex <= 8) {
+                SwitchView(v, hmc);
+            } else if (hmc.channelIndex == 11) {
+                VariableView(v, hmc, 0, 100, "%", HmType.DIMMER, R.drawable.flat_light_off_2, R.drawable.flat_light_on_2);
+            }
+        } else if (type.equals("HmIP-MIO16-PCB")) {
             if (hmc.channelIndex <= 8) {
                 SwitchView(v, hmc);
             } else if (hmc.channelIndex == 11) {
@@ -667,7 +673,7 @@ public class ListViewGenerator {
             } else {
                 SwitchView(v, hmc);
             }
-        } else if (type.equals("HBW-SD6-Multikey")) {
+        } else if (type.startsWith("HBW-SD6-Multikey")) {
             if (hmc.channelIndex <= 6) {
                 TasterView(v, hmc);
             } else if (hmc.channelIndex <= 12) {
@@ -747,9 +753,9 @@ public class ListViewGenerator {
             }
         }
 
-        if (v != null) {
-            addConnectedVariables(v, hmc);
-        }
+//        if (v != null) {
+//            addConnectedVariables(v, hmc);
+//        }
 
         return v;
     }

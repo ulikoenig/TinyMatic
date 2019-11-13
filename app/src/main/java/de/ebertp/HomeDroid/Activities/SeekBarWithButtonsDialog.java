@@ -560,9 +560,17 @@ public class SeekBarWithButtonsDialog extends ThemedDialogActivity {
     }
 
     private void addProfileButtonHandling() {
-        mButtonBoost.setOnClickListener(view -> {
+        mButtonProfile.setOnClickListener(view -> {
             ViewGroup dialogView = (ViewGroup) getLayoutInflater().inflate(R.layout.dialog_grid, null);
-            for (int i = 0; i < 3; i++) {
+
+            int profileCount;
+            if (hms.type == VARIABLECLIMATE_IP) {
+                profileCount = 6;
+            } else {
+                profileCount = 3;
+            }
+
+            for (int i = 0; i < profileCount; i++) {
                 int profile = i + 1;
                 View child = getLayoutInflater().inflate(R.layout.grid_button, null);
                 child.setOnClickListener(view1 -> {
