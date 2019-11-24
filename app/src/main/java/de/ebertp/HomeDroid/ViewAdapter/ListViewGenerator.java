@@ -2313,15 +2313,15 @@ public class ListViewGenerator {
                     Double.toString(Math.round(actualTemperature * 10) / 10.) + unit);
         }
 
-        Double actualHumidity = DbUtil.getDatapointDouble(hmc.rowId, "ACTUAL_HUMIDITY");
-        if (actualHumidity != null) {
-            mViewAdder.addNewValue(v, R.drawable.flat_humidity, Double.toString(Math.round(actualHumidity)) + "%");
-        }
-
         Double setTemperature = DbUtil.getDatapointDouble(hmc.rowId, "SET_TEMPERATURE");
         if (setTemperature != null) {
             mViewAdder.addNewValue(v, R.drawable.flat_counter,
                     Double.toString(Math.round(setTemperature * 10) / 10.) + unit);
+        }
+
+        Double actualHumidity = DbUtil.getDatapointDouble(hmc.rowId, "ACTUAL_HUMIDITY");
+        if (actualHumidity != null) {
+            mViewAdder.addNewValue(v, R.drawable.flat_humidity, Double.toString(Math.round(actualHumidity)) + "%");
         }
 
         if (isDetailed) {
