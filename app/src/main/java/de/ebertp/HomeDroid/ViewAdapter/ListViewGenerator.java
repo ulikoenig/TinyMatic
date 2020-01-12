@@ -441,7 +441,7 @@ public class ListViewGenerator {
             } else {
                 v = null;
             }
-        } else if (type.equalsIgnoreCase("HMIP-WTH") || type.equalsIgnoreCase("HMIPW-WTH") || type.equalsIgnoreCase("HMIP-WTH-2") || Util.startsWithIgnoreCase(type, "HmIP-BWTH") || type.startsWith("HmIP-STH") || type.equals("ALPHA-IP-RBG")) {
+        } else if (type.startsWith("HMIP-WTH") || type.equalsIgnoreCase("HMIPW-WTH") || Util.startsWithIgnoreCase(type, "HmIP-BWTH") || type.startsWith("HmIP-STH") || type.equals("ALPHA-IP-RBG")) {
             if (hmc.channelIndex == 1) {
                 ClimateControlIpView(v, hmc, 6, 30, "°C");
             } else if (hmc.channelIndex >= 9) {
@@ -729,7 +729,7 @@ public class ListViewGenerator {
             } else {
                 IpWeekProgramView(v, hmc);
             }
-        } else if (type.equals("EASYCam")) {
+        } else if (type.equals("EASYCam") || type.equals("Outdoor-EASYCam")) {
             EasyCamView(v, hmc);
         } else if (type.equals("EASYLed") || type.equals("EASYLed2")) {
             SwitchView(v, hmc);
