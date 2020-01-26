@@ -331,6 +331,12 @@ public class ListViewGenerator {
             } else {
                 v = null;
             }
+        } else if (type.equalsIgnoreCase("HM-Sen-MDIR-WM55")) {
+            if (hmc.channelIndex <= 2) {
+                TasterView(v, hmc);
+            } else {
+                MotionView(v, hmc);
+            }
         } else if (type.startsWith("HM-Sec-MDIR") || type.startsWith("HM-Sen-MDIR") || type.equalsIgnoreCase(
                 "HM-Sec-MD") || type.equalsIgnoreCase("HM-MD")) {
             MotionView(v, hmc);
@@ -441,7 +447,7 @@ public class ListViewGenerator {
             } else {
                 v = null;
             }
-        } else if (type.startsWith("HMIP-WTH") || type.equalsIgnoreCase("HMIPW-WTH") || Util.startsWithIgnoreCase(type, "HmIP-BWTH") || type.startsWith("HmIP-STH") || type.equals("ALPHA-IP-RBG")) {
+        } else if (Util.startsWithIgnoreCase(type, "HmIP-WTH") || type.equalsIgnoreCase("HmIPW-WTH") || Util.startsWithIgnoreCase(type, "HmIP-BWTH") || type.startsWith("HmIP-STH") || type.equals("ALPHA-IP-RBG")) {
             if (hmc.channelIndex == 1) {
                 ClimateControlIpView(v, hmc, 6, 30, "°C");
             } else if (hmc.channelIndex >= 9) {
@@ -478,12 +484,14 @@ public class ListViewGenerator {
         } else if (type.equals("HmIP-BDT") || type.equals("HmIP-PDT")) {
             if (hmc.channelIndex < 3) {
                 TasterView(v, hmc);
+            } else if (hmc.channelIndex == 9) {
+                IpWeekProgramView(v, hmc);
             } else {
                 VariableView(v, hmc, 0, 100, "%", HmType.DIMMER_IP, R.drawable.flat_light_off_2, R.drawable.flat_light_on_2);
             }
         } else if (type.equals("HmIP-FDT")) {
             VariableView(v, hmc, 0, 100, "%", HmType.DIMMER_IP, R.drawable.flat_light_off_2, R.drawable.flat_light_on_2);
-        } else if (Util.startsWithIgnoreCase(type, "HMIP-SWD")) {
+        } else if (Util.startsWithIgnoreCase(type, "HMIP-SWD") || type.equalsIgnoreCase("HmIP-SCI")) {
             if (hmc.channelIndex == 1) {
                 OpenClosedView(v, hmc);
             } else {
@@ -685,7 +693,7 @@ public class ListViewGenerator {
             } else {
                 NotSupportedView(v, hmc);
             }
-        } else if (type.equals("HBW-IO-12-1W-UP")) {
+        } else if (type.startsWith("HBW-IO-12-1W-UP")) {
             if (hmc.channelIndex <= 12) {
                 TasterView(v, hmc);
             } else if (hmc.channelIndex <= 24) {
@@ -717,8 +725,6 @@ public class ListViewGenerator {
             } else {
                 IpWeekProgramView(v, hmc);
             }
-        } else if (type.equals("HmIP-SCI")) {
-            StateView(v, hmc, R.drawable.btn_check_on_holo_dark_hm, R.drawable.btn_check_off_holo_dark_hm);
         } else if (type.startsWith("HmIP-FCI")) {
             TasterView(v, hmc);
         } else if (type.equals("HmIPW-FIO6")) {
@@ -878,7 +884,7 @@ public class ListViewGenerator {
     }
 
     private View SmokeIPView(View v, HMChannel hmc) {
-        Integer error = DbUtil.getDatapointInt(hmc.rowId, "SMOKE_DETECTOR_ALARM_STAT");
+        Integer error = DbUtil.getDatapointInt(hmc.rowId, "SMOKE_DETECTOR_ALARM_STATUS");
         if (error != null) {
             if (error == 0) {
                 mViewAdder.addNewValue(v, R.drawable.flat_no_smoke, ViewAdder.IconSize.BIG);

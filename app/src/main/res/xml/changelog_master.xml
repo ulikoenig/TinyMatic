@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <changelog>
     <release
+        version="2.15.2"
+        versioncode="2152000">
+        <change>Bug fixes and small improvements</change>
+    </release>
+    <release
+        version="2.15.1"
+        versioncode="2151000">
+        <change>Bug fixes and small improvements</change>
+    </release>
+    <release
         version="2.15.0"
         versioncode="2150000">
         <change>HmIP-ASIR-2</change>
