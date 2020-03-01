@@ -276,8 +276,10 @@ public class ListViewGenerator {
                 "HM-RC-4-2") || type.equalsIgnoreCase("HM-PB-6-WM55") || type.equalsIgnoreCase("ZEL STG RM WT 2")
                 || type.equalsIgnoreCase("ZEL STG RM FST UP4") || type.equalsIgnoreCase("ZEL STG RM HS 4")
                 || type.equalsIgnoreCase("HM-RC-SB-X") || type.equalsIgnoreCase("BRC-H") || type.equalsIgnoreCase("HM-Dis-WM55") || type.startsWith("HM-RC-2-PBU-FM")
-                || type.equalsIgnoreCase("HM-RCV-50") || type.equals("HMW-RCV-50")) {
+                || type.equalsIgnoreCase("HM-RCV-50") || type.equals("HMW-RCV-50") || type.equals("HmIP-DSD-PCB")) {
             TasterView(v, hmc);
+        } else if (type.startsWith("HmIP-FCI") || type.startsWith("HmIPW-DRI")) {
+            TasterAndStateView(v, hmc);
         } else if (type.startsWith("HM-MOD-EM-8")) {
             ModeView(v, hmc);
         } else if (type.equalsIgnoreCase("HM-RC-19") || type.equalsIgnoreCase("HM-RC-19-B") || type.equalsIgnoreCase(
@@ -447,7 +449,7 @@ public class ListViewGenerator {
             } else {
                 v = null;
             }
-        } else if (Util.startsWithIgnoreCase(type, "HmIP-WTH") || type.equalsIgnoreCase("HmIPW-WTH") || Util.startsWithIgnoreCase(type, "HmIP-BWTH") || type.startsWith("HmIP-STH") || type.equals("ALPHA-IP-RBG")) {
+        } else if (Util.startsWithIgnoreCase(type, "HmIP-WTH") || type.equalsIgnoreCase("HmIPW-WTH") || Util.startsWithIgnoreCase(type, "HmIP-BWTH") || type.startsWith("HmIP-STH") || type.startsWith(" HmIPW-STH") || type.equals("ALPHA-IP-RBG")) {
             if (hmc.channelIndex == 1) {
                 ClimateControlIpView(v, hmc, 6, 30, "°C");
             } else if (hmc.channelIndex >= 9) {
@@ -484,8 +486,6 @@ public class ListViewGenerator {
         } else if (type.equals("HmIP-BDT") || type.equals("HmIP-PDT")) {
             if (hmc.channelIndex < 3) {
                 TasterView(v, hmc);
-            } else if (hmc.channelIndex == 9) {
-                IpWeekProgramView(v, hmc);
             } else {
                 VariableView(v, hmc, 0, 100, "%", HmType.DIMMER_IP, R.drawable.flat_light_off_2, R.drawable.flat_light_on_2);
             }
@@ -503,13 +503,13 @@ public class ListViewGenerator {
             MotionIPView(v, hmc);
         } else if (type.equals("HmIP-SAM")) {
             MotionIPOnlyView(v, hmc);
-        } else if (type.equals("HmIP-SMI55")) {
+        } else if (type.equals("HmIP-SMI55") || type.equals("HmIPW-SMI55")) {
             if (hmc.channelIndex <= 2) {
                 TasterView(v, hmc);
             } else {
                 MotionIPView(v, hmc);
             }
-        } else if (type.equals("HmIP-SPI")) {
+        } else if (type.equals("HmIP-SPI") || type.equals("HmIPW-SPI")) {
             PresenceIPView(v, hmc);
         } else if (type.equals("HmIP-SRH")) {
             WindowView(v, hmc);
@@ -567,8 +567,6 @@ public class ListViewGenerator {
             } else {
                 VariableView(v, hmc, 0, 100, "%", HmType.BLIND_WITH_LAMELLA_IP, R.drawable.flat_blinds_closed, R.drawable.flat_blinds_up);
             }
-        } else if (type.startsWith("HmIPW-DRI")) {
-            TasterView(v, hmc);
         } else if (type.equals("HmIP-FROLL") || type.equals("HmIP-BROLL")) {
             if (hmc.channelIndex < 3) {
                 TasterView(v, hmc);
@@ -725,12 +723,18 @@ public class ListViewGenerator {
             } else {
                 IpWeekProgramView(v, hmc);
             }
-        } else if (type.startsWith("HmIP-FCI")) {
-            TasterView(v, hmc);
         } else if (type.equals("HmIPW-FIO6")) {
             if (hmc.channelIndex <= 6) {
                 TasterView(v, hmc);
             } else if (hmc.channelIndex <= 30) {
+                SwitchView(v, hmc);
+            } else {
+                IpWeekProgramView(v, hmc);
+            }
+        } else if (type.equals("HmIP-DRSI4")) {
+            if (hmc.channelIndex <= 4) {
+                TasterView(v, hmc);
+            } else if (hmc.channelIndex <= 20) {
                 SwitchView(v, hmc);
             } else {
                 IpWeekProgramView(v, hmc);
@@ -865,6 +869,8 @@ public class ListViewGenerator {
             SwitchView(v, hmc);
         } else if (DbUtil.hasDatapoint(hmc.rowId, "ENERGY_COUNTER")) {
             PowerMeterView(v, hmc);
+        } else if (DbUtil.hasDatapoint(hmc.rowId, "WEEK_PROGRAM_CHANNEL_LOCKS")) {
+            IpWeekProgramView(v, hmc);
         }
     }
 
@@ -1101,6 +1107,17 @@ public class ListViewGenerator {
         Double power = DbUtil.getDatapointDouble(hmc.rowId, "POWER");
         if (power != null) {
             mViewAdder.addNewValue(v, R.drawable.flat_power, Double.toString(Math.round(power * 10) / 10.) + "W");
+        }
+
+        Double iecEnergyCounter = DbUtil.getDatapointDouble(hmc.rowId, "IEC_ENERGY_COUNTER");
+        if (iecEnergyCounter != null) {
+            mViewAdder.addNewValue(v, R.drawable.flat_counter,
+                    Double.toString(Math.round(iecEnergyCounter * 10) / 10.) + "Wh");
+        }
+
+        Double icePower = DbUtil.getDatapointDouble(hmc.rowId, "IEC_POWER");
+        if (icePower != null) {
+            mViewAdder.addNewValue(v, R.drawable.flat_power, Double.toString(Math.round(icePower * 10) / 10.) + "W");
         }
 
         setIcon(v, R.drawable.icon_new33);
@@ -1580,10 +1597,71 @@ public class ListViewGenerator {
         return v;
     }
 
+    private View TasterAndStateView(View v, HMChannel hmc) {
+        Integer pressShortId = DbUtil.getDatapointId(hmc.rowId, "PRESS_SHORT");
+        if (pressShortId == null) {
+            pressShortId = 0;
+        }
+
+        Integer pressLongId = DbUtil.getDatapointId(hmc.rowId, "PRESS_LONG");
+        if (pressLongId == null) {
+            pressLongId = 0;
+        }
+
+        Button button = (Button) mViewAdder.addNewButtonView(v).findViewById(R.id.button);
+        button.setVisibility(View.VISIBLE);
+        if (!PreferenceHelper.isDisableNotOperate(ctx) || hmc.isOperate()) {
+            setOnClickListener(v, tasterDialogHandler);
+
+            final Integer finalPressShortId = pressShortId;
+
+            setOnClickListener(button, new OnClickListener() {
+
+                public void onClick(View arg0) {
+                    ControlHelper.sendOrder(ctx, finalPressShortId, "1", toastHandler, false, true);
+                }
+            });
+
+            final Integer finalPressLongId = pressLongId;
+            setOnLongClickListener(button, new OnLongClickListener() {
+
+                public boolean onLongClick(View arg0) {
+                    ControlHelper.sendOrder(ctx, finalPressLongId, "1", toastHandler, false, true);
+                    return true;
+                }
+            });
+        }
+
+        String state = DbUtil.getDatapointString(hmc.rowId, "STATE");
+        if (state != null) {
+            switch (state) {
+                case "true":
+                    mViewAdder.addNewValue(v, R.drawable.flat_unlocked, ViewAdder.IconSize.BIG);
+                    break;
+                case "false": {
+                    mViewAdder.addNewValue(v, R.drawable.flat_locked, ViewAdder.IconSize.BIG);
+                    break;
+                }
+                default: {
+                    //don't show anything
+                }
+            }
+        }
+
+        setIcon(v, R.drawable.icon15);
+        v.setTag(new HMControllable(pressShortId, hmc.name, null, HmType.TASTER, pressLongId));
+        return v;
+    }
+
     private View IpWeekProgramView(View v, final HMChannel hmc) {
         Integer weekWriteId = DbUtil.getDatapointId(hmc.rowId, "WEEK_PROGRAM_TARGET_CHANNEL_LOCK");
         if (weekWriteId == null) {
             weekWriteId = 0;
+        }
+
+        Integer weekWriteValue = DbUtil.getDatapointInt(hmc.rowId, "WEEK_PROGRAM_TARGET_CHANNEL_LOCK");
+        if (weekWriteValue == null) {
+            weekWriteValue = 0;
         }
 
         Integer weekReadId = DbUtil.getDatapointId(hmc.rowId, "WEEK_PROGRAM_CHANNEL_LOCKS");
@@ -1591,8 +1669,13 @@ public class ListViewGenerator {
             weekReadId = 0;
         }
 
+        Integer weekReadIdValue = DbUtil.getDatapointInt(hmc.rowId, "WEEK_PROGRAM_CHANNEL_LOCKS");
+        if (weekReadIdValue == null) {
+            weekReadIdValue = 0;
+        }
+
         String status;
-        switch (weekReadId) {
+        switch (weekReadIdValue) {
             case 0:
                 status = "MANU_MODE (0)";
                 break;
@@ -1603,7 +1686,7 @@ public class ListViewGenerator {
                 status = "AUTO_MODE_WITHOUT_RESET(2)";
                 break;
             default:
-                status = "Unknown (" + weekReadId + ")";
+                status = "Unknown (" + weekReadIdValue + ")";
         }
 
         mViewAdder.addNewValue(v, status);
@@ -1613,7 +1696,7 @@ public class ListViewGenerator {
             setOnClickListener(v, new OnClickListener() {
                 @Override
                 public void onClick(final View v) {
-                    View dialogView = inflater.inflate(R.layout.dialog_three_buttons, null);
+                    View dialogView = inflater.inflate(R.layout.dialog_three_buttons_vertical, null);
                     final AlertDialog alertDialog = new AlertDialog.Builder(ctx).setView(dialogView).create();
 
                     Button buttonLeft = (Button) dialogView.findViewById(R.id.button_set);
@@ -2032,7 +2115,7 @@ public class ListViewGenerator {
             mViewAdder.addNewValue(v, R.drawable.flat_alarm, ViewAdder.IconSize.SMALL);
         }
 
-        setIcon(v, R.drawable.icon10);
+        setIcon(v, R.drawable.icon_new30);
         v.setTag(new HMControllable(hmc.rowId, hmc.name, HmType.PASSIV));
         return v;
     }
@@ -2254,6 +2337,11 @@ public class ListViewGenerator {
                 case 3:
                     mode = R.string.mode_boost;
                     break;
+                case 4:
+                    mode = R.string.mode_comfort;
+                    break;
+                case 5:
+                    mode = R.string.mode_eco;
                 default:
                     break;
             }

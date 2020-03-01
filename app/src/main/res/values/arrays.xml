@@ -92,6 +92,8 @@
         <item>@string/mode_manu</item>
         <item>@string/mode_lowering</item>
         <item>@string/mode_boost</item>
+        <item>@string/mode_comfort</item>
+        <item>@string/mode_eco</item>
     </string-array>
     <string-array name="climate_mode_labels_ip">
         <item>@string/mode_auto</item>

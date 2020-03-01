@@ -64,7 +64,7 @@ public class ProtocolDbAdapter extends BaseRelationsDbAdapter {
 
     public Cursor fetchAllItems(int prefix, String orderBy) {
         return mDb.query(tableName, new String[]{KEY_NAME, KEY_VALUE, KEY_DATETIME}, getPrefixCondition(prefix), null,
-                null, null, KEY_DATETIME+" DESC");
+                null, null, KEY_DATETIME+" ASC");
     }
 
     @Override

@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <changelog>
     <release
+        version="2.15.3"
+        versioncode="2153000">
+        <change>HmIP-DRSI4</change>
+        <change>HmIPW-SPI</change>
+        <change>HmIP-DSD-PCB</change>
+        <change>HmIP-FCI1</change>
+        <change> HmIPW-STHD</change>
+    </release>
+    <release
         version="2.15.2"
         versioncode="2152000">
         <change>Fehlerbehebungen und kleinere Verbesserungen</change>

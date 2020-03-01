@@ -584,7 +584,6 @@ public class SeekBarWithButtonsDialog extends ThemedDialogActivity {
             final AlertDialog alertDialog = new AlertDialog.Builder(SeekBarWithButtonsDialog.this).setView(dialogView).create();
 
             alertDialog.show();
-            finishOnSent();
         });
     }
 

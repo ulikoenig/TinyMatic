@@ -406,6 +406,8 @@
     <string name="rating_already_done">Already did!</string>
     <string name="rating_button_go_to_playstore">Play Store</string>
     <string name="profil">Profile</string>
+    <string name="mode_comfort">Comfort</string>
+    <string name="mode_eco">Eco</string>
 
 
 </resources>

@@ -391,4 +391,6 @@
     <string name="rating_already_done">Schon erledigt!</string>
     <string name="rating_button_go_to_playstore">Zum Play Store</string>
     <string name="profil">Profil</string>
+    <string name="mode_comfort">Comfort</string>
+    <string name="mode_eco">Eco</string>
 </resources>

@@ -14,12 +14,14 @@ public class TranslateUtil {
 
         if (locale.equals("de")) {
             s = s.replace("LOWBAT", "Batterie leer");
+            s = s.replace("FAULT_REPORTING", "Batterie leer");
             s = s.replace("ERROR", "Fehler");
             s = s.replace("STICKY_UNREACH", "Gerätekommunikation war gestört");
             s = s.replace("UNREACH", "Gerätekommunikation gestört");
             s = s.replace("CONFIG_PENDING", "Konfigurationsdaten stehen zur Übertragung an");
         } else {
             s = s.replace("LOWBAT", "Battery empty");
+            s = s.replace("FAULT_REPORTING", "Battery empty");
             s = s.replace("ERROR", "Error");
             s = s.replace("STICKY_UNREACH", "Device was unreachable");
             s = s.replace("UNREACH", "Device unreachable");
