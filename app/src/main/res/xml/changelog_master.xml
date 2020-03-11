@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <changelog>
     <release
+        version="2.15.4"
+        versioncode="2154000">
+        <change>Bugfixes for temperature profiles</change>
+    </release>
+    <release
         version="2.15.3"
         versioncode="2153000">
         <change>HmIP-DRSI4</change>
