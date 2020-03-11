@@ -2,7 +2,7 @@
 <Button xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/button_set"
-    android:layout_width="wrap_content"
-    android:layout_height="@dimen/dialog_btn_height"
-    android:minWidth="@dimen/dialog_btn_min_width"
+    android:layout_margin="8dp"
+    android:layout_width="60dp"
+    android:layout_height="60dp"
     tools:text="1" />

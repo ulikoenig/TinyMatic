@@ -562,6 +562,7 @@ public class SeekBarWithButtonsDialog extends ThemedDialogActivity {
     private void addProfileButtonHandling() {
         mButtonProfile.setOnClickListener(view -> {
             ViewGroup dialogView = (ViewGroup) getLayoutInflater().inflate(R.layout.dialog_grid, null);
+            final AlertDialog alertDialog = new AlertDialog.Builder(SeekBarWithButtonsDialog.this).setView(dialogView).create();
 
             int profileCount;
             if (hms.type == VARIABLECLIMATE_IP) {
@@ -572,16 +573,18 @@ public class SeekBarWithButtonsDialog extends ThemedDialogActivity {
 
             for (int i = 0; i < profileCount; i++) {
                 int profile = i + 1;
-                View child = getLayoutInflater().inflate(R.layout.grid_button, null);
+                Button child = (Button) getLayoutInflater().inflate(R.layout.grid_button, dialogView, false);
                 child.setOnClickListener(view1 -> {
                             int datapointId = DbUtil.getDatapointId(hms.rowId, "ACTIVE_PROFILE");
                             ControlHelper.sendOrder(SeekBarWithButtonsDialog.this, datapointId, Integer.toString(profile), toastHandler, false, true);
+                            alertDialog.dismiss();
                         }
                 );
+                child.setText(Integer.toString(profile));
                 dialogView.addView(child);
             }
 
-            final AlertDialog alertDialog = new AlertDialog.Builder(SeekBarWithButtonsDialog.this).setView(dialogView).create();
+            alertDialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
             alertDialog.show();
         });

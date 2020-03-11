@@ -491,7 +491,9 @@ public class ListViewGenerator {
             }
         } else if (type.equals("HmIP-FDT")) {
             VariableView(v, hmc, 0, 100, "%", HmType.DIMMER_IP, R.drawable.flat_light_off_2, R.drawable.flat_light_on_2);
-        } else if (Util.startsWithIgnoreCase(type, "HMIP-SWD") || type.equalsIgnoreCase("HmIP-SCI")) {
+        } else if(type.equalsIgnoreCase("HmIP-SWD")) {
+            AlarmOrNotStateView(v, hmc);
+        } else if (Util.startsWithIgnoreCase(type, "HMIP-SWDO") || type.equalsIgnoreCase("HmIP-SCI")) {
             if (hmc.channelIndex == 1) {
                 OpenClosedView(v, hmc);
             } else {
@@ -1886,13 +1888,10 @@ public class ListViewGenerator {
         String state = DbUtil.getDatapointString(hmc.rowId, "STATE");
 
         if (state != null) {
-            switch (state) {
-                case "1":
-                    mViewAdder.addNewValue(v, R.drawable.flat_window_open, ViewAdder.IconSize.BIG);
-                    break;
-                default:
-                    mViewAdder.addNewValue(v, R.drawable.flat_locked, ViewAdder.IconSize.BIG);
-                    break;
+            if (state.equals("1")) {
+                mViewAdder.addNewValue(v, R.drawable.flat_window_open, ViewAdder.IconSize.BIG);
+            } else {
+                mViewAdder.addNewValue(v, R.drawable.flat_locked, ViewAdder.IconSize.BIG);
             }
         }
 
@@ -2121,6 +2120,22 @@ public class ListViewGenerator {
     }
 
     private View AlarmStateView(View v, HMChannel hmc) {
+        Boolean alarmstate = DbUtil.getDatapointBoolean(hmc.rowId, "ALARMSTATE");
+
+        if (alarmstate != null) {
+            if (alarmstate) {
+                mViewAdder.addNewValue(v, R.drawable.flat_alarm, ViewAdder.IconSize.SMALL);
+            } else {
+                mViewAdder.addNewValue(v, R.drawable.btn_check_off_holo_dark_hm, ViewAdder.IconSize.SMALL);
+            }
+        }
+
+        setIcon(v, R.drawable.icon_gahle1);
+        v.setTag(new HMControllable(hmc.rowId, hmc.name, HmType.PASSIV));
+        return v;
+    }
+
+    private View AlarmOrNotStateView(View v, HMChannel hmc) {
         Boolean accoustic = DbUtil.getDatapointBoolean(hmc.rowId, "ACOUSTIC_ALARM_ACTIVE");
         Boolean optical = DbUtil.getDatapointBoolean(hmc.rowId, "OPTICAL_ALARM_ACTIVE");
 

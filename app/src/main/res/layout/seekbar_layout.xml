@@ -120,9 +120,9 @@
 
         <LinearLayout
             android:id="@+id/layout_color_white"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"
+            android:layout_gravity="center"
             android:paddingBottom="8dp"
             android:visibility="gone"
             android:weightSum="1"
@@ -137,9 +137,9 @@
 
         <LinearLayout
             android:id="@+id/layout_climate_mode"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"
+            android:layout_gravity="center"
             android:orientation="horizontal"
             android:paddingBottom="8dp"
             android:visibility="gone"
@@ -170,9 +170,9 @@
 
         <LinearLayout
             android:id="@+id/layout_lamella"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"
+            android:layout_gravity="center"
             android:paddingBottom="8dp"
             android:visibility="gone"
             android:weightSum="1"
@@ -187,9 +187,9 @@
 
         <LinearLayout
             android:id="@+id/layout_color"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"
+            android:layout_gravity="center"
             android:paddingBottom="8dp"
             android:visibility="gone"
             android:weightSum="1"
@@ -204,9 +204,9 @@
 
         <LinearLayout
             android:id="@+id/layout_up_down"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"
+            android:layout_gravity="center"
             android:paddingBottom="8dp"
             android:visibility="gone"
             android:weightSum="1"
@@ -233,9 +233,9 @@
 
         <LinearLayout
             android:id="@+id/layout_open_close"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"
+            android:layout_gravity="center"
             android:paddingBottom="8dp"
             android:visibility="gone"
             android:weightSum="1"
