@@ -492,7 +492,7 @@ public class ListViewGenerator {
         } else if (type.equals("HmIP-FDT")) {
             VariableView(v, hmc, 0, 100, "%", HmType.DIMMER_IP, R.drawable.flat_light_off_2, R.drawable.flat_light_on_2);
         } else if(type.equalsIgnoreCase("HmIP-SWD")) {
-            AlarmOrNotStateView(v, hmc);
+            AlarmStateView(v, hmc);
         } else if (Util.startsWithIgnoreCase(type, "HMIP-SWDO") || type.equalsIgnoreCase("HmIP-SCI")) {
             if (hmc.channelIndex == 1) {
                 OpenClosedView(v, hmc);
@@ -539,7 +539,7 @@ public class ListViewGenerator {
             }
         } else if (type.equals("HmIP-ASIR-O") || type.equals("HmIP-ASIR-2")) {
             if (hmc.channelIndex == 3) {
-                AlarmStateView(v, hmc);
+                AlarmSireneStateView(v, hmc);
             } else {
                 v = null;
             }
@@ -738,6 +738,14 @@ public class ListViewGenerator {
                 TasterView(v, hmc);
             } else if (hmc.channelIndex <= 20) {
                 SwitchView(v, hmc);
+            } else {
+                IpWeekProgramView(v, hmc);
+            }
+        } else if (type.equals("HmIP-DRBLI4")) {
+            if (hmc.channelIndex <= 8) {
+                TasterAndStateView(v, hmc);
+            } else if (hmc.channelIndex <= 24) {
+                VariableView(v, hmc, 0, 100, "%", HmType.BLIND_WITH_LAMELLA, R.drawable.flat_blinds_closed, R.drawable.flat_blinds_up);
             } else {
                 IpWeekProgramView(v, hmc);
             }
@@ -2135,7 +2143,7 @@ public class ListViewGenerator {
         return v;
     }
 
-    private View AlarmOrNotStateView(View v, HMChannel hmc) {
+    private View AlarmSireneStateView(View v, HMChannel hmc) {
         Boolean accoustic = DbUtil.getDatapointBoolean(hmc.rowId, "ACOUSTIC_ALARM_ACTIVE");
         Boolean optical = DbUtil.getDatapointBoolean(hmc.rowId, "OPTICAL_ALARM_ACTIVE");
 
@@ -2355,8 +2363,6 @@ public class ListViewGenerator {
                 case 4:
                     mode = R.string.mode_comfort;
                     break;
-                case 5:
-                    mode = R.string.mode_eco;
                 default:
                     break;
             }

@@ -576,7 +576,8 @@ public class SeekBarWithButtonsDialog extends ThemedDialogActivity {
                 Button child = (Button) getLayoutInflater().inflate(R.layout.grid_button, dialogView, false);
                 child.setOnClickListener(view1 -> {
                             int datapointId = DbUtil.getDatapointId(hms.rowId, "ACTIVE_PROFILE");
-                            ControlHelper.sendOrder(SeekBarWithButtonsDialog.this, datapointId, Integer.toString(profile), toastHandler, false, true);
+                            ControlHelper.sendOrder(SeekBarWithButtonsDialog.this, datapointId, Integer.toString(profile), toastHandler,
+                                    false, true);
                             alertDialog.dismiss();
                         }
                 );
@@ -780,6 +781,9 @@ public class SeekBarWithButtonsDialog extends ThemedDialogActivity {
                                 break;
                             case 3:
                                 modeName = "BOOST_MODE";
+                                break;
+                            case 4:
+                                modeName = "COMFORT_MODE";
                                 break;
                             default:
                                 modeName = "AUTO_MODE";

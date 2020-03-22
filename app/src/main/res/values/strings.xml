@@ -83,7 +83,7 @@
     <string name="mode">Mode</string>
     <string name="mode_auto">Auto</string>
     <string name="mode_manu">Manual</string>
-    <string name="mode_lowering">Vacation/Party</string>
+    <string name="mode_lowering">Eco</string>
     <string name="mode_boost">Boost</string>
 
     <!-- Icon Gallery -->
@@ -407,7 +407,6 @@
     <string name="rating_button_go_to_playstore">Play Store</string>
     <string name="profil">Profile</string>
     <string name="mode_comfort">Comfort</string>
-    <string name="mode_eco">Eco</string>
 
 
 </resources>

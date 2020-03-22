@@ -79,7 +79,7 @@
     <string name="mode">Modus</string>
     <string name="mode_auto">Auto</string>
     <string name="mode_manu">Manuell</string>
-    <string name="mode_lowering">Urlaub/Party</string>
+    <string name="mode_lowering">Eco</string>
     <string name="mode_boost">Boost</string>
 
 
@@ -392,5 +392,4 @@
     <string name="rating_button_go_to_playstore">Zum Play Store</string>
     <string name="profil">Profil</string>
     <string name="mode_comfort">Comfort</string>
-    <string name="mode_eco">Eco</string>
 </resources>

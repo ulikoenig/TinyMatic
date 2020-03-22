@@ -3,7 +3,8 @@
     <release
         version="2.15.4"
         versioncode="2154000">
-        <change>Bugfixes for temperature profiles</change>
+        <change>HmIP-DRBLI4</change>
+        <change>Bug fixes and small improvements</change>
     </release>
     <release
         version="2.15.3"

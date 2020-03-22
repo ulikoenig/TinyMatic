@@ -3,7 +3,8 @@
     <release
         version="2.15.4"
         versioncode="2154000">
-        <change>Fehlerbehebungen für Temperaturprofile</change>
+        <change>HmIP-DRBLI4</change>
+        <change>Fehlerbehebungen und kleinere Verbesserungen</change>
     </release>
     <release
         version="2.15.3"
