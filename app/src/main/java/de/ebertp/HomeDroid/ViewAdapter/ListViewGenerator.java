@@ -491,9 +491,9 @@ public class ListViewGenerator {
             }
         } else if (type.equals("HmIP-FDT")) {
             VariableView(v, hmc, 0, 100, "%", HmType.DIMMER_IP, R.drawable.flat_light_off_2, R.drawable.flat_light_on_2);
-        } else if(type.equalsIgnoreCase("HmIP-SWD")) {
+        } else if (type.equalsIgnoreCase("HmIP-SWD")) {
             AlarmStateView(v, hmc);
-        } else if (Util.startsWithIgnoreCase(type, "HMIP-SWDO") || type.equalsIgnoreCase("HmIP-SCI")) {
+        } else if (Util.startsWithIgnoreCase(type, "HMIP-SWDO") || type.equalsIgnoreCase("HmIP-SCI") || type.startsWith("HmIP-SWDM")) {
             if (hmc.channelIndex == 1) {
                 OpenClosedView(v, hmc);
             } else {
@@ -631,7 +631,7 @@ public class ListViewGenerator {
             VariableView(v, hmc, 0, 100, "%", HmType.LIGHTIFY_DIMMER, R.drawable.flat_light_off_2, R.drawable.flat_light_on_2);
         } else if (type.equals("VIR-LG-RGBW-DIM") || type.equals("VIR-LG-RGB-DIM") || type.equals("VIR-LG-GROUP")) {
             VariableView(v, hmc, 0, 100, "%", HmType.LIGHTIFY_DIMMER_RGBW, R.drawable.flat_light_off_2, R.drawable.flat_light_on_2);
-        } else if (type.startsWith("HmIP-FAL230-C") || type.startsWith("HmIPW-FAL230-C") || type.startsWith("HmIP-FAL24")) {
+        } else if (type.startsWith("HmIP-FAL230-C") || type.startsWith("HmIPW-FAL230-C") || type.startsWith("HmIP-FAL24") || type.startsWith("HmIPW-FAL24")) {
             StateView(v, hmc, R.drawable.btn_check_on_holo_dark_hm, R.drawable.btn_check_off_holo_dark_hm);
         } else if (type.equals("HmIP-PMFS")) {
             PowerFailureView(v, hmc);
@@ -2132,9 +2132,9 @@ public class ListViewGenerator {
 
         if (alarmstate != null) {
             if (alarmstate) {
-                mViewAdder.addNewValue(v, R.drawable.flat_alarm, ViewAdder.IconSize.SMALL);
+                mViewAdder.addNewValue(v, R.drawable.flat_alarm, ViewAdder.IconSize.BIG);
             } else {
-                mViewAdder.addNewValue(v, R.drawable.btn_check_off_holo_dark_hm, ViewAdder.IconSize.SMALL);
+                mViewAdder.addNewValue(v, R.drawable.btn_check_off_holo_dark_hm, ViewAdder.IconSize.BIG);
             }
         }
 

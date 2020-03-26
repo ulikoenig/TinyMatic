@@ -680,7 +680,7 @@ public class XmlToDbParser {
                 XmlPullParser xpp = factory.newPullParser();
 
                 try {
-                    conn = getUrlConnectionFromAddressUrl("sysvar.cgi?ise_id=" + rowId);
+                    conn = getUrlConnectionFromAddressUrl("sysvar.cgi?ise_id=" + Util.removePrefix(ctx, rowId));
                 } catch (IOException e) {
                     return;
                 }
