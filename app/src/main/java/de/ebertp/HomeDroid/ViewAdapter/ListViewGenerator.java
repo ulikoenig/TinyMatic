@@ -741,11 +741,27 @@ public class ListViewGenerator {
             } else {
                 IpWeekProgramView(v, hmc);
             }
+        } else if(type.equals("HmIP-DRDI3")) {
+            if (hmc.channelIndex <= 3) {
+                TasterAndStateView(v, hmc);
+            } else if (hmc.channelIndex <= 15) {
+                VariableView(v, hmc, 0, 100, "%", HmType.DIMMER, R.drawable.flat_light_off_2, R.drawable.flat_light_on_2);
+            } else {
+                IpWeekProgramView(v, hmc);
+            }
         } else if (type.equals("HmIP-DRBLI4")) {
             if (hmc.channelIndex <= 8) {
                 TasterAndStateView(v, hmc);
             } else if (hmc.channelIndex <= 24) {
                 VariableView(v, hmc, 0, 100, "%", HmType.BLIND_WITH_LAMELLA, R.drawable.flat_blinds_closed, R.drawable.flat_blinds_up);
+            } else {
+                IpWeekProgramView(v, hmc);
+            }
+        } else if(type.equals("HmIP-FSI16")) {
+            if(hmc.channelIndex == 1) {
+                TasterView(v, hmc);
+            } else if(hmc.channelIndex < 6) {
+                SwitchView(v, hmc);
             } else {
                 IpWeekProgramView(v, hmc);
             }
@@ -2134,7 +2150,7 @@ public class ListViewGenerator {
             if (alarmstate) {
                 mViewAdder.addNewValue(v, R.drawable.flat_alarm, ViewAdder.IconSize.BIG);
             } else {
-                mViewAdder.addNewValue(v, R.drawable.btn_check_off_holo_dark_hm, ViewAdder.IconSize.BIG);
+                mViewAdder.addNewValue(v, R.drawable.flat_locked, ViewAdder.IconSize.BIG);
             }
         }
 
