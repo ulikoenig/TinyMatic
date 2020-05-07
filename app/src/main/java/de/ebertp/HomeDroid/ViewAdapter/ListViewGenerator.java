@@ -449,7 +449,7 @@ public class ListViewGenerator {
             } else {
                 v = null;
             }
-        } else if (Util.startsWithIgnoreCase(type, "HmIP-WTH") || type.equalsIgnoreCase("HmIPW-WTH") || Util.startsWithIgnoreCase(type, "HmIP-BWTH") || type.startsWith("HmIP-STH") || type.startsWith(" HmIPW-STH") || type.equals("ALPHA-IP-RBG")) {
+        } else if (Util.startsWithIgnoreCase(type, "HmIP-WTH") || type.equalsIgnoreCase("HmIPW-WTH") || Util.startsWithIgnoreCase(type, "HmIP-BWTH") || Util.startsWithIgnoreCase(type, "HmIP-STH") || Util.startsWithIgnoreCase(type, "HmIPW-STH") || type.equals("ALPHA-IP-RBG")) {
             if (hmc.channelIndex == 1) {
                 ClimateControlIpView(v, hmc, 6, 30, "°C");
             } else if (hmc.channelIndex >= 9) {
@@ -741,7 +741,7 @@ public class ListViewGenerator {
             } else {
                 IpWeekProgramView(v, hmc);
             }
-        } else if(type.equals("HmIP-DRDI3")) {
+        } else if (type.equals("HmIP-DRDI3")) {
             if (hmc.channelIndex <= 3) {
                 TasterAndStateView(v, hmc);
             } else if (hmc.channelIndex <= 15) {
@@ -757,10 +757,10 @@ public class ListViewGenerator {
             } else {
                 IpWeekProgramView(v, hmc);
             }
-        } else if(type.equals("HmIP-FSI16")) {
-            if(hmc.channelIndex == 1) {
+        } else if (type.equals("HmIP-FSI16")) {
+            if (hmc.channelIndex == 1) {
                 TasterView(v, hmc);
-            } else if(hmc.channelIndex < 6) {
+            } else if (hmc.channelIndex < 6) {
                 SwitchView(v, hmc);
             } else {
                 IpWeekProgramView(v, hmc);
@@ -2536,6 +2536,7 @@ public class ListViewGenerator {
                     Double.toString(Math.round(level * 100)) + "%");
         }
 
+
         Integer controlMode = DbUtil.getDatapointInt(hmc.rowId, "SET_POINT_MODE");
         if (controlMode != null) {
             Integer mode = null;
@@ -2556,6 +2557,11 @@ public class ListViewGenerator {
             if (mode != null) {
                 mViewAdder.addNewValue(v, R.drawable.flat_settings, ctx.getResources().getString(mode));
             }
+        }
+
+        Integer activeProfile = DbUtil.getDatapointInt(hmc.rowId, "ACTIVE_PROFILE");
+        if (activeProfile != null) {
+            mViewAdder.addNewValue(v, R.drawable.flat_list, activeProfile.toString());
         }
 
         setIcon(v, R.drawable.icon10);
@@ -2614,6 +2620,11 @@ public class ListViewGenerator {
             if (mode != null) {
                 mViewAdder.addNewValue(v, R.drawable.flat_settings, ctx.getResources().getString(mode));
             }
+        }
+
+        Integer activeProfile = DbUtil.getDatapointInt(hmc.rowId, "ACTIVE_PROFILE");
+        if (activeProfile != null) {
+            mViewAdder.addNewValue(v, R.drawable.flat_list, activeProfile.toString());
         }
 
         setIcon(v, R.drawable.icon10);
