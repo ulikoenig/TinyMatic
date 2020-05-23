@@ -22,9 +22,11 @@ import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.Toolbar;
+
 import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -65,8 +67,10 @@ public class NewPreferenceFragment extends PreferenceFragment implements SharedP
     private static final int REQUEST_PERMISSION_FILESYSTEM_EXPORT = 1;
     private static final int REQUEST_PERMISSION_FILESYSTEM_IMPORT = 2;
     private static final int REQUEST_PERMISSION_LOCATION_HOME_WIFI = 4;
-    private static final int REQUEST_PERMISSION_LOCATION_WIFI_SWITCH = 5;
-    private static final int REQUEST_PERMISSION_LOCATION_HOME = 6;
+    private static final int REQUEST_PERMISSION_LOCATION_HOME_WIFI_SELECT = 5;
+    private static final int REQUEST_PERMISSION_LOCATION_WIFI_SWITCH = 6;
+    private static final int REQUEST_PERMISSION_LOCATION_HOME = 7;
+
     private EditTextPreference mServerAddressPreference;
     private Preference mSelectWifiPref;
     private BackupHelper mBackupHelper;
@@ -685,51 +689,12 @@ public class NewPreferenceFragment extends PreferenceFragment implements SharedP
         mSelectWifiPref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(Preference preference) {
-                final WifiManager wifiManager = (WifiManager) getActivity().getApplicationContext().getSystemService(Context.WIFI_SERVICE);
-
-                if (!wifiManager.isWifiEnabled()) {
-                    Toast.makeText(getActivity(), R.string.enable_wifi, Toast.LENGTH_LONG).show();
-                    return true;
+                if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.O && !PermissionUtil.hasLocationPermissions(getActivity())) {
+                    PermissionUtil.requestLocationPermission(NewPreferenceFragment.this, REQUEST_PERMISSION_LOCATION_HOME_WIFI_SELECT);
+                    return false;
                 }
 
-                final List<WifiConfiguration> configs = wifiManager.getConfiguredNetworks();
-                final CharSequence[] wifiNames = new CharSequence[configs.size()];
-                final boolean[] selecteds = new boolean[configs.size()];
-
-                final List<String> oldWifiNames = PreferenceHelper.getHomeWifi(getContext());
-
-                for (int i = 0; i < configs.size(); i++) {
-                    String wifiName = configs.get(i).SSID;
-                    wifiNames[i] = wifiName.replaceAll("\"", "");
-                    selecteds[i] = oldWifiNames.contains(wifiName);
-                }
-
-                final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), getDialogTheme());
-                builder.setMultiChoiceItems(wifiNames, selecteds, new DialogInterface.OnMultiChoiceClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which, boolean isChecked) {
-                        selecteds[which] = isChecked;
-                    }
-                });
-
-                builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        List<String> newSelectedWifis = new ArrayList<>();
-
-                        for (int i = 0; i < wifiNames.length; i++) {
-                            if (selecteds[i]) {
-                                newSelectedWifis.add(configs.get(i).SSID);
-                            }
-                        }
-
-                        PreferenceHelper.setHomeWifi(getContext(), newSelectedWifis);
-                        mSelectWifiPref.setSummary(getHomeWifisAsString());
-                    }
-                });
-
-                builder.create().show();
-                return true;
+                return selectWifi();
             }
         });
 
@@ -745,6 +710,54 @@ public class NewPreferenceFragment extends PreferenceFragment implements SharedP
                 return true;
             }
         });
+    }
+
+    private boolean selectWifi() {
+        final WifiManager wifiManager = (WifiManager) getActivity().getApplicationContext().getSystemService(Context.WIFI_SERVICE);
+
+        if (!wifiManager.isWifiEnabled()) {
+            Toast.makeText(getActivity(), R.string.enable_wifi, Toast.LENGTH_LONG).show();
+            return true;
+        }
+
+        final List<WifiConfiguration> configs = wifiManager.getConfiguredNetworks();
+        final CharSequence[] wifiNames = new CharSequence[configs.size()];
+        final boolean[] selecteds = new boolean[configs.size()];
+
+        final List<String> oldWifiNames = PreferenceHelper.getHomeWifi(getContext());
+
+        for (int i = 0; i < configs.size(); i++) {
+            String wifiName = configs.get(i).SSID;
+            wifiNames[i] = wifiName.replaceAll("\"", "");
+            selecteds[i] = oldWifiNames.contains(wifiName);
+        }
+
+        final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), getDialogTheme());
+        builder.setMultiChoiceItems(wifiNames, selecteds, new DialogInterface.OnMultiChoiceClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+                selecteds[which] = isChecked;
+            }
+        });
+
+        builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                List<String> newSelectedWifis = new ArrayList<>();
+
+                for (int i = 0; i < wifiNames.length; i++) {
+                    if (selecteds[i]) {
+                        newSelectedWifis.add(configs.get(i).SSID);
+                    }
+                }
+
+                PreferenceHelper.setHomeWifi(getContext(), newSelectedWifis);
+                mSelectWifiPref.setSummary(getHomeWifisAsString());
+            }
+        });
+
+        builder.create().show();
+        return true;
     }
 
     private void initUpdatePrefs() {
@@ -784,8 +797,7 @@ public class NewPreferenceFragment extends PreferenceFragment implements SharedP
         switch (requestCode) {
             case REQUEST_PERMISSION_LOCATION_FIX: {
                 // If request is cancelled, the result arrays are empty.
-                if (grantResults.length > 0
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     // Permission granted
                     Toast.makeText(getActivity(), getString(R.string.permission_granted), Toast.LENGTH_LONG).show();
                 } else {
@@ -795,8 +807,7 @@ public class NewPreferenceFragment extends PreferenceFragment implements SharedP
             }
             case REQUEST_PERMISSION_LOCATION_HOME: {
                 // If request is cancelled, the result arrays are empty.
-                if (grantResults.length > 0
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     // Permission granted
                     storeLocation();
                 } else {
@@ -806,11 +817,20 @@ public class NewPreferenceFragment extends PreferenceFragment implements SharedP
             }
             case REQUEST_PERMISSION_LOCATION_HOME_WIFI: {
                 // If request is cancelled, the result arrays are empty.
-                if (grantResults.length > 0
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     // Permission granted
                     HomeDroidApp.Instance().registerWifiReceiver();
                     syncOnHomeWifiOnlyPref.setChecked(true);
+                } else {
+                    Toast.makeText(getActivity(), getString(R.string.permission_denied), Toast.LENGTH_LONG).show();
+                }
+                break;
+            }
+            case REQUEST_PERMISSION_LOCATION_HOME_WIFI_SELECT: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    // Permission granted
+                    selectWifi();
                 } else {
                     Toast.makeText(getActivity(), getString(R.string.permission_denied), Toast.LENGTH_LONG).show();
                 }
