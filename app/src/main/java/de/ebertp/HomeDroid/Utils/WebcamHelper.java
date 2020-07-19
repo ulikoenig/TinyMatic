@@ -132,6 +132,7 @@ public class WebcamHelper {
                                 .fitCenter()
                                 .listener(listener)
                                 .diskCacheStrategy(DiskCacheStrategy.NONE)
+                                .skipMemoryCache(true)
                                 .into(webCamView);
                     }
                 };

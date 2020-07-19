@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <changelog>
     <release
+        version="2.15.6"
+        versioncode="2156000">
+        <change>Fehlerbehebungen und kleinere Verbesserungen</change>
+    </release>
+    <release
         version="2.15.5"
         versioncode="2155000">
         <change>HmIP-FSI16</change>
