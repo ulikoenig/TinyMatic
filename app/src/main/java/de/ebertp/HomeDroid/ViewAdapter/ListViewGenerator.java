@@ -339,8 +339,7 @@ public class ListViewGenerator {
             } else {
                 MotionView(v, hmc);
             }
-        } else if (type.startsWith("HM-Sec-MDIR") || type.startsWith("HM-Sen-MDIR") || type.equalsIgnoreCase(
-                "HM-Sec-MD") || type.equalsIgnoreCase("HM-MD")) {
+        } else if (type.startsWith("HM-Sec-MDIR") || type.startsWith("HM-Sen-MDIR") || type.equalsIgnoreCase("HM-Sec-MD") || type.equalsIgnoreCase("HM-MD") || type.equals("HmIP-STV")) {
             MotionView(v, hmc);
         } else if (type.equalsIgnoreCase("HM-Sec-RHS") || type.equalsIgnoreCase("HM-Sec-RHS-2") || type.equalsIgnoreCase("HM-Sec-XX") || type.equalsIgnoreCase(
                 "ZEL STG RM FDK")) {
