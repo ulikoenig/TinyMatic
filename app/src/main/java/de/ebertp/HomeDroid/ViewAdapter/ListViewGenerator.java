@@ -11,9 +11,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-
-import androidx.annotation.Nullable;
-
 import android.text.Editable;
 import android.text.Html;
 import android.view.LayoutInflater;
@@ -27,6 +24,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import androidx.annotation.Nullable;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -276,7 +275,7 @@ public class ListViewGenerator {
                 "HM-RC-4-2") || type.equalsIgnoreCase("HM-PB-6-WM55") || type.equalsIgnoreCase("ZEL STG RM WT 2")
                 || type.equalsIgnoreCase("ZEL STG RM FST UP4") || type.equalsIgnoreCase("ZEL STG RM HS 4")
                 || type.equalsIgnoreCase("HM-RC-SB-X") || type.equalsIgnoreCase("BRC-H") || type.equalsIgnoreCase("HM-Dis-WM55") || type.startsWith("HM-RC-2-PBU-FM")
-                || type.equalsIgnoreCase("HM-RCV-50") || type.equals("HMW-RCV-50") || type.equals("HmIP-DSD-PCB")) {
+                || type.equalsIgnoreCase("HM-RCV-50") || type.equals("HMW-RCV-50") || type.equals("HmIP-DSD-PCB") || type.startsWith("HmIPW-BRC")) {
             TasterView(v, hmc);
         } else if (type.startsWith("HmIP-FCI") || type.startsWith("HmIPW-DRI")) {
             TasterAndStateView(v, hmc);
@@ -469,9 +468,9 @@ public class ListViewGenerator {
                 FloorHeatingLevel(v, hmc);
             }
         } else if (type.equalsIgnoreCase("HMIP-PS")) {
-            if(hmc.channelIndex  == 2) {
+            if (hmc.channelIndex == 2) {
                 StateView(v, hmc, R.drawable.btn_check_on_holo_dark_hm, R.drawable.btn_check_off_holo_dark_hm);
-            } else if(hmc.channelIndex <= 5) {
+            } else if (hmc.channelIndex <= 5) {
                 SwitchView(v, hmc);
             } else {
                 IpWeekProgramView(v, hmc);
@@ -566,6 +565,12 @@ public class ListViewGenerator {
             }
         } else if (type.equals("HmIPW-DRBL4")) {
             if (hmc.channelIndex == 17) {
+                IpWeekProgramView(v, hmc);
+            } else {
+                VariableView(v, hmc, 0, 100, "%", HmType.BLIND_WITH_LAMELLA_IP, R.drawable.flat_blinds_closed, R.drawable.flat_blinds_up);
+            }
+        } else if (type.equals("HmIP-HDM1 ")) {
+            if (hmc.channelIndex == 2) {
                 IpWeekProgramView(v, hmc);
             } else {
                 VariableView(v, hmc, 0, 100, "%", HmType.BLIND_WITH_LAMELLA_IP, R.drawable.flat_blinds_closed, R.drawable.flat_blinds_up);
