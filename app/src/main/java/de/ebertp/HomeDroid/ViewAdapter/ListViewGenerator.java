@@ -293,8 +293,6 @@ public class ListViewGenerator {
             TasterView(v, hmc);
         } else if (type.equals("HM-Sen-DB-PCB")) {
             DoorBellView(v, hmc);
-        } else if (type.equals("HM-MOD-EM-8")) {
-            ModeView(v, hmc);
         } else if (type.equalsIgnoreCase("HM-CC-VD") || type.equalsIgnoreCase("ZEL STG RM FSA")) {
             if (hmc.channelIndex == 0) {
                 v = null;
@@ -327,7 +325,11 @@ public class ListViewGenerator {
             }
         } else if (type.equalsIgnoreCase("HM-TC-IT-WM-W-EU")) {
             if (hmc.channelIndex == 1) {
-                WeatherView(v, hmc);
+                if (hmc.getAddress().startsWith("CUX900201")) {
+                    WeatherCuxdView(v, hmc);
+                } else {
+                    WeatherView(v, hmc);
+                }
             } else if (hmc.channelIndex == 2) {
                 TemperatureControlView3(v, hmc, 4.5, 30.5, "°C");
             } else {
@@ -469,9 +471,9 @@ public class ListViewGenerator {
                 FloorHeatingLevel(v, hmc);
             }
         } else if (type.equalsIgnoreCase("HMIP-PS")) {
-            if(hmc.channelIndex  == 2) {
+            if (hmc.channelIndex == 2) {
                 StateView(v, hmc, R.drawable.btn_check_on_holo_dark_hm, R.drawable.btn_check_off_holo_dark_hm);
-            } else if(hmc.channelIndex <= 5) {
+            } else if (hmc.channelIndex <= 5) {
                 SwitchView(v, hmc);
             } else {
                 IpWeekProgramView(v, hmc);
@@ -504,7 +506,7 @@ public class ListViewGenerator {
             TasterView(v, hmc);
         } else if (type.equals("HmIP-SMI") || type.startsWith("HmIP-SMO")) {
             MotionIPView(v, hmc);
-        } else if (type.equals("HmIP-SAM")) {
+        } else if (type.equals("HmIP-SAM") || type.equals("HmIP-STV")) {
             MotionIPOnlyView(v, hmc);
         } else if (type.equals("HmIP-SMI55") || type.equals("HmIPW-SMI55")) {
             if (hmc.channelIndex <= 2) {
@@ -570,6 +572,12 @@ public class ListViewGenerator {
             } else {
                 VariableView(v, hmc, 0, 100, "%", HmType.BLIND_WITH_LAMELLA_IP, R.drawable.flat_blinds_closed, R.drawable.flat_blinds_up);
             }
+        } else if (type.equals("HmIP-HDM1")) {
+            if (hmc.channelIndex == 2) {
+                IpWeekProgramView(v, hmc);
+            } else {
+                VariableView(v, hmc, 0, 100, "%", HmType.BLIND_WITH_LAMELLA_IP, R.drawable.flat_blinds_closed, R.drawable.flat_blinds_up);
+            }
         } else if (type.equals("HmIP-FROLL") || type.equals("HmIP-BROLL")) {
             if (hmc.channelIndex < 3) {
                 TasterView(v, hmc);
@@ -594,10 +602,10 @@ public class ListViewGenerator {
             } else {
                 IpWeekProgramView(v, hmc);
             }
-        } else if (type.equals("HmIP-BRC2")) {
+        } else if (type.equals("HmIP-BRC2") || type.equals("HmIP-DBB")) {
             TasterView(v, hmc);
-        } else if (type.equals("HmIP-MOD-RC8") || type.equals("HmIP-DBB")) {
-            TasterView(v, hmc);
+        } else if (type.equals("HmIP-MOD-RC8") ) {
+            ModeView(v, hmc);
         } else if (type.equals("HmIP-MOD-OC8")) {
             if (hmc.channelIndex <= 8) {
                 TasterView(v, hmc);
@@ -2255,7 +2263,13 @@ public class ListViewGenerator {
         if (level != null) {
             value = Math.round(level * 100);
             final boolean isZero = value == min;
-            String levelString = Double.toString(value) + unit;
+            String levelString;
+            if (hmType == HmType.BLIND || hmType == HmType.BLIND_WITH_LAMELLA || hmType == HmType.BLIND_WITH_LAMELLA_IP) {
+                levelString = (int) value + unit;
+            } else {
+                levelString = value + unit;
+            }
+
             Integer iconRes = isZero ? lowerRes : upperRes;
 
             if (hmType == HmType.DIMMER || hmType.equals(HmType.DIMMER_IP) || hmType.equals(HmType.DIMMER_IP_COLOR) || hmType == HmType.BLIND || hmType == HmType.BLIND_WITH_LAMELLA_IP || hmType == HmType.BLIND_WITH_LAMELLA) {
@@ -2299,9 +2313,9 @@ public class ListViewGenerator {
         if (hmType == HmType.BLIND_WITH_LAMELLA_IP) {
             Double lamella = DbUtil.getDatapointDouble(hmc.rowId, "LEVEL_2");
             if (lamella != null) {
-                long lamellaValue = Math.round(lamella);
+                long lamellaValue = Math.round(lamella * 100);
                 mViewAdder.addNewValue(v, R.drawable.ic_action_menu_sort_off,
-                        Double.toString(Math.round(lamellaValue)) + "%");
+                        Math.round(lamellaValue) + "%");
             }
         }
 
