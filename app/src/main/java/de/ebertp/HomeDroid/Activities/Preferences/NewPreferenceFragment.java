@@ -10,6 +10,7 @@ import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.location.Location;
+import android.net.wifi.ScanResult;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
 import android.os.Build;
@@ -720,14 +721,33 @@ public class NewPreferenceFragment extends PreferenceFragment implements SharedP
             return true;
         }
 
-        final List<WifiConfiguration> configs = wifiManager.getConfiguredNetworks();
-        final CharSequence[] wifiNames = new CharSequence[configs.size()];
-        final boolean[] selecteds = new boolean[configs.size()];
+        final List<String> ssids = new ArrayList<>();
+
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
+            @SuppressLint("MissingPermission") final List<WifiConfiguration> configs = wifiManager.getConfiguredNetworks();
+
+            for (WifiConfiguration config : configs) {
+                if (!config.SSID.equals("")) {
+                    ssids.add(config.SSID);
+                }
+            }
+        } else {
+            final List<ScanResult> scanResults = wifiManager.getScanResults();
+
+            for (ScanResult scanResult : scanResults) {
+                if (!scanResult.SSID.equals("")) {
+                    ssids.add(scanResult.SSID);
+                }
+            }
+        }
+
+        final boolean[] selecteds = new boolean[ssids.size()];
+        String[] wifiNames = new String[ssids.size()];
 
         final List<String> oldWifiNames = PreferenceHelper.getHomeWifi(getContext());
 
-        for (int i = 0; i < configs.size(); i++) {
-            String wifiName = configs.get(i).SSID;
+        for (int i = 0; i < ssids.size(); i++) {
+            String wifiName = ssids.get(i);
             wifiNames[i] = wifiName.replaceAll("\"", "");
             selecteds[i] = oldWifiNames.contains(wifiName);
         }
@@ -747,7 +767,7 @@ public class NewPreferenceFragment extends PreferenceFragment implements SharedP
 
                 for (int i = 0; i < wifiNames.length; i++) {
                     if (selecteds[i]) {
-                        newSelectedWifis.add(configs.get(i).SSID);
+                        newSelectedWifis.add(ssids.get(i));
                     }
                 }
 
