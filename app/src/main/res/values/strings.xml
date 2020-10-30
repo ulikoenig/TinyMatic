@@ -231,12 +231,12 @@
     <string name="last_commands_desc">Last commands, for use in automation tools like Tasker</string>
     <string name="confirm_all">Confirm all</string>
     <string name="delete_all">Delete all</string>
-    
-    
+
+
 	<string name="speed">Speed</string>
 	<string name="vane_position">Vane Position</string>
 	<string name="room_occupancy">Room Occupancy</string>
-	
+
     <string name="room">Room</string>
     <string name="category">Category</string>
     <string name="script">Script</string>
@@ -245,7 +245,7 @@
     <string name="new_layer">New Layer</string>
     <string name="existing_layer">Existing Layer</string>
     <string name="new_item">New Item</string>
-    
+
     <string name="add_layer">Add Layer</string>
     <string name="toggle_creation">Creation Mode</string>
     <string name="set_background">Select Background</string>
@@ -253,18 +253,18 @@
     <string name="delete_layer">Delete Layer</string>
     <string name="set_default_layer">Set Default Layer</string>
 	<string name="saved">Saved</string>
-    
+
     <string name="layer_welcome_title">Hello Floorplan</string>
     <string name="layer_welcome_message">Welcome to the new floor plan mode! Here you can create your own personal control interface. You can add floors and put any HomeMatic item on them.\n\nThe normal interface is designed for tablets. If you want to use it on a phone or just have more space, use minimal mode. You can change it later.</string>
     <string name="name">Name</string>
     <string name="remove">Remove</string>
-    
+
     <string name="layer1">Layer 1</string>
     <string name="immersive_mode">Immersive Mode</string>
     <string name="layer_mode_minimal">Compact Layer Mode</string>
-    
+
     <string name="error_background">Error loading background image</string>
-    
+
         <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="do_not_show">Do not show this message again</string>
@@ -407,6 +407,9 @@
     <string name="rating_button_go_to_playstore">Play Store</string>
     <string name="profil">Profile</string>
     <string name="mode_comfort">Comfort</string>
+    <string name="wifi_name_input_description">Exact name of your Wifi network (SSID)\n\nSeparate multiple SSIDs by comma</string>
+    <string name="wifi_name_input_hint">Wifi SSID</string>
+    <string name="wifi_name_input_title">Home Wifi Name</string>
 
 
 </resources>

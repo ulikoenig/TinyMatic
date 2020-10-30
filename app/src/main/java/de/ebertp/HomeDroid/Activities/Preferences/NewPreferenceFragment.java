@@ -10,7 +10,6 @@ import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.location.Location;
-import android.net.wifi.ScanResult;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
 import android.os.Build;
@@ -23,11 +22,6 @@ import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.widget.Toolbar;
-
 import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -37,12 +31,17 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.widget.Toolbar;
+
 import com.github.machinarius.preferencefragment.PreferenceFragment;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import de.ebertp.HomeDroid.Backup.BackupHelper;
@@ -714,30 +713,72 @@ public class NewPreferenceFragment extends PreferenceFragment implements SharedP
     }
 
     private boolean selectWifi() {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
+            showLegacyWifiDialog();
+        } else {
+            showWifiDialog();
+        }
+        return true;
+    }
+
+    private void showWifiDialog() {
+        final List<String> oldWifiNames = PreferenceHelper.getHomeWifi(getContext());
+
+        final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), getDialogTheme());
+
+        StringBuilder flattend = new StringBuilder();
+
+        for (String wifiName : oldWifiNames) {
+            boolean isLast = oldWifiNames.indexOf(wifiName) == oldWifiNames.size() - 1;
+            flattend.append(wifiName);
+            if(!isLast) {
+                flattend.append(",");
+            }
+        }
+
+        View dialogView = getLayoutInflater().inflate(R.layout.dialog_wifi_input, null);
+        EditText wifiNamesEditText = dialogView.findViewById(R.id.wifiNamesEditText);
+        builder.setView(dialogView);
+
+        builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                String value = wifiNamesEditText.getText().toString();
+                List<String> items = Arrays.asList(value.split(","));
+                List<String> trimmed = new ArrayList();
+                for(String item : items) {
+                    trimmed.add(item.trim());
+                }
+                PreferenceHelper.setHomeWifi(getContext(), trimmed);
+                mSelectWifiPref.setSummary(getHomeWifisAsString());
+            }
+        });
+
+        builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+        builder.show();
+    }
+
+    private void showLegacyWifiDialog() {
         final WifiManager wifiManager = (WifiManager) getActivity().getApplicationContext().getSystemService(Context.WIFI_SERVICE);
 
         if (!wifiManager.isWifiEnabled()) {
             Toast.makeText(getActivity(), R.string.enable_wifi, Toast.LENGTH_LONG).show();
-            return true;
+            return;
         }
+
+        @SuppressLint("MissingPermission") final List<WifiConfiguration> configs = wifiManager.getConfiguredNetworks();
 
         final List<String> ssids = new ArrayList<>();
 
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
-            @SuppressLint("MissingPermission") final List<WifiConfiguration> configs = wifiManager.getConfiguredNetworks();
-
-            for (WifiConfiguration config : configs) {
-                if (!config.SSID.equals("")) {
-                    ssids.add(config.SSID);
-                }
-            }
-        } else {
-            final List<ScanResult> scanResults = wifiManager.getScanResults();
-
-            for (ScanResult scanResult : scanResults) {
-                if (!scanResult.SSID.equals("")) {
-                    ssids.add(scanResult.SSID);
-                }
+        for (WifiConfiguration config : configs) {
+            if (!config.SSID.equals("")) {
+                ssids.add(config.SSID);
             }
         }
 
@@ -777,7 +818,6 @@ public class NewPreferenceFragment extends PreferenceFragment implements SharedP
         });
 
         builder.create().show();
-        return true;
     }
 
     private void initUpdatePrefs() {

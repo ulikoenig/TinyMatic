@@ -1,19 +1,17 @@
 {
-  "version": 1,
+  "version": 2,
   "artifactType": {
     "type": "APK",
     "kind": "Directory"
   },
   "applicationId": "de.ebertp.HomeDroid",
-  "variantName": "release",
+  "variantName": "processReleaseResources",
   "elements": [
     {
       "type": "SINGLE",
       "filters": [],
-      "properties": [],
-      "versionCode": 2157001,
-      "versionName": "2.15.7",
-      "enabled": true,
+      "versionCode": 2160000,
+      "versionName": "2.16.0",
       "outputFile": "app-release.apk"
     }
   ]

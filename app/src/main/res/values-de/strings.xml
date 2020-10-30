@@ -306,7 +306,7 @@
     <string name="recents">Zuletzt</string>
     <string name="auto_switch_network_mode">WLAN-Erkennung</string>
     <string name="auto_switch_network_mode_desc">Verwende lokale Adresse im eigenen WLAN</string>
-    <string name="select_wifi">Heimnetzwerk auswählen</string>
+    <string name="select_wifi">Heimnetzwerk festlegen</string>
     <string name="enable_wifi">Fehler: WLAN ist deaktiviert</string>
     <string name="detectUnrenamedChannelsDesc">Kanalnamen ersetzen</string>
     <string name="detectUnrenamedChannels">Gerätenamen für Kanäle verwenden die nicht umbenannt wurden</string>
@@ -392,4 +392,7 @@
     <string name="rating_button_go_to_playstore">Zum Play Store</string>
     <string name="profil">Profil</string>
     <string name="mode_comfort">Comfort</string>
+    <string name="wifi_name_input_description">Exakter Name des WLAN-Netzwerks (SSID)\n\nMehrere Netzwerke mit Komma trennen</string>
+    <string name="wifi_name_input_hint">WLAN SSID</string>
+    <string name="wifi_name_input_title">Heimnetzwerk festlegen</string>
 </resources>
