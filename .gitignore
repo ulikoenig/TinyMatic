@@ -10,3 +10,5 @@ sh.exe.stackdump
 app/release/app-release.apk
 app/release/output.json
 /app/release/output-metadata.json
+/app/.DS_Store
+/.DS_Store
