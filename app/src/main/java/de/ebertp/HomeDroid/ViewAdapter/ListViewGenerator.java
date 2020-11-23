@@ -773,6 +773,8 @@ public class ListViewGenerator {
             } else {
                 IpWeekProgramView(v, hmc);
             }
+        } else if(type.equals("HmIP-SRD")) {
+            RainingIPView(v, hmc);
         } else if (type.equals("EASYCam") || type.equals("Outdoor-EASYCam")) {
             EasyCamView(v, hmc);
         } else if (type.equals("EASYLed") || type.equals("EASYLed2")) {
@@ -2013,6 +2015,16 @@ public class ListViewGenerator {
             mViewAdder.addNewValue(v, R.drawable.flat_humidity, Double.toString(humidity) + "%");
         }
 
+        Double dewPoint = DbUtil.getDatapointDouble(hmc.rowId, "DEW_POINT");
+        if (dewPoint != null) {
+            mViewAdder.addNewValue(v, null, "DEW_POINT", Double.toString(dewPoint));
+        }
+
+        Double absHumidity = DbUtil.getDatapointDouble(hmc.rowId, "ABS_HUMIDITY");
+        if (absHumidity != null) {
+            mViewAdder.addNewValue(v, null, "ABS_HUMIDITY", Double.toString(absHumidity));
+        }
+
         setIcon(v, R.drawable.icon10);
         v.setTag(new HMControllable(hmc.rowId, hmc.name, HmType.PASSIV));
         return v;
@@ -2709,6 +2721,30 @@ public class ListViewGenerator {
         v.setTag(new HMControllable(hmc.rowId, hmc.name, HmType.PASSIV));
         return v;
     }
+
+    private View RainingIPView(View v, HMChannel hmc) {
+        String raining = DbUtil.getDatapointString(hmc.rowId, "RAINING");
+        if (raining != null) {
+            if (raining.equals("true")) {
+                mViewAdder.addNewValue(v, R.drawable.flat_rain, ViewAdder.IconSize.BIG);
+            } else if (raining.equals("false")) {
+                mViewAdder.addNewValue(v, R.drawable.flat_sunny, ViewAdder.IconSize.BIG);
+            }
+        }
+
+        Double temperature = DbUtil.getDatapointDouble(hmc.rowId, "ACTUAL_TEMPERATURE");
+        if (temperature != null) {
+            mViewAdder.addNewValue(v, R.drawable.flat_temp, Double.toString(Math.round(temperature * 10) / 10.) + "°C");
+        }
+
+
+        setIcon(v, R.drawable.icon10);
+        v.setTag(new HMControllable(hmc.rowId, hmc.name, HmType.PASSIV));
+        return v;
+    }
+
+
+
 
     private View BlindHeightIpView(View v, HMChannel hmc) {
         Double level = DbUtil.getDatapointDouble(hmc.rowId, "LEVEL");
