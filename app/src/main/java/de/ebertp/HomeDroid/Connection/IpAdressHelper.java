@@ -107,6 +107,11 @@ public class IpAdressHelper {
 
             for (String homeWifi : savedHomeWifis) {
                 String ssid = connectionInfo.getSSID();
+
+                if(ssid.matches("^\".*\"$")) {
+                    ssid = ssid.replace("\"", "");
+                }
+
                 if (ssid.equals(homeWifi)) {
                     return true;
                 }

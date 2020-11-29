@@ -726,19 +726,23 @@ public class NewPreferenceFragment extends PreferenceFragment implements SharedP
 
         final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), getDialogTheme());
 
-        StringBuilder flattend = new StringBuilder();
+        StringBuilder flattened = new StringBuilder();
 
         for (String wifiName : oldWifiNames) {
             boolean isLast = oldWifiNames.indexOf(wifiName) == oldWifiNames.size() - 1;
-            flattend.append(wifiName);
+            flattened.append(wifiName);
             if(!isLast) {
-                flattend.append(",");
+                flattened.append(",");
             }
         }
 
         View dialogView = getLayoutInflater().inflate(R.layout.dialog_wifi_input, null);
         EditText wifiNamesEditText = dialogView.findViewById(R.id.wifiNamesEditText);
         builder.setView(dialogView);
+
+        if(flattened.length() >= 0) {
+            wifiNamesEditText.setText(flattened);
+        }
 
         builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
             @Override
