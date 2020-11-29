@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="de.ebertp.HomeDroid"
     android:installLocation="auto"
-    android:versionCode="2161000"
+    android:versionCode="2161002"
     android:versionName="2.16.1">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -51,6 +51,7 @@
         android:label="@string/app_name"
         android:theme="@style/HomeDroidLight"
         android:usesCleartextTraffic="true"
+        android:requestLegacyExternalStorage="true"
         tools:replace="android:icon">
 
         <meta-data
