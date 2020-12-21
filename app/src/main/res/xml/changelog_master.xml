@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <changelog>
     <release
+        version="2.16.1"
+        versioncode="2161000">
+        <change>Fix for backups on Android 10+</change>
+        <change>HmIP-SRD</change>
+        <change>Bug fixes and small improvements</change>
+    </release>
+    <release
         version="2.16.0"
         versioncode="2160000">
         <change>Bug fixes and small improvements</change>
