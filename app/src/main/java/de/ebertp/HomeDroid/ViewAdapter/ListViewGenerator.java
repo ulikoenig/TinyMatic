@@ -749,6 +749,14 @@ public class ListViewGenerator {
             } else {
                 IpWeekProgramView(v, hmc);
             }
+        } else if (type.equals("HmIP-DRSI1")) {
+            if (hmc.channelIndex == 1) {
+                TasterView(v, hmc);
+            } else if (hmc.channelIndex <= 5) {
+                SwitchView(v, hmc);
+            } else {
+                IpWeekProgramView(v, hmc);
+            }
         } else if (type.equals("HmIP-DRDI3")) {
             if (hmc.channelIndex <= 3) {
                 TasterAndStateView(v, hmc);
