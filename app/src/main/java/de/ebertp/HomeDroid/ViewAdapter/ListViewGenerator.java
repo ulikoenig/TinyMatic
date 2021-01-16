@@ -571,7 +571,7 @@ public class ListViewGenerator {
             } else {
                 VariableView(v, hmc, 0, 100, "%", HmType.BLIND_WITH_LAMELLA_IP, R.drawable.flat_blinds_closed, R.drawable.flat_blinds_up);
             }
-        } else if (type.equals("HmIP-HDM1 ")) {
+        } else if (type.equals("HmIP-HDM1")) {
             if (hmc.channelIndex == 2) {
                 IpWeekProgramView(v, hmc);
             } else {
@@ -1931,7 +1931,7 @@ public class ListViewGenerator {
 
         if (state != null) {
             if (state.equals("1")) {
-                mViewAdder.addNewValue(v, R.drawable.flat_window_open, ViewAdder.IconSize.BIG);
+                mViewAdder.addNewValue(v, R.drawable.flat_unlocked, ViewAdder.IconSize.BIG);
             } else {
                 mViewAdder.addNewValue(v, R.drawable.flat_locked, ViewAdder.IconSize.BIG);
             }
