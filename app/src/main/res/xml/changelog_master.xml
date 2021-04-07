@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <changelog>
     <release
+        version="2.16.3"
+        versioncode="2163000">
+        <change>Bugfix for Home Wifi Detection</change>
+    </release>
+    <release
         version="2.16.2"
-        versioncode="2161000">
+        versioncode="2162000">
         <change>HmIP-HDM1</change>
         <change>HmIP-DRSI1</change>
     </release>

@@ -255,19 +255,9 @@ public class NewPreferenceFragment extends PreferenceFragment implements SharedP
 
         List<String> homeWifis = PreferenceHelper.getHomeWifi(getActivity());
         if (homeWifis != null && !homeWifis.isEmpty()) {
-            StringBuilder stringBuilder = new StringBuilder();
-
-            for (int i = 0; i < homeWifis.size(); i++) {
-                stringBuilder.append(homeWifis.get(i).replace("\"", ""));
-
-                if (i != homeWifis.size() - 1) {
-                    stringBuilder.append(", ");
-                }
-            }
-
             String homemWifis = getHomeWifisAsString();
             if (homemWifis != null) {
-                mSelectWifiPref.setSummary(stringBuilder.toString());
+                mSelectWifiPref.setSummary(homemWifis);
             }
         }
         getPreferenceScreen().getSharedPreferences().registerOnSharedPreferenceChangeListener(this);

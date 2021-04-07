@@ -106,13 +106,9 @@ public class IpAdressHelper {
             }
 
             for (String homeWifi : savedHomeWifis) {
-                String ssid = connectionInfo.getSSID();
-
-                if(ssid.matches("^\".*\"$")) {
-                    ssid = ssid.replace("\"", "");
-                }
-
-                if (ssid.equals(homeWifi)) {
+                String trimmedHomeWifi = homeWifi.replace("\"", "");
+                String trimmedSSID = connectionInfo.getSSID().replace("\"", "");
+                if (trimmedSSID.equals(trimmedHomeWifi)) {
                     return true;
                 }
             }
