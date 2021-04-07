@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <changelog>
     <release
+        version="2.16.4"
+        versioncode="2164000">
+        <change>Fehlerbehebungen und kleinere Verbesserungen</change>
+    </release>
+    <release
         version="2.16.3"
         versioncode="2163000">
         <change>Fehlerbehebungen für WLAN-Erkennung</change>
