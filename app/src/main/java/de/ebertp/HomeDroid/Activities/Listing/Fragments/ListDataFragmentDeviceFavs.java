@@ -11,13 +11,11 @@ import java.util.List;
 
 import de.ebertp.HomeDroid.DbAdapter.BaseDbAdapter;
 import de.ebertp.HomeDroid.DbAdapter.ConcreteHelpers.FavRelationsDbAdapter;
-import de.ebertp.HomeDroid.EventTracker;
 import de.ebertp.HomeDroid.Model.HMObject;
 import de.ebertp.HomeDroid.R;
 import de.ebertp.HomeDroid.Utils.PreferenceHelper;
 import de.ebertp.HomeDroid.Utils.PrefixHelper;
 import de.ebertp.HomeDroid.ViewAdapter.CursorToObjectHelper;
-import de.ebertp.HomeDroid.ViewAdapter.StatusListViewAdapter;
 
 public class ListDataFragmentDeviceFavs extends SortableListDataFragment {
 
@@ -26,13 +24,6 @@ public class ListDataFragmentDeviceFavs extends SortableListDataFragment {
         super.onCreate(savedInstanceState);
         mRoomId = PrefixHelper.getFullPrefix(getContext()) + SortableListDataFragment.GROUP_ID_DEVICE_FAVS;
     }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        EventTracker.trackScreen(getActivity(), "Quick_Access");
-    }
-
 
     public void initDbHelper() {
         mRelationsHelper = dbManager.favRelationsDbAdapter;

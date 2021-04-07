@@ -19,7 +19,6 @@ import android.widget.Toast;
 
 import de.ebertp.HomeDroid.DbAdapter.ConcreteHelpers.ProfileDbAdapter;
 import de.ebertp.HomeDroid.DbAdapter.DataBaseAdapterManager;
-import de.ebertp.HomeDroid.EventTracker;
 import de.ebertp.HomeDroid.HomeDroidApp;
 import de.ebertp.HomeDroid.R;
 import de.ebertp.HomeDroid.Utils.PreferenceHelper;
@@ -53,12 +52,6 @@ public class ProfilePreferencesActivity extends AppCompatActivity {
 
         initContent();
         initButtons();
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        EventTracker.trackScreen(this, "Profiles");
     }
 
     private void initButtons() {

@@ -48,7 +48,6 @@ import de.ebertp.HomeDroid.Backup.BackupHelper;
 import de.ebertp.HomeDroid.Communication.Rpc.RpcForegroundService;
 import de.ebertp.HomeDroid.Communication.Utils;
 import de.ebertp.HomeDroid.DbAdapter.DataBaseAdapterManager;
-import de.ebertp.HomeDroid.EventTracker;
 import de.ebertp.HomeDroid.HomeDroidApp;
 import de.ebertp.HomeDroid.Location.GeoFencingManager;
 import de.ebertp.HomeDroid.Model.HMDrawerItem;
@@ -249,8 +248,6 @@ public class NewPreferenceFragment extends PreferenceFragment implements SharedP
     @Override
     public void onResume() {
         super.onResume();
-        EventTracker.trackScreen(getActivity(), "Settings");
-
         mServerAddressPreference.setSummary(PreferenceHelper.getServer(getActivity()));
 
         List<String> homeWifis = PreferenceHelper.getHomeWifi(getActivity());

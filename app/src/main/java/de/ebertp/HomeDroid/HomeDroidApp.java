@@ -10,7 +10,6 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import android.widget.Toast;
 
 import com.facebook.stetho.Stetho;
-import com.google.firebase.analytics.FirebaseAnalytics;
 
 import de.ebertp.HomeDroid.Communication.StuffEventReceiver;
 import de.ebertp.HomeDroid.Communication.Sync.PeriodSyncManager;
@@ -53,10 +52,6 @@ public class HomeDroidApp extends Application {
         initBackgroundDetection();
         GeoFencingManager.init();
         registerWifiReceiver();
-
-        FirebaseAnalytics firebase = FirebaseAnalytics.getInstance(this);
-        firebase.setMinimumSessionDuration(3000);
-        EventTracker.setUserProperties(this);
 
         if (BuildConfig.DEBUG) {
             Stetho.initialize(

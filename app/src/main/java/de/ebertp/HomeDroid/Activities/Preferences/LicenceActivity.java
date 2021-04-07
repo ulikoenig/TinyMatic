@@ -10,7 +10,6 @@ import android.widget.Toast;
 
 import de.ebertp.HomeDroid.Activities.ThemedDialogActivity;
 import de.ebertp.HomeDroid.Communication.Control.ControlHelper;
-import de.ebertp.HomeDroid.EventTracker;
 import de.ebertp.HomeDroid.R;
 import de.ebertp.HomeDroid.Utils.LicenceUtil;
 import de.ebertp.HomeDroid.Utils.PreferenceHelper;
@@ -36,7 +35,6 @@ public class LicenceActivity extends ThemedDialogActivity {
     public void onResume() {
         initLicenceData();
         super.onResume();
-        EventTracker.trackScreen(this, "Licence");
     }
 
     private void initLicenceData() {

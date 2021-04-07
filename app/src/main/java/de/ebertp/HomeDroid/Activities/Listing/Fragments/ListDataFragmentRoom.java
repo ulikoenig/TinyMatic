@@ -6,22 +6,12 @@ import android.os.Bundle;
 import java.util.ArrayList;
 import java.util.Collections;
 
-import de.ebertp.HomeDroid.DbAdapter.ConcreteHelpers.SortableRelations;
-import de.ebertp.HomeDroid.EventTracker;
 import de.ebertp.HomeDroid.Model.HMObject;
 import de.ebertp.HomeDroid.R;
 import de.ebertp.HomeDroid.Utils.PreferenceHelper;
 import de.ebertp.HomeDroid.ViewAdapter.CursorToObjectHelper;
-import de.ebertp.HomeDroid.ViewAdapter.HMObjectViewAdapter;
-import de.ebertp.HomeDroid.ViewAdapter.StatusListViewAdapter;
 
 public class ListDataFragmentRoom extends SortableListDataFragment {
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        EventTracker.trackScreen(getActivity(), "Room");
-    }
 
     public static ListDataFragmentRoom newInstance(Bundle bun) {
         ListDataFragmentRoom f = new ListDataFragmentRoom();

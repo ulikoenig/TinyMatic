@@ -6,11 +6,15 @@ import android.net.Uri;
 import android.util.Log;
 import android.widget.Toast;
 
+import de.ebertp.HomeDroid.BuildConfig;
 import de.ebertp.HomeDroid.R;
 
 public class LicenceUtil {
 
     public static boolean checkLicence(Context ctx, boolean notifiyUserOnError, boolean notifiyUserOnSuccess) {
+        if (!BuildConfig.LICENSE_CHECK) {
+            return true;
+        }
 
         int challenge = 4221;
 

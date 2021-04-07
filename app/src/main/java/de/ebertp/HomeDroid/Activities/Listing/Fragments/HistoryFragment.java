@@ -13,7 +13,6 @@ import java.sql.SQLException;
 import java.util.List;
 
 import de.ebertp.HomeDroid.Communication.Control.ControlHelper;
-import de.ebertp.HomeDroid.EventTracker;
 import de.ebertp.HomeDroid.Model.HMCommand;
 import de.ebertp.HomeDroid.Model.HmSpeechCommand;
 import de.ebertp.HomeDroid.R;
@@ -44,12 +43,6 @@ public class HistoryFragment extends CommandFragment {
         }
 
         return listView;
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        EventTracker.trackScreen(getActivity(), "History");
     }
 
     @Override

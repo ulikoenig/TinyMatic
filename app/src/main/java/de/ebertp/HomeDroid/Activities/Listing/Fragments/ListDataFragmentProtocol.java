@@ -18,7 +18,6 @@ import java.util.List;
 
 import de.ebertp.HomeDroid.Communication.Control.ControlHelper;
 import de.ebertp.HomeDroid.Communication.RefreshStateHelper;
-import de.ebertp.HomeDroid.EventTracker;
 import de.ebertp.HomeDroid.Model.HMObject;
 import de.ebertp.HomeDroid.R;
 import de.ebertp.HomeDroid.Utils.PreferenceHelper;
@@ -34,8 +33,6 @@ public class ListDataFragmentProtocol extends ListDataFragment {
     @Override
     public void onResume() {
         super.onResume();
-        EventTracker.trackScreen(getActivity(), "Protocol");
-
         if (isFirstResume) {
             isFirstResume = false;
             doRefreshWithProgress();

@@ -14,10 +14,8 @@ import java.util.Collections;
 import java.util.List;
 
 import de.ebertp.HomeDroid.Communication.RefreshStateHelper;
-import de.ebertp.HomeDroid.EventTracker;
 import de.ebertp.HomeDroid.Model.HMObject;
 import de.ebertp.HomeDroid.R;
-import de.ebertp.HomeDroid.Utils.PreferenceHelper;
 import de.ebertp.HomeDroid.Utils.PrefixHelper;
 import de.ebertp.HomeDroid.ViewAdapter.CursorToObjectHelper;
 
@@ -34,12 +32,6 @@ public class ListDataFragmentScripts extends SortableListDataFragment {
         View view = super.onCreateView(inflater, container, savedInstanceState);
         shrinkList(view);
         return view;
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        EventTracker.trackScreen(getActivity(), "Scripts");
     }
 
     public void initDbHelper() {

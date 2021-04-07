@@ -27,7 +27,6 @@ import de.ebertp.HomeDroid.DbAdapter.BaseDbAdapter;
 import de.ebertp.HomeDroid.DbAdapter.ConcreteHelpers.ChannelsDbAdapter;
 import de.ebertp.HomeDroid.DbAdapter.ConcreteHelpers.ProgramsDbAdapter;
 import de.ebertp.HomeDroid.DbAdapter.DataBaseAdapterManager;
-import de.ebertp.HomeDroid.EventTracker;
 import de.ebertp.HomeDroid.HomeDroidApp;
 import de.ebertp.HomeDroid.Model.HMObject;
 import de.ebertp.HomeDroid.R;
@@ -256,11 +255,5 @@ public class CreateWidgetActivity extends ListActivity {
         resultValue.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, mAppWidgetId);
         setResult(RESULT_OK, resultValue);
         finish();
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        EventTracker.trackScreen(this, "Create_Widget");
     }
 }

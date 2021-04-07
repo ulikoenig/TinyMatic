@@ -15,7 +15,6 @@ import com.software.shell.fab.ActionButton;
 import java.sql.SQLException;
 import java.util.List;
 
-import de.ebertp.HomeDroid.EventTracker;
 import de.ebertp.HomeDroid.HomeDroidApp;
 import de.ebertp.HomeDroid.Model.WebCam;
 import de.ebertp.HomeDroid.R;
@@ -81,12 +80,6 @@ public class WebCamFragment extends DataFragment {
         }
 
         return content;
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        EventTracker.trackScreen(getActivity(), "Webcams");
     }
 
     public List<WebCam> getItems() throws SQLException {

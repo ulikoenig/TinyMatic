@@ -2,16 +2,9 @@ package de.ebertp.HomeDroid.Activities.Listing.Fragments;
 
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import de.ebertp.HomeDroid.EventTracker;
 import de.ebertp.HomeDroid.R;
 
 public class ListDataFragmentRemote extends ListDataFragment {
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        EventTracker.trackScreen(getActivity(), "Remote");
-    }
 
     public void initDbHelper() {
         mRelationsHelper = dbManager.remoteRelationsDbAdapter;

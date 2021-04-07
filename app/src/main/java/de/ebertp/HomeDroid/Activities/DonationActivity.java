@@ -8,18 +8,11 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.Toast;
 
-import de.ebertp.HomeDroid.EventTracker;
 import de.ebertp.HomeDroid.R;
 import de.ebertp.HomeDroid.Utils.LicenceUtil;
 import de.ebertp.HomeDroid.Utils.PreferenceHelper;
 
 public class DonationActivity extends ThemedDialogActivity {
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        EventTracker.trackScreen(this, "Activate");
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

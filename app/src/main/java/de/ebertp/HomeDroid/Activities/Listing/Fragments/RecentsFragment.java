@@ -9,7 +9,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import de.ebertp.HomeDroid.EventTracker;
 import de.ebertp.HomeDroid.HomeDroidApp;
 import de.ebertp.HomeDroid.Model.HMCommand;
 import de.ebertp.HomeDroid.Model.HMObject;
@@ -18,12 +17,6 @@ import de.ebertp.HomeDroid.Utils.PreferenceHelper;
 import de.ebertp.HomeDroid.ViewAdapter.StatusListViewAdapter;
 
 public class RecentsFragment extends ListDataFragment {
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        EventTracker.trackScreen(getActivity(), "Recents");
-    }
 
     @Override
     protected void initList() {

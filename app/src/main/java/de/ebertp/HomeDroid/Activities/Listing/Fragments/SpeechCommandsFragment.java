@@ -16,7 +16,6 @@ import android.widget.ListView;
 import java.sql.SQLException;
 import java.util.List;
 
-import de.ebertp.HomeDroid.EventTracker;
 import de.ebertp.HomeDroid.Model.HmSpeechCommand;
 import de.ebertp.HomeDroid.R;
 
@@ -58,12 +57,6 @@ public class SpeechCommandsFragment extends CommandFragment {
         }
 
         return listView;
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        EventTracker.trackScreen(getActivity(), "Speech_Commands");
     }
 
     @Override

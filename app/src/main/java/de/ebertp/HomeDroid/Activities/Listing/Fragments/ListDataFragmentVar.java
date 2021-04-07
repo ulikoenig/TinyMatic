@@ -13,7 +13,6 @@ import java.util.Collections;
 import java.util.List;
 
 import de.ebertp.HomeDroid.Communication.RefreshStateHelper;
-import de.ebertp.HomeDroid.EventTracker;
 import de.ebertp.HomeDroid.Model.HMObject;
 import de.ebertp.HomeDroid.R;
 import de.ebertp.HomeDroid.Utils.PrefixHelper;
@@ -32,12 +31,6 @@ public class ListDataFragmentVar extends SortableListDataFragment {
         View view = super.onCreateView(inflater, container, savedInstanceState);
         shrinkList(view);
         return view;
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        EventTracker.trackScreen(getActivity(), "Variables");
     }
 
     public void initDbHelper() {

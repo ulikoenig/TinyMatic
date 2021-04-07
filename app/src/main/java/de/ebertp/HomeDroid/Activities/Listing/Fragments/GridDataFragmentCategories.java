@@ -4,16 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import de.ebertp.HomeDroid.Activities.Listing.ListDataActivity;
-import de.ebertp.HomeDroid.EventTracker;
 import de.ebertp.HomeDroid.R;
 
 public class GridDataFragmentCategories extends GridDataFragment {
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        EventTracker.trackScreen(getActivity(), "Category_Grid");
-    }
 
     @Override
     public Intent getIntentForList() {

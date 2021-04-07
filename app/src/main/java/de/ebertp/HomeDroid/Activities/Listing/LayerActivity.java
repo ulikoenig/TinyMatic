@@ -49,7 +49,6 @@ import java.util.List;
 import de.ebertp.HomeDroid.Activities.GallerySelectIcon;
 import de.ebertp.HomeDroid.Communication.Control.HMControllable;
 import de.ebertp.HomeDroid.DbAdapter.DataBaseAdapterManager;
-import de.ebertp.HomeDroid.EventTracker;
 import de.ebertp.HomeDroid.HomeDroidApp;
 import de.ebertp.HomeDroid.InterceptViewGroup;
 import de.ebertp.HomeDroid.Model.HMChannel;
@@ -224,7 +223,6 @@ public class LayerActivity extends ServiceContentActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        EventTracker.trackScreen(this, "Floorplan");
         doItemsLayout();
     }
 

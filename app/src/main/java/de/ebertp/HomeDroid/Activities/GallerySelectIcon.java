@@ -14,7 +14,6 @@ import android.widget.GridView;
 
 import de.ebertp.HomeDroid.DbAdapter.ConcreteHelpers.IconDbAdapter;
 import de.ebertp.HomeDroid.DbAdapter.DataBaseAdapterManager;
-import de.ebertp.HomeDroid.EventTracker;
 import de.ebertp.HomeDroid.HomeDroidApp;
 import de.ebertp.HomeDroid.R;
 import de.ebertp.HomeDroid.ViewAdapter.ImageAdapter;
@@ -68,12 +67,6 @@ public class GallerySelectIcon extends AppCompatActivity {
                 finish();
             }
         });
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        EventTracker.trackScreen(this, "Select_Icon");
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {

@@ -7,17 +7,10 @@ import android.view.View;
 
 import de.ebertp.HomeDroid.Activities.Listing.ListDataActivity;
 import de.ebertp.HomeDroid.DbAdapter.BaseDbAdapter;
-import de.ebertp.HomeDroid.EventTracker;
 import de.ebertp.HomeDroid.R;
 import de.ebertp.HomeDroid.Utils.PreferenceHelper;
 
 public class GridDataFragmentCCUFavs extends GridDataFragment {
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        EventTracker.trackScreen(getActivity(), "CCU_Favorite_Grid");
-    }
 
     @Override
     public Intent getIntentForList() {

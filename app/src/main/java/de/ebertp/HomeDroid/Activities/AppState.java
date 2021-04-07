@@ -11,7 +11,6 @@ import de.ebertp.HomeDroid.DbAdapter.ConcreteHelpers.DatapointDbAdapter;
 import de.ebertp.HomeDroid.DbAdapter.ConcreteHelpers.ProgramsDbAdapter;
 import de.ebertp.HomeDroid.DbAdapter.ConcreteHelpers.RoomsDbAdapter;
 import de.ebertp.HomeDroid.DbAdapter.DataBaseAdapterManager;
-import de.ebertp.HomeDroid.EventTracker;
 import de.ebertp.HomeDroid.HomeDroidApp;
 import de.ebertp.HomeDroid.R;
 import de.ebertp.HomeDroid.Utils.PreferenceHelper;
@@ -34,7 +33,6 @@ public class AppState extends ThemedDialogActivity {
 
     public void onResume() {
         super.onResume();
-        EventTracker.trackScreen(this, "App_State");
         getTableCount();
     }
 
