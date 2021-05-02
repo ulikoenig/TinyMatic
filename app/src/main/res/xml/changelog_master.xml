@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <changelog>
     <release
+        version="2.16.5"
+        versioncode="2165000">
+        <change>HmIP-DLD</change>
+    </release>
+    <release
         version="2.16.4"
         versioncode="2164000">
         <change>Bug fixes and small improvements</change>
