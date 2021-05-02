@@ -42,6 +42,7 @@ import de.ebertp.HomeDroid.DbAdapter.DataBaseAdapterManager;
 import de.ebertp.HomeDroid.DbAdapter.DbUtil;
 import de.ebertp.HomeDroid.HomeDroidApp;
 import de.ebertp.HomeDroid.Model.HMChannel;
+import de.ebertp.HomeDroid.Model.HMCommand;
 import de.ebertp.HomeDroid.Model.HMHvac;
 import de.ebertp.HomeDroid.Model.HMObject;
 import de.ebertp.HomeDroid.Model.HMScript;
@@ -262,7 +263,11 @@ public class ListViewGenerator {
         } else if (type.equalsIgnoreCase("HM-Sec-Key") || type.equalsIgnoreCase("HM-Sec-Key-S")
                 || type.equalsIgnoreCase("HM-Sec-Key-O") || type.equalsIgnoreCase("HM-Sec-Key-Generic")) {
             SwitchKeyView(v, hmc);
-
+        } else if (type.equals("HmIP-DLD")) {
+            // hide all other channels
+            if (hmc.channelIndex == 1) {
+                LockIpView(v, hmc);
+            }
         } else if (type.equalsIgnoreCase("HM-RC-4") || type.equalsIgnoreCase("HM-RC-4-B") || type.equalsIgnoreCase("HM-RC-4-3") || type.equalsIgnoreCase(
                 "HM-RC-8") || type.equalsIgnoreCase("HM-RC-P1") || type.equalsIgnoreCase("HM-RC-Sec3")
                 || type.equalsIgnoreCase("HM-RC-Sec3-B") || type.equalsIgnoreCase("HM-RC-Key3")
@@ -603,7 +608,7 @@ public class ListViewGenerator {
             }
         } else if (type.equals("HmIP-BRC2") || type.equals("HmIP-DBB")) {
             TasterView(v, hmc);
-        } else if (type.equals("HmIP-MOD-RC8") ) {
+        } else if (type.equals("HmIP-MOD-RC8")) {
             ModeView(v, hmc);
         } else if (type.equals("HmIP-MOD-OC8")) {
             if (hmc.channelIndex <= 8) {
@@ -781,7 +786,7 @@ public class ListViewGenerator {
             } else {
                 IpWeekProgramView(v, hmc);
             }
-        } else if(type.equals("HmIP-SRD")) {
+        } else if (type.equals("HmIP-SRD")) {
             RainingIPView(v, hmc);
         } else if (type.equals("EASYCam") || type.equals("Outdoor-EASYCam")) {
             EasyCamView(v, hmc);
@@ -1926,6 +1931,28 @@ public class ListViewGenerator {
         return v;
     }
 
+    private View LockIpView(View v, HMChannel hmc) {
+        Integer readValue = DbUtil.getDatapointInt(hmc.rowId, "LOCK_STATE");
+        Integer writeDatapointId = DbUtil.getDatapointId(hmc.rowId, "LOCK_TARGET_LEVEL");
+
+        if (readValue != null && writeDatapointId != null) {
+            switch (readValue) {
+                case 1:
+                    mViewAdder.addNewValue(v, R.drawable.flat_locked, ViewAdder.IconSize.BIG);
+                case 2:
+                    mViewAdder.addNewValue(v, R.drawable.flat_unlocked, ViewAdder.IconSize.BIG);
+            }
+
+            if (!PreferenceHelper.isDisableNotOperate(ctx) || hmc.isOperate()) {
+                setOnClickListener(v, lockIpHandler);
+            }
+        }
+
+        setIcon(v, R.drawable.icon14);
+        v.setTag(new HMControllable(hmc.rowId, hmc.name, "", HmType.SWITCH, writeDatapointId));
+        return v;
+    }
+
     private View OpenClosedView(View v, HMChannel hmc) {
         String state = DbUtil.getDatapointString(hmc.rowId, "STATE");
 
@@ -2752,8 +2779,6 @@ public class ListViewGenerator {
     }
 
 
-
-
     private View BlindHeightIpView(View v, HMChannel hmc) {
         Double level = DbUtil.getDatapointDouble(hmc.rowId, "LEVEL");
         if (level != null) {
@@ -2992,6 +3017,78 @@ public class ListViewGenerator {
             v.refreshDrawableState();
         }
     };
+
+    public OnClickListener lockIpHandler = new OnClickListener() {
+
+        public void onClick(final View v) {
+            final HMControllable hmc = (HMControllable) v.getTag();
+            String name = hmc.name;
+            final int writeDatapoint = hmc.datapointId;
+
+            View dialogView = inflater.inflate(R.layout.dialog_three_buttons, null);
+            final AlertDialog alertDialog = new AlertDialog.Builder(ctx).setView(dialogView).create();
+
+            Button buttonLeft = (Button) dialogView.findViewById(R.id.button_set);
+            buttonLeft.setText(R.string.lock);
+            buttonLeft.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    ControlHelper.sendOrder(ctx, new HMCommand(writeDatapoint, HMCommand.TYPE_DATAPOINT, "0", new Date()), toastHandler);
+                    Util.addRefreshNotify(v);
+                    alertDialog.dismiss();
+                }
+            });
+
+            Button buttonMiddle = (Button) dialogView.findViewById(R.id.button_middle);
+            buttonMiddle.setText(R.string.unlock);
+            buttonMiddle.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    ControlHelper.sendOrder(ctx, new HMCommand(writeDatapoint, HMCommand.TYPE_DATAPOINT, "1", new Date()), toastHandler);
+                    Util.addRefreshNotify(v);
+                    alertDialog.dismiss();
+                }
+            });
+
+            Button buttonRight = (Button) dialogView.findViewById(R.id.button_back);
+            buttonRight.setText(R.string.open);
+            buttonRight.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    alertDialog.setOnDismissListener(null);
+                    alertDialog.dismiss();
+
+                    AlertDialog.Builder builder = new AlertDialog.Builder(ctx);
+                    builder.setMessage(ctx.getResources().getString(R.string.yousure))
+                            .setTitle(hmc.name)
+                            .setCancelable(false)
+                            .setPositiveButton(ctx.getString(R.string.yes), new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    ControlHelper.sendOrder(ctx, new HMCommand(writeDatapoint, HMCommand.TYPE_DATAPOINT, "2", new Date()), toastHandler);
+                                    Util.addRefreshNotify(v);
+                                }
+                            })
+                            .setNegativeButton(ctx.getString(R.string.cancel), new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    dialog.cancel();
+                                }
+                            });
+
+                    AlertDialog innerAlertDialog = builder.create();
+                    innerAlertDialog.setOnDismissListener(activityFinishDimissListener);
+                    innerAlertDialog.show();
+                }
+            });
+
+            alertDialog.setOnCancelListener(activityFinishCancelListener);
+            alertDialog.setOnDismissListener(activityFinishDimissListener);
+
+            alertDialog.setMessage(name);
+            alertDialog.show();
+            v.refreshDrawableState();
+        }
+    };
+
 
     OnDismissListener activityFinishDimissListener = new OnDismissListener() {
 
