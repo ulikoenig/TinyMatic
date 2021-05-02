@@ -190,8 +190,7 @@ public class ListViewGenerator {
                 v = null;
             }
         } // switches
-        else if (type.startsWith("HM-LC-Sw") || type.equalsIgnoreCase("HM-MOD-RC-8") || type.equalsIgnoreCase(
-                "ZEL STG RM FZS") || type.equalsIgnoreCase("ZEL STG RM FZS") || type.equalsIgnoreCase("HM-MOD-Re-8") || type.equals("HM-LC-DDC1-PCB")) {
+        else if (type.startsWith("HM-LC-Sw") || type.equalsIgnoreCase("HM-MOD-RC-8") || type.equalsIgnoreCase("ZEL STG RM FZS") || type.equalsIgnoreCase("HM-MOD-Re-8") || type.equals("HM-LC-DDC1-PCB")) {
             SwitchView(v, hmc);
             // statusanzeige
         } else if (type.equalsIgnoreCase("HM-Dis-TD-T")) {
@@ -267,6 +266,8 @@ public class ListViewGenerator {
             // hide all other channels
             if (hmc.channelIndex == 1) {
                 LockIpView(v, hmc);
+            } else if (hmc.channelIndex >= 2 && hmc.channelIndex <= 9) {
+                StateView(v, hmc, R.drawable.btn_check_on_holo_dark_hm, R.drawable.btn_check_off_holo_dark_hm);
             }
         } else if (type.equalsIgnoreCase("HM-RC-4") || type.equalsIgnoreCase("HM-RC-4-B") || type.equalsIgnoreCase("HM-RC-4-3") || type.equalsIgnoreCase(
                 "HM-RC-8") || type.equalsIgnoreCase("HM-RC-P1") || type.equalsIgnoreCase("HM-RC-Sec3")
@@ -470,6 +471,22 @@ public class ListViewGenerator {
             } else if (hmc.channelIndex == 4) {
                 StateView(v, hmc, R.drawable.btn_check_on_holo_dark_hm, R.drawable.btn_check_off_holo_dark_hm);
             }
+        } else if (type.equalsIgnoreCase("HmIP-SCTH230")) {
+            if (hmc.channelIndex == 1) {
+                CO2View(v, hmc);
+            }  else if (hmc.channelIndex == 4) {
+                ClimateControlIpView(v, hmc, 5, 35, "°C");
+            } else if (hmc.channelIndex == 7) {
+                StateView(v, hmc, R.drawable.btn_check_on_holo_dark_hm, R.drawable.btn_check_off_holo_dark_hm);
+            } else if (hmc.channelIndex <= 10) {
+                SwitchView(v, hmc);
+            } else if (hmc.channelIndex == 11) {
+                ColorLevelIpView(v, hmc);
+            } else if (hmc.channelIndex <= 14) {
+                VariableView(v, hmc, 0, 100, "%", HmType.DIMMER_IP, R.drawable.flat_light_off_2, R.drawable.flat_light_on_2);
+            } else if (hmc.channelIndex == 15) {
+                IpWeekProgramView(v, hmc);
+            }
         } else if (type.equals("HmIP-FALMOT-C12")) {
             if (hmc.channelIndex <= 12) {
                 FloorHeatingLevel(v, hmc);
@@ -549,6 +566,21 @@ public class ListViewGenerator {
                 AlarmSireneStateView(v, hmc);
             } else {
                 v = null;
+            }
+        } else if (type.equals("HmIP-MP3P")) {
+            if (hmc.channelIndex <= 4) { // @TODO implement MP3 Player
+
+                if (PreferenceHelper.isHideUnsupported(ctx)) {
+                    v = null;
+                } else {
+                    NotSupportedView(v, hmc);
+                }
+            } else if (hmc.channelIndex == 5) {
+                ColorLevelIpView(v, hmc);
+            } else if (hmc.channelIndex <= 8) {
+                VariableView(v, hmc, 0, 100, "%", HmType.DIMMER_IP_COLOR, R.drawable.flat_light_off_2, R.drawable.flat_light_on_2);
+            } else {
+                IpWeekProgramView(v, hmc);
             }
         } else if (Util.startsWithIgnoreCase(type, "HmIP-KRC")) {
             TasterView(v, hmc);
@@ -1473,6 +1505,15 @@ public class ListViewGenerator {
         return v;
     }
 
+    private View CO2View(View v, HMChannel hmc) {
+        Double concentration = DbUtil.getDatapointDouble(hmc.rowId, "CONCENTRATION");
+        if (concentration != null) {
+            mViewAdder.addNewValue(v, R.drawable.flat_humidity, Double.toString(Math.round(concentration)) + "ppm");
+        }
+
+        return v;
+    }
+
     private View WeatherStationIPView(View v, HMChannel hmc) {
         Double temperature = DbUtil.getDatapointDouble(hmc.rowId, "ACTUAL_TEMPERATURE");
         if (temperature != null) {
@@ -1937,10 +1978,17 @@ public class ListViewGenerator {
 
         if (readValue != null && writeDatapointId != null) {
             switch (readValue) {
+                case 0:
+                    mViewAdder.addNewValue(v, R.drawable.hvac_unkown, ViewAdder.IconSize.BIG);
+                    break;
+
                 case 1:
                     mViewAdder.addNewValue(v, R.drawable.flat_locked, ViewAdder.IconSize.BIG);
+                    break;
+
                 case 2:
                     mViewAdder.addNewValue(v, R.drawable.flat_unlocked, ViewAdder.IconSize.BIG);
+                    break;
             }
 
             if (!PreferenceHelper.isDisableNotOperate(ctx) || hmc.isOperate()) {
@@ -3085,6 +3133,7 @@ public class ListViewGenerator {
 
             alertDialog.setMessage(name);
             alertDialog.show();
+
             v.refreshDrawableState();
         }
     };

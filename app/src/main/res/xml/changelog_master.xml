@@ -4,6 +4,8 @@
         version="2.16.5"
         versioncode="2165000">
         <change>HmIP-DLD</change>
+        <change>HmIP-SCTH230</change>
+        <change>HmIP-MP3</change>
     </release>
     <release
         version="2.16.4"
