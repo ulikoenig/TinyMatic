@@ -26,6 +26,7 @@ public enum HmType {
     BLIND_WITH_LAMELLA,
     LAMELLA, ALARM,
     DIMMER_IP_COLOR,
+    DIMMER_MP3_COLOR,
     MP3_IP_SOUND_FILE,
     MP3_IP_SOUND
 }

@@ -577,7 +577,7 @@ public class ListViewGenerator {
             } else if (hmc.channelIndex == 5) {
                 ColorLevelIpView(v, hmc);
             } else if (hmc.channelIndex <= 8) {
-                VariableView(v, hmc, 0, 100, "%", HmType.DIMMER_IP_COLOR, R.drawable.flat_light_off_2, R.drawable.flat_light_on_2);
+                VariableView(v, hmc, 0, 100, "%", HmType.DIMMER_MP3_COLOR, R.drawable.flat_light_off_2, R.drawable.flat_light_on_2);
             } else {
                 IpWeekProgramView(v, hmc);
             }
@@ -2396,7 +2396,7 @@ public class ListViewGenerator {
 
             Integer iconRes = isZero ? lowerRes : upperRes;
 
-            if (hmType == HmType.DIMMER || hmType.equals(HmType.DIMMER_IP) || hmType.equals(HmType.DIMMER_IP_COLOR) || hmType == HmType.BLIND || hmType == HmType.BLIND_WITH_LAMELLA_IP || hmType == HmType.BLIND_WITH_LAMELLA || hmType == HmType.MP3_IP_SOUND || hmType == HmType.MP3_IP_SOUND_FILE) {
+            if (hmType == HmType.DIMMER || hmType.equals(HmType.DIMMER_IP) || hmType.equals(HmType.DIMMER_IP_COLOR) || hmType == HmType.BLIND || hmType == HmType.BLIND_WITH_LAMELLA_IP || hmType == HmType.BLIND_WITH_LAMELLA || hmType == HmType.MP3_IP_SOUND || hmType == HmType.MP3_IP_SOUND_FILE || hmType == HmType.DIMMER_MP3_COLOR) {
                 CheckedTextView cb = mViewAdder.addNewCheckedView(v).findViewById(R.id.check);
                 cb.setChecked(!isZero);
                 cb.setText(levelString);
@@ -2412,13 +2412,30 @@ public class ListViewGenerator {
                                     ControlHelper.sendOrder(ctx, datapointId, "1", toastHandler,
                                             false, true);
                                 }
+                            } else if (hmType == HmType.MP3_IP_SOUND || hmType == HmType.MP3_IP_SOUND_FILE) {
+                                Integer datapointId = DbUtil.getDatapointId(hmc.rowId, "LEVEL");
+                                if (datapointId != null) {
+                                    ControlHelper.sendOrder(ctx, datapointId, "0.3", toastHandler, false, true);
+                                }
+                            } else if (hmType == HmType.DIMMER_MP3_COLOR) {
+                                Integer datapointId = DbUtil.getDatapointId(hmc.rowId, "LEVEL");
+                                if (datapointId != null) {
+                                    ControlHelper.sendOrder(ctx, datapointId, "1", toastHandler, false, true);
+                                }
                             } else {
                                 ControlHelper.sendOrder(ctx, hmc.rowId, "1", toastHandler,
                                         false, true);
                             }
                         } else {
-                            ControlHelper.sendOrder(ctx, hmc.rowId, "0", toastHandler, hmType == HmType.SYSVARIABLE,
-                                    false);
+                            if (hmType == HmType.MP3_IP_SOUND || hmType == HmType.MP3_IP_SOUND_FILE || hmType == HmType.DIMMER_MP3_COLOR) {
+                                Integer datapointId = DbUtil.getDatapointId(hmc.rowId, "LEVEL");
+                                if (datapointId != null) {
+                                    ControlHelper.sendOrder(ctx, datapointId, "0", toastHandler, false, true);
+                                }
+                            } else {
+                                ControlHelper.sendOrder(ctx, hmc.rowId, "0", toastHandler, hmType == HmType.SYSVARIABLE,
+                                        false);
+                            }
                         }
                     }
                 });
