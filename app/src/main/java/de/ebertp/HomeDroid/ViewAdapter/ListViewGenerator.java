@@ -1362,7 +1362,7 @@ public class ListViewGenerator {
             mViewAdder.addNewValue(v, R.drawable.flat_list, soundFile.toString());
         }
 
-        //v.setTag(new HMControllable(hmc.rowId, hmc.name, HmType.PASSIV));
+        v.setTag(new HMControllable(hmc.rowId, hmc.name, HmType.PASSIV));
         return v;
     }
 
