@@ -616,17 +616,16 @@ public class ListViewGenerator {
                 v = null;
             }
         } else if (type.equals("HmIP-MP3P")) {
-            if (hmc.channelIndex <= 4) { // @TODO implement MP3 Player
-
-                if (PreferenceHelper.isHideUnsupported(ctx)) {
-                    v = null;
-                } else {
-                    NotSupportedView(v, hmc);
-                }
+            if (hmc.channelIndex == 1) {
+                SoundLevelIpView(v, hmc);
+            } else if (hmc.channelIndex == 2) {
+                VariableView(v, hmc, 0, 100, "%", HmType.MP3_IP_SOUND_FILE, R.drawable.flat_sound_off, R.drawable.flat_sound_on);
+            } else if (hmc.channelIndex <= 4) {
+                VariableView(v, hmc, 0, 100, "%", HmType.MP3_IP_SOUND, R.drawable.flat_sound_off, R.drawable.flat_sound_on);
             } else if (hmc.channelIndex == 5) {
                 ColorLevelIpView(v, hmc);
             } else if (hmc.channelIndex <= 8) {
-                VariableView(v, hmc, 0, 100, "%", HmType.DIMMER_IP_COLOR, R.drawable.flat_light_off_2, R.drawable.flat_light_on_2);
+                VariableView(v, hmc, 0, 100, "%", HmType.DIMMER_MP3_COLOR, R.drawable.flat_light_off_2, R.drawable.flat_light_on_2);
             } else {
                 IpWeekProgramView(v, hmc);
             }
@@ -1407,6 +1406,30 @@ public class ListViewGenerator {
         return v;
     }
 
+    private View SoundLevelIpView(View v, HMChannel hmc) {
+        Double level = DbUtil.getDatapointDouble(hmc.rowId, "LEVEL");
+        if (level != null) {
+            mViewAdder.addNewValue(v, R.drawable.flat_sound_on,
+                    Double.toString(Math.round(level * 100)) + "%");
+
+            if (level > 0) {
+                setIcon(v, (R.drawable.flat_sound_on));
+            } else {
+                setIcon(v, (R.drawable.flat_sound_off));
+            }
+        } else {
+            setIcon(v, (R.drawable.flat_sound_off));
+        }
+
+        Integer soundFile = DbUtil.getDatapointInt(hmc.rowId, "SOUNDFILE");
+        if (soundFile != null) {
+            mViewAdder.addNewValue(v, R.drawable.flat_list, soundFile.toString());
+        }
+
+        v.setTag(new HMControllable(hmc.rowId, hmc.name, HmType.PASSIV));
+        return v;
+    }
+
     private View ColorLevelIpView(View v, HMChannel hmc) {
         String color = DbUtil.getDatapointString(hmc.rowId, "COLOR");
         if (color != null) {
@@ -1423,9 +1446,16 @@ public class ListViewGenerator {
         if (level != null) {
             mViewAdder.addNewValue(v, R.drawable.flat_light_on_2,
                     Double.toString(Math.round(level * 100)) + "%");
+
+            if (level > 0) {
+                setIcon(v, (R.drawable.icon_gahle3));
+            } else {
+                setIcon(v, (R.drawable.icon_gahle4));
+            }
+        } else {
+            setIcon(v, (R.drawable.icon_gahle3));
         }
 
-        setIcon(v, (R.drawable.icon_gahle3));
         v.setTag(new HMControllable(hmc.rowId, hmc.name, HmType.PASSIV));
         return v;
     }
@@ -2456,7 +2486,7 @@ public class ListViewGenerator {
 
             Integer iconRes = isZero ? lowerRes : upperRes;
 
-            if (hmType == HmType.DIMMER || hmType.equals(HmType.DIMMER_IP) || hmType.equals(HmType.DIMMER_IP_COLOR) || hmType == HmType.BLIND || hmType == HmType.BLIND_WITH_LAMELLA_IP || hmType == HmType.BLIND_WITH_LAMELLA) {
+            if (hmType == HmType.DIMMER || hmType.equals(HmType.DIMMER_IP) || hmType.equals(HmType.DIMMER_IP_COLOR) || hmType == HmType.BLIND || hmType == HmType.BLIND_WITH_LAMELLA_IP || hmType == HmType.BLIND_WITH_LAMELLA || hmType == HmType.MP3_IP_SOUND || hmType == HmType.MP3_IP_SOUND_FILE || hmType == HmType.DIMMER_MP3_COLOR) {
                 CheckedTextView cb = mViewAdder.addNewCheckedView(v).findViewById(R.id.check);
                 cb.setChecked(!isZero);
                 cb.setText(levelString);
@@ -2472,13 +2502,30 @@ public class ListViewGenerator {
                                     ControlHelper.sendOrder(ctx, datapointId, "1", toastHandler,
                                             false, true);
                                 }
+                            } else if (hmType == HmType.MP3_IP_SOUND || hmType == HmType.MP3_IP_SOUND_FILE) {
+                                Integer datapointId = DbUtil.getDatapointId(hmc.rowId, "LEVEL");
+                                if (datapointId != null) {
+                                    ControlHelper.sendOrder(ctx, datapointId, "0.3", toastHandler, false, true);
+                                }
+                            } else if (hmType == HmType.DIMMER_MP3_COLOR) {
+                                Integer datapointId = DbUtil.getDatapointId(hmc.rowId, "LEVEL");
+                                if (datapointId != null) {
+                                    ControlHelper.sendOrder(ctx, datapointId, "1", toastHandler, false, true);
+                                }
                             } else {
                                 ControlHelper.sendOrder(ctx, hmc.rowId, "1", toastHandler,
                                         false, true);
                             }
                         } else {
-                            ControlHelper.sendOrder(ctx, hmc.rowId, "0", toastHandler, hmType == HmType.SYSVARIABLE,
-                                    false);
+                            if (hmType == HmType.MP3_IP_SOUND || hmType == HmType.MP3_IP_SOUND_FILE || hmType == HmType.DIMMER_MP3_COLOR) {
+                                Integer datapointId = DbUtil.getDatapointId(hmc.rowId, "LEVEL");
+                                if (datapointId != null) {
+                                    ControlHelper.sendOrder(ctx, datapointId, "0", toastHandler, false, true);
+                                }
+                            } else {
+                                ControlHelper.sendOrder(ctx, hmc.rowId, "0", toastHandler, hmType == HmType.SYSVARIABLE,
+                                        false);
+                            }
                         }
                     }
                 });

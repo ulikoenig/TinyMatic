@@ -72,6 +72,9 @@ public class ImageAdapter extends BaseAdapter {
             R.drawable.icon_new37,
             R.drawable.icon_new38,
             R.drawable.icon_new39,
+            R.drawable.icon_new40,
+            R.drawable.icon_new41,
+            R.drawable.icon_new42,
             R.drawable.old_icon1,
             R.drawable.old_icon2,
             R.drawable.old_icon3,
@@ -290,4 +293,4 @@ public class ImageAdapter extends BaseAdapter {
 
         return convertView;
     }
-}    
+}

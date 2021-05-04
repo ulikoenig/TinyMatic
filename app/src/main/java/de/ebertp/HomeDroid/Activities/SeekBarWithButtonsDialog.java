@@ -12,9 +12,6 @@ import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.RectShape;
 import android.os.Bundle;
 import android.os.Handler;
-
-import androidx.appcompat.view.ContextThemeWrapper;
-
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.MotionEvent;
@@ -23,21 +20,19 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.GridLayout;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import androidx.appcompat.view.ContextThemeWrapper;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import com.flask.colorpicker.ColorPickerView;
 import com.flask.colorpicker.OnColorSelectedListener;
 import com.flask.colorpicker.builder.ColorPickerClickListener;
 import com.flask.colorpicker.builder.ColorPickerDialogBuilder;
 import com.triggertrap.seekarc.SeekArc;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import de.ebertp.HomeDroid.Communication.Control.ControlHelper;
 import de.ebertp.HomeDroid.Communication.Control.HMControllableVar;
 import de.ebertp.HomeDroid.Communication.Control.HmType;
@@ -62,6 +57,7 @@ import static de.ebertp.HomeDroid.Communication.Control.HmType.LAMELLA;
 import static de.ebertp.HomeDroid.Communication.Control.HmType.LAMELLA_IP;
 import static de.ebertp.HomeDroid.Communication.Control.HmType.LIGHTIFY_DIMMER;
 import static de.ebertp.HomeDroid.Communication.Control.HmType.LIGHTIFY_DIMMER_RGBW;
+import static de.ebertp.HomeDroid.Communication.Control.HmType.MP3_IP_SOUND_FILE;
 import static de.ebertp.HomeDroid.Communication.Control.HmType.SYSVARIABLE;
 import static de.ebertp.HomeDroid.Communication.Control.HmType.VARIABLECLIMATE;
 import static de.ebertp.HomeDroid.Communication.Control.HmType.VARIABLECLIMATE_IP;
@@ -131,6 +127,11 @@ public class SeekBarWithButtonsDialog extends ThemedDialogActivity {
     LinearLayout mColorLayout;
     @BindView(R.id.button_color)
     Button mButtonColor;
+
+    @BindView(R.id.layout_sound)
+    LinearLayout mSoundLayout;
+    @BindView(R.id.button_sound)
+    Button mButtonSound;
 
     @BindView(R.id.layout_open_close)
     LinearLayout mLayoutOpenClose;
@@ -212,6 +213,11 @@ public class SeekBarWithButtonsDialog extends ThemedDialogActivity {
         if (hms.type == DIMMER_IP_COLOR) {
             mColorLayout.setVisibility(View.VISIBLE);
             addColorButtonHandling();
+        }
+
+        if (hms.type == MP3_IP_SOUND_FILE) {
+            mSoundLayout.setVisibility(View.VISIBLE);
+            addSoundButtonHandling();
         }
 
         if (hms.type == WINDOW || hms.type == DIMMER || hms.type == DIMMER_IP || hms.type == DIMMER_IP_COLOR || hms.type == LIGHTIFY_DIMMER || hms.type == LIGHTIFY_DIMMER_RGBW) {
@@ -358,6 +364,44 @@ public class SeekBarWithButtonsDialog extends ThemedDialogActivity {
                 i.putExtras(bun);
 
                 SeekBarWithButtonsDialog.this.startActivityForResult(i, Util.REQUEST_REFRESH_NOTIFY);
+            }
+        });
+    }
+
+    private void addSoundButtonHandling() {
+        mButtonSound.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Integer soundFile = DbUtil.getDatapointInt(hms.rowId, "SOUNDFILE");
+
+
+                int selectedSoundFile = -1;
+                if (soundFile != null) {
+                    selectedSoundFile = soundFile;
+                }
+
+                final AlertDialog.Builder dialog = new AlertDialog.Builder(new ContextThemeWrapper(SeekBarWithButtonsDialog.this, getTheme()));
+                dialog.setTitle(R.string.sound);
+                // 0: internal - 252
+                String[] soundNumbers = new String[253];
+                for (int i = 0; i <= 252; ++i) {
+                    if (i == 0) {
+                        soundNumbers[i] = String.valueOf(i) + ": " + getResources().getString(R.string.internal_sound);
+                        continue;
+                    }
+
+                    soundNumbers[i] = String.valueOf(i);
+                }
+
+                dialog.setSingleChoiceItems(soundNumbers, selectedSoundFile, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        int datapointId = DbUtil.getDatapointId(hms.rowId, "SOUNDFILE");
+                        ControlHelper.sendOrder(SeekBarWithButtonsDialog.this, datapointId, Integer.toString(i), toastHandler, false, true);
+                        dialogInterface.dismiss();
+                    }
+                });
+                dialog.create().show();
             }
         });
     }
