@@ -1602,7 +1602,7 @@ public class ListViewGenerator {
     private View CO2View(View v, HMChannel hmc) {
         Double concentration = DbUtil.getDatapointDouble(hmc.rowId, "CONCENTRATION");
         if (concentration != null) {
-            mViewAdder.addNewValue(v, R.drawable.flat_humidity, Double.toString(Math.round(concentration)) + "ppm");
+            mViewAdder.addNewValue(v, R.drawable.flat_humidity, (int) Math.round(concentration) + " ppm");
         }
 
         return v;
