@@ -372,6 +372,8 @@
     <string name="color_yellow">Gelb</string>
     <string name="color_white">Weiß</string>
     <string name="color">Farbe</string>
+    <string name="sound">MP3-Datei</string>
+    <string name="internal_sound">Interner Sound</string>
     <string name="location_permission_missing">TinyMatic: Standort-Zugriff für WLAN-Erkennung nicht möglich.\n\n Bitte unter Einstellungen > Netzwerkeinstellungen erlauben.</string>
     <string name="validate_ssl">SSL Zertifikat prüfen</string>
     <string name="fix_wifi">Standort-Zugriff erlauben</string>

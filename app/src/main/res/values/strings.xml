@@ -387,6 +387,8 @@
     <string name="color_yellow">Yellow</string>
     <string name="color_white">White</string>
     <string name="color">Color</string>
+    <string name="sound">MP3-File</string>
+    <string name="internal_sound">Internal Sound</string>
     <string name="location_permission_missing">TinyMatic: Location access permission is missing for wifi detection. Please grant location access in network settings</string>
     <string name="validate_ssl">Validate SSL Certificate</string>
     <string name="fix_wifi">Grant location access</string>
