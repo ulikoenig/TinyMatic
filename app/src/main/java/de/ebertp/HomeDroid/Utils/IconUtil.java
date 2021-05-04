@@ -103,6 +103,21 @@ public class IconUtil {
                 resId = R.drawable.icon16;
                 break;
             default:
+                String lowerCaseName = rawName.toLowerCase();
+
+                if (lowerCaseName.contains("arbeit") || lowerCaseName.contains("work")) {
+                    resId = R.drawable.icon_new40;
+                } else if (lowerCaseName.contains("auto") || lowerCaseName.contains("car")) {
+                    resId = R.drawable.icon2;
+                } else if (lowerCaseName.contains("dach") || lowerCaseName.contains("attic")) {
+                    resId = R.drawable.icon_new41;
+                } else if (lowerCaseName.contains("einfahrt") || lowerCaseName.contains("driveway") || lowerCaseName.contains("straße") || lowerCaseName.contains("street")) {
+                    resId = R.drawable.icon_new42;
+                } else if (lowerCaseName.contains("wc")) {
+                    resId = R.drawable.icon4;
+                } else if (lowerCaseName.contains("kind") || lowerCaseName.contains("child")) {
+                    resId = R.drawable.icon_new26;
+                }
                 break;
         }
 
