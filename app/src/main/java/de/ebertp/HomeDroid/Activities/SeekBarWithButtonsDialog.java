@@ -53,6 +53,7 @@ import static de.ebertp.HomeDroid.Communication.Control.HmType.COLOR;
 import static de.ebertp.HomeDroid.Communication.Control.HmType.DIMMER;
 import static de.ebertp.HomeDroid.Communication.Control.HmType.DIMMER_IP;
 import static de.ebertp.HomeDroid.Communication.Control.HmType.DIMMER_IP_COLOR;
+import static de.ebertp.HomeDroid.Communication.Control.HmType.DIMMER_MP3_COLOR;
 import static de.ebertp.HomeDroid.Communication.Control.HmType.LAMELLA;
 import static de.ebertp.HomeDroid.Communication.Control.HmType.LAMELLA_IP;
 import static de.ebertp.HomeDroid.Communication.Control.HmType.LIGHTIFY_DIMMER;
@@ -178,7 +179,7 @@ public class SeekBarWithButtonsDialog extends ThemedDialogActivity {
         mProgressUnit.setText(hms.unit);
 
         if (hms.type == COLOR || hms.type == BLIND || hms.type == BLIND_WITH_LAMELLA || hms.type == LAMELLA || hms.type == BLIND_WITH_LAMELLA_IP || hms.type == LAMELLA_IP
-                || hms.type == DIMMER || hms.type == DIMMER_IP || hms.type == DIMMER_IP_COLOR || hms.type == LIGHTIFY_DIMMER || hms.type == LIGHTIFY_DIMMER_RGBW) {
+                || hms.type == DIMMER || hms.type == DIMMER_IP || hms.type == DIMMER_IP_COLOR || hms.type == LIGHTIFY_DIMMER || hms.type == LIGHTIFY_DIMMER_RGBW || hms.type == DIMMER_MP3_COLOR) {
             mNumOfDecimalPoints = NO_DECIMAL;
         } else if (hms.type == SYSVARIABLE) {
             mNumOfDecimalPoints = TWO_DECIMAL;
@@ -210,7 +211,7 @@ public class SeekBarWithButtonsDialog extends ThemedDialogActivity {
             addLamellaIpButtonHandling();
         }
 
-        if (hms.type == DIMMER_IP_COLOR) {
+        if (hms.type == DIMMER_IP_COLOR || hms.type == DIMMER_MP3_COLOR) {
             mColorLayout.setVisibility(View.VISIBLE);
             addColorButtonHandling();
         }
@@ -220,7 +221,7 @@ public class SeekBarWithButtonsDialog extends ThemedDialogActivity {
             addSoundButtonHandling();
         }
 
-        if (hms.type == WINDOW || hms.type == DIMMER || hms.type == DIMMER_IP || hms.type == DIMMER_IP_COLOR || hms.type == LIGHTIFY_DIMMER || hms.type == LIGHTIFY_DIMMER_RGBW) {
+        if (hms.type == WINDOW || hms.type == DIMMER || hms.type == DIMMER_IP || hms.type == DIMMER_IP_COLOR || hms.type == LIGHTIFY_DIMMER || hms.type == LIGHTIFY_DIMMER_RGBW || hms.type == DIMMER_MP3_COLOR) {
             mLayoutOpenClose.setVisibility(View.VISIBLE);
             addOpenCloseButtonHandling();
 
@@ -230,7 +231,7 @@ public class SeekBarWithButtonsDialog extends ThemedDialogActivity {
             }
         }
 
-        if (hms.type == DIMMER || hms.type == DIMMER_IP || hms.type == DIMMER_IP_COLOR) {
+        if (hms.type == DIMMER || hms.type == DIMMER_IP || hms.type == DIMMER_IP_COLOR || hms.type == DIMMER_MP3_COLOR) {
             mButtonReset.setVisibility(View.VISIBLE);
             addResetButtonHandling();
         }
