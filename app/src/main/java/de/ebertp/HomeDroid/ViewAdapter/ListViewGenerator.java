@@ -264,7 +264,9 @@ public class ListViewGenerator {
             SwitchKeyView(v, hmc);
         } else if (type.equals("HmIP-DLD")) {
             // hide all other channels
-            if (hmc.channelIndex == 1) {
+            if (hmc.channelIndex == 0) {
+                BatteryView(v, hmc);
+            } else if (hmc.channelIndex == 1) {
                 LockIpView(v, hmc);
             } else if (hmc.channelIndex >= 2 && hmc.channelIndex <= 9) {
                 StateView(v, hmc, R.drawable.btn_check_on_holo_dark_hm, R.drawable.btn_check_off_holo_dark_hm);
@@ -284,7 +286,11 @@ public class ListViewGenerator {
                 || type.equalsIgnoreCase("HM-RCV-50") || type.equals("HMW-RCV-50") || type.equals("HmIP-DSD-PCB") || type.startsWith("HmIPW-BRC")) {
             TasterView(v, hmc);
         } else if (type.startsWith("HmIP-FCI") || type.startsWith("HmIPW-DRI")) {
-            TasterAndStateView(v, hmc);
+            if (hmc.channelIndex == 0) {
+                BatteryView(v, hmc);
+            } else {
+                TasterAndStateView(v, hmc);
+            }
         } else if (type.startsWith("HM-MOD-EM-8")) {
             ModeView(v, hmc);
         } else if (type.equalsIgnoreCase("HM-RC-19") || type.equalsIgnoreCase("HM-RC-19-B") || type.equalsIgnoreCase(
@@ -347,7 +353,11 @@ public class ListViewGenerator {
                 MotionView(v, hmc);
             }
         } else if (type.startsWith("HM-Sec-MDIR") || type.startsWith("HM-Sen-MDIR") || type.equalsIgnoreCase("HM-Sec-MD") || type.equalsIgnoreCase("HM-MD") || type.equals("HmIP-STV")) {
-            MotionView(v, hmc);
+            if (hmc.channelIndex == 0) {
+                BatteryView(v, hmc);
+            } else {
+                MotionView(v, hmc);
+            }
         } else if (type.equalsIgnoreCase("HM-Sec-RHS") || type.equalsIgnoreCase("HM-Sec-RHS-2") || type.equalsIgnoreCase("HM-Sec-XX") || type.equalsIgnoreCase(
                 "ZEL STG RM FDK")) {
             WindowView(v, hmc);
@@ -450,13 +460,17 @@ public class ListViewGenerator {
         } else if (type.equalsIgnoreCase("HM-Sys-sRP-Pl")) {
             v = null;
         } else if (Util.startsWithIgnoreCase(type, "HMIP-eTRV")) {
-            if (hmc.channelIndex == 1) {
+            if (hmc.channelIndex == 0) {
+                BatteryView(v, hmc);
+            } else if (hmc.channelIndex == 1) {
                 ThermostatIpView(v, hmc, 6, 30, "°C");
             } else {
                 v = null;
             }
         } else if (Util.startsWithIgnoreCase(type, "HmIP-WTH") || type.equalsIgnoreCase("HmIPW-WTH") || Util.startsWithIgnoreCase(type, "HmIP-BWTH") || Util.startsWithIgnoreCase(type, "HmIP-STH") || Util.startsWithIgnoreCase(type, "HmIPW-STH") || type.equals("ALPHA-IP-RBG")) {
-            if (hmc.channelIndex == 1) {
+            if (hmc.channelIndex == 0) {
+                BatteryView(v, hmc);
+            } else if (hmc.channelIndex == 1) {
                 ClimateControlIpView(v, hmc, 6, 30, "°C");
             } else if (hmc.channelIndex >= 9) {
                 StateView(v, hmc, R.drawable.btn_check_on_holo_dark_hm, R.drawable.btn_check_off_holo_dark_hm);
@@ -520,33 +534,61 @@ public class ListViewGenerator {
         } else if (type.equals("HmIP-FDT")) {
             VariableView(v, hmc, 0, 100, "%", HmType.DIMMER_IP, R.drawable.flat_light_off_2, R.drawable.flat_light_on_2);
         } else if (type.equalsIgnoreCase("HmIP-SWD")) {
-            AlarmStateView(v, hmc);
+            if (hmc.channelIndex == 0) {
+                BatteryView(v, hmc);
+            } else {
+                AlarmStateView(v, hmc);
+            }
         } else if (Util.startsWithIgnoreCase(type, "HMIP-SWDO") || type.equalsIgnoreCase("HmIP-SCI") || type.startsWith("HmIP-SWDM")) {
-            if (hmc.channelIndex == 1) {
+            if (hmc.channelIndex == 0) {
+                BatteryView(v, hmc);
+            } else if (hmc.channelIndex == 1) {
                 OpenClosedView(v, hmc);
             } else {
                 v = null;
             }
         } else if (Util.startsWithIgnoreCase(type, "HmIP-WRC")) {
-            TasterView(v, hmc);
+            if (hmc.channelIndex == 0) {
+                BatteryView(v, hmc);
+            } else {
+                TasterView(v, hmc);
+            }
         } else if (type.equals("HmIP-SMI") || type.startsWith("HmIP-SMO")) {
             MotionIPView(v, hmc);
-        } else if (type.equals("HmIP-SAM") || type.equals("HmIP-STV")) {
-            MotionIPOnlyView(v, hmc);
+        } else if (type.equals("HmIP-SAM")) {
+            if (hmc.channelIndex == 0) {
+                BatteryView(v, hmc);
+            } else {
+                MotionIPOnlyView(v, hmc);
+            }
         } else if (type.equals("HmIP-SMI55") || type.equals("HmIPW-SMI55")) {
-            if (hmc.channelIndex <= 2) {
+            if (hmc.channelIndex == 0) {
+                MotionIPView(v, hmc);
+            } else if (hmc.channelIndex <= 2) {
                 TasterView(v, hmc);
             } else {
                 MotionIPView(v, hmc);
             }
         } else if (type.equals("HmIP-SPI") || type.equals("HmIPW-SPI")) {
-            PresenceIPView(v, hmc);
+            if (hmc.channelIndex == 0) {
+                BatteryView(v, hmc);
+            } else {
+                PresenceIPView(v, hmc);
+            }
         } else if (type.equals("HmIP-SRH")) {
-            WindowView(v, hmc);
+            if (hmc.channelIndex == 0) {
+                BatteryView(v, hmc);
+            } else {
+                WindowView(v, hmc);
+            }
         } else if (type.equals("HmIP-SWSD")) {
             SmokeIPView(v, hmc);
         } else if (type.equals("HmIP-SPDR")) {
-            DirectionIPView(v, hmc);
+            if (hmc.channelIndex == 0) {
+                BatteryView(v, hmc);
+            } else {
+                DirectionIPView(v, hmc);
+            }
         } else if (type.equals("HmIP-ASIR")) {
             if (hmc.channelIndex == 1) {
                 TasterView(v, hmc);
@@ -566,7 +608,9 @@ public class ListViewGenerator {
                 setIcon(v, R.drawable.icon_gahle1);
             }
         } else if (type.equals("HmIP-ASIR-O") || type.equals("HmIP-ASIR-2")) {
-            if (hmc.channelIndex == 3) {
+            if (hmc.channelIndex == 0) {
+                BatteryView(v, hmc);
+            } else if (hmc.channelIndex == 3) {
                 AlarmSireneStateView(v, hmc);
             } else {
                 v = null;
@@ -587,9 +631,17 @@ public class ListViewGenerator {
                 IpWeekProgramView(v, hmc);
             }
         } else if (Util.startsWithIgnoreCase(type, "HmIP-KRC")) {
-            TasterView(v, hmc);
+            if (hmc.channelIndex == 0) {
+                BatteryView(v, hmc);
+            } else {
+                TasterView(v, hmc);
+            }
         } else if (Util.startsWithIgnoreCase(type, "HmIP-RC")) {
-            TasterView(v, hmc);
+            if (hmc.channelIndex == 0) {
+                BatteryView(v, hmc);
+            } else {
+                TasterView(v, hmc);
+            }
         } else if (type.equals("HmIP-FBL") || type.equals("HmIP-BBL")) {
             if (hmc.channelIndex < 3) {
                 TasterView(v, hmc);
@@ -629,9 +681,13 @@ public class ListViewGenerator {
                 v = IpWeekProgramView(v, hmc);
             }
         } else if (type.equals("HmIP-PCBS") || type.equals("HmIP-PCBS-BAT")) {
-            if (hmc.channelIndex == 1) {
+            if (hmc.channelIndex == 0) {
+                BatteryView(v, hmc);
+            } else if (hmc.channelIndex == 1) {
                 TasterView(v, hmc);
-            } else {
+            }/* else if (hmc.channelIndex == 6) {
+                IpWeekProgramView(v, hmc);
+            }*/ else {
                 SwitchView(v, hmc);
             }
         } else if (type.equals("HmIP-PCBS2")) {
@@ -643,7 +699,11 @@ public class ListViewGenerator {
                 IpWeekProgramView(v, hmc);
             }
         } else if (type.equals("HmIP-BRC2") || type.equals("HmIP-DBB")) {
-            TasterView(v, hmc);
+            if (hmc.channelIndex == 0) {
+                BatteryView(v, hmc);
+            } else {
+                TasterView(v, hmc);
+            }
         } else if (type.equals("HmIP-MOD-RC8")) {
             ModeView(v, hmc);
         } else if (type.equals("HmIP-MOD-OC8")) {
@@ -1650,6 +1710,21 @@ public class ListViewGenerator {
         }
     }
 
+    private View BatteryView(View v, HMChannel hmc) {
+        Boolean lowBattery = DbUtil.getDatapointBoolean(hmc.rowId, "LOW_BAT");
+
+        Double battery = DbUtil.getDatapointDouble(hmc.rowId, "OPERATING_VOLTAGE");
+        if (battery != null && battery > 0) {
+            View setPointView = mViewAdder.addNewValue(v, R.drawable.flat_battery, Math.round(battery * 10) / 10. + " V");
+
+            if (lowBattery != null && lowBattery) {
+                ((TextView) setPointView.findViewById(R.id.value)).setTextColor(ctx.getResources().getColor(R.color.orange));
+            }
+        }
+
+        return v;
+    }
+
     private View TasterView(View v, HMChannel hmc) {
         Integer pressShortId = DbUtil.getDatapointId(hmc.rowId, "PRESS_SHORT");
         if (pressShortId == null) {
@@ -2214,6 +2289,17 @@ public class ListViewGenerator {
         Boolean motion = DbUtil.getDatapointBoolean(hmc.rowId, "MOTION");
         if (motion != null && motion) {
             mViewAdder.addNewValue(v, R.drawable.flat_alarm, ViewAdder.IconSize.SMALL);
+        }
+
+        Boolean lowBattery = DbUtil.getDatapointBoolean(hmc.rowId, "LOW_BAT");
+
+        Double battery = DbUtil.getDatapointDouble(hmc.rowId, "OPERATING_VOLTAGE");
+        if (battery != null) {
+            View setPointView = mViewAdder.addNewValue(v, R.drawable.flat_battery, Math.round(battery * 10) / 10. + " V");
+
+            if (lowBattery != null && lowBattery) {
+                ((TextView) setPointView.findViewById(R.id.value)).setTextColor(ctx.getResources().getColor(R.color.orange));
+            }
         }
 
         setIcon(v, R.drawable.icon10);
