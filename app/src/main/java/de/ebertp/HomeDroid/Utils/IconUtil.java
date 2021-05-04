@@ -113,7 +113,7 @@ public class IconUtil {
                     resId = R.drawable.icon_new41;
                 } else if (lowerCaseName.contains("einfahrt") || lowerCaseName.contains("driveway") || lowerCaseName.contains("straße") || lowerCaseName.contains("street")) {
                     resId = R.drawable.icon_new42;
-                } else if (lowerCaseName.contains("wc")) {
+                } else if (lowerCaseName.contains("wc ") || lowerCaseName.endsWith(" wc")) {
                     resId = R.drawable.icon4;
                 } else if (lowerCaseName.contains("kind") || lowerCaseName.contains("child")) {
                     resId = R.drawable.icon_new26;
