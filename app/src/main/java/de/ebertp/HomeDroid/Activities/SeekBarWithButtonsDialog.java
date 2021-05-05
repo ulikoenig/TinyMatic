@@ -20,6 +20,7 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.GridLayout;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
@@ -607,6 +608,8 @@ public class SeekBarWithButtonsDialog extends ThemedDialogActivity {
     private void addProfileButtonHandling() {
         mButtonProfile.setOnClickListener(view -> {
             ViewGroup dialogView = (ViewGroup) getLayoutInflater().inflate(R.layout.dialog_grid, null);
+            GridLayout dialogGrid = dialogView.findViewById(R.id.dialog_grid);
+
             final AlertDialog alertDialog = new AlertDialog.Builder(SeekBarWithButtonsDialog.this).setView(dialogView).create();
 
             int profileCount;
@@ -627,7 +630,7 @@ public class SeekBarWithButtonsDialog extends ThemedDialogActivity {
                         }
                 );
                 child.setText(Integer.toString(profile));
-                dialogView.addView(child);
+                dialogGrid.addView(child);
             }
 
             alertDialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
