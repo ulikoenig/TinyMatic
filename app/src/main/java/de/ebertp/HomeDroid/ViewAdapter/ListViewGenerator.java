@@ -2868,6 +2868,17 @@ public class ListViewGenerator {
             }
         }
 
+        Boolean boostMode = DbUtil.getDatapointBoolean(hmc.rowId, "BOOST_MODE");
+        if (boostMode != null) {
+            if (boostMode) {
+                String boostStatus = ctx.getResources().getString(R.string.mode_boost);
+
+                View setPointView = mViewAdder.addNewValue(v, R.drawable.flat_power, boostStatus);
+
+                ((TextView) setPointView.findViewById(R.id.value)).setTextColor(ctx.getResources().getColor(R.color.orange));
+            }
+        }
+
         Integer activeProfile = DbUtil.getDatapointInt(hmc.rowId, "ACTIVE_PROFILE");
         if (activeProfile != null) {
             mViewAdder.addNewValue(v, R.drawable.flat_list, activeProfile.toString());

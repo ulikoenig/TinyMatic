@@ -595,9 +595,18 @@ public class SeekBarWithButtonsDialog extends ThemedDialogActivity {
             @Override
             public void onClick(View view) {
                 Cursor dData = dBm.datapointDbAdapter.fetchItemsByChannelAndType(hms.rowId, "BOOST_MODE");
-                if (dData.getCount() != 0) {
-                    int datapointId = dData.getInt(dData.getColumnIndex("_id"));
-                    ControlHelper.sendOrder(SeekBarWithButtonsDialog.this, datapointId, "true", toastHandler, false, true);
+                Boolean active = DbUtil.getDatapointBoolean(hms.rowId, "BOOST_MODE");
+
+                if (active != null && active) {
+                    if (dData.getCount() != 0) {
+                        int datapointId = dData.getInt(dData.getColumnIndex("_id"));
+                        ControlHelper.sendOrder(SeekBarWithButtonsDialog.this, datapointId, "false", toastHandler, false, true);
+                    }
+                } else {
+                    if (dData.getCount() != 0) {
+                        int datapointId = dData.getInt(dData.getColumnIndex("_id"));
+                        ControlHelper.sendOrder(SeekBarWithButtonsDialog.this, datapointId, "true", toastHandler, false, true);
+                    }
                 }
 
                 finishOnSent();
