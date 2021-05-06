@@ -1281,6 +1281,11 @@ public class ListViewGenerator {
             mViewAdder.addNewValue(v, R.drawable.flat_power, Double.toString(Math.round(power * 10) / 10.) + "W");
         }
 
+        Double current = DbUtil.getDatapointDouble(hmc.rowId, "CURRENT");
+        if (current != null) {
+            mViewAdder.addNewValue(v, R.drawable.flat_power, Math.round(current) + "mA");
+        }
+
         setIcon(v, R.drawable.icon_new33);
         v.setTag(new HMControllable(hmc.rowId, hmc.name, HmType.PASSIV));
         return v;
