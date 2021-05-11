@@ -21,6 +21,7 @@ import de.ebertp.HomeDroid.FixedDragSortController;
 import de.ebertp.HomeDroid.HomeDroidApp;
 import de.ebertp.HomeDroid.Model.HMObject;
 import de.ebertp.HomeDroid.R;
+import de.ebertp.HomeDroid.Utils.NumberAwareStringComparator;
 import de.ebertp.HomeDroid.Utils.PreferenceHelper;
 import de.ebertp.HomeDroid.ViewAdapter.StatusListViewAdapter;
 import timber.log.Timber;
@@ -165,7 +166,7 @@ public abstract class SortableListDataFragment extends ListDataFragment {
         @Override
         public int compare(HMObject o1, HMObject o2) {
             if (o1.getSortOrder() == null && o2.getSortOrder() == null) {
-                int compareResult = o1.getName().compareToIgnoreCase(o2.getName());
+                int compareResult = NumberAwareStringComparator.INSTANCE.compare(o1.getName(), o2.getName());
                 if (compareResult < 0) {
                     return -1;
                 } else if (compareResult > 0) {
