@@ -47,6 +47,7 @@ import java.util.List;
 import de.ebertp.HomeDroid.Backup.BackupHelper;
 import de.ebertp.HomeDroid.Communication.Rpc.RpcForegroundService;
 import de.ebertp.HomeDroid.Communication.Utils;
+import de.ebertp.HomeDroid.Connection.IpAdressHelper;
 import de.ebertp.HomeDroid.DbAdapter.DataBaseAdapterManager;
 import de.ebertp.HomeDroid.HomeDroidApp;
 import de.ebertp.HomeDroid.Location.GeoFencingManager;
@@ -258,6 +259,18 @@ public class NewPreferenceFragment extends PreferenceFragment implements SharedP
             }
         }
         getPreferenceScreen().getSharedPreferences().registerOnSharedPreferenceChangeListener(this);
+
+        updateHomeWifiConnectionIcon();
+    }
+
+    private void updateHomeWifiConnectionIcon() {
+        Preference selectWifi = findPreference("select_wifi");
+
+        if (IpAdressHelper.isHomeWifiConnected(getContext())) {
+            selectWifi.setIcon(R.drawable.metro_83);
+        } else {
+            selectWifi.setIcon(R.drawable.metro_41);
+        }
     }
 
     private String getHomeWifisAsString() {
@@ -742,6 +755,7 @@ public class NewPreferenceFragment extends PreferenceFragment implements SharedP
                 }
                 PreferenceHelper.setHomeWifi(getContext(), trimmed);
                 mSelectWifiPref.setSummary(getHomeWifisAsString());
+                updateHomeWifiConnectionIcon();
             }
         });
 
@@ -805,6 +819,8 @@ public class NewPreferenceFragment extends PreferenceFragment implements SharedP
 
                 PreferenceHelper.setHomeWifi(getContext(), newSelectedWifis);
                 mSelectWifiPref.setSummary(getHomeWifisAsString());
+
+                updateHomeWifiConnectionIcon();
             }
         });
 
