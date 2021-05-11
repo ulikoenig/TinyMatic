@@ -62,7 +62,7 @@ public class CursorToObjectHelper {
         deviceName = c.getColumnIndex("device_name") == -1 ? null : c.getString(c.getColumnIndex("device_name"));
 
         if (detectUnrenamedChannels && deviceName != null && name.matches("^.+?:\\d*$")) {
-            name = deviceName + "(" + channelIndex + ")";
+            name = deviceName + " [" + channelIndex + "]";
         }
         HMChannel hmChannel = new HMChannel(rowId, address, channelIndex, name, type, isVisible, isOperate);
 
