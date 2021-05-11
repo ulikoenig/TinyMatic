@@ -165,6 +165,13 @@ public abstract class SortableListDataFragment extends ListDataFragment {
         @Override
         public int compare(HMObject o1, HMObject o2) {
             if (o1.getSortOrder() == null && o2.getSortOrder() == null) {
+                int compareResult = o1.getName().compareToIgnoreCase(o2.getName());
+                if (compareResult < 0) {
+                    return -1;
+                } else if (compareResult > 0) {
+                    return 1;
+                }
+
                 return 0;
             }
 
