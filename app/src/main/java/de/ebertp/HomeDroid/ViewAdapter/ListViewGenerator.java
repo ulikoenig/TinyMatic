@@ -488,7 +488,7 @@ public class ListViewGenerator {
         } else if (type.equalsIgnoreCase("HmIP-SCTH230")) {
             if (hmc.channelIndex == 1) {
                 CO2View(v, hmc);
-            }  else if (hmc.channelIndex == 4) {
+            } else if (hmc.channelIndex == 4) {
                 ClimateControlIpView(v, hmc, 5, 35, "°C");
             } else if (hmc.channelIndex == 7) {
                 StateView(v, hmc, R.drawable.btn_check_on_holo_dark_hm, R.drawable.btn_check_off_holo_dark_hm);
@@ -883,6 +883,8 @@ public class ListViewGenerator {
             }
         } else if (type.equals("HmIP-SRD")) {
             RainingIPView(v, hmc);
+        } else if (type.equals("HmIP-STE2-PCB")) {
+            TemperatureIPView(v, hmc);
         } else if (type.equals("EASYCam") || type.equals("Outdoor-EASYCam")) {
             EasyCamView(v, hmc);
         } else if (type.equals("EASYLed") || type.equals("EASYLed2")) {
@@ -2973,6 +2975,17 @@ public class ListViewGenerator {
             mViewAdder.addNewValue(v, R.drawable.flat_temp, Double.toString(Math.round(temperature * 10) / 10.) + "°C");
         }
 
+
+        setIcon(v, R.drawable.icon10);
+        v.setTag(new HMControllable(hmc.rowId, hmc.name, HmType.PASSIV));
+        return v;
+    }
+
+    private View TemperatureIPView(View v, HMChannel hmc) {
+        Double temperature = DbUtil.getDatapointDouble(hmc.rowId, "ACTUAL_TEMPERATURE");
+        if (temperature != null) {
+            mViewAdder.addNewValue(v, R.drawable.flat_temp, Double.toString(Math.round(temperature * 10) / 10.) + "°C");
+        }
 
         setIcon(v, R.drawable.icon10);
         v.setTag(new HMControllable(hmc.rowId, hmc.name, HmType.PASSIV));
