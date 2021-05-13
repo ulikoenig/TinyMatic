@@ -55,7 +55,7 @@
     <string name="display_author"> © Philipp Ebert 2018</string>
     <string name="help">Help</string>
     <string name="configuration">Settings</string>
-
+    <string name="battery_saving_enabled_description">If you encounter issues with background synchronization, please add a battery saving exception in the settings of your phone.</string>
     <!-- Room Controls -->
     <string name="cancel">Cancel</string>
     <string name="close">Close</string>
@@ -233,9 +233,9 @@
     <string name="delete_all">Delete all</string>
 
 
-	<string name="speed">Speed</string>
-	<string name="vane_position">Vane Position</string>
-	<string name="room_occupancy">Room Occupancy</string>
+    <string name="speed">Speed</string>
+    <string name="vane_position">Vane Position</string>
+    <string name="room_occupancy">Room Occupancy</string>
 
     <string name="room">Room</string>
     <string name="category">Category</string>
@@ -252,7 +252,7 @@
     <string name="rename_layer">Rename Layer</string>
     <string name="delete_layer">Delete Layer</string>
     <string name="set_default_layer">Set Default Layer</string>
-	<string name="saved">Saved</string>
+    <string name="saved">Saved</string>
 
     <string name="layer_welcome_title">Hello Floorplan</string>
     <string name="layer_welcome_message">Welcome to the new floor plan mode! Here you can create your own personal control interface. You can add floors and put any HomeMatic item on them.\n\nThe normal interface is designed for tablets. If you want to use it on a phone or just have more space, use minimal mode. You can change it later.</string>
@@ -265,7 +265,7 @@
 
     <string name="error_background">Error loading background image</string>
 
-        <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="do_not_show">Do not show this message again</string>
 

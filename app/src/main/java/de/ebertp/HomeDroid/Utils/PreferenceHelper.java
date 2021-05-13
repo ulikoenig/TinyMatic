@@ -828,4 +828,17 @@ public class PreferenceHelper {
         editor.putLong("UserDimissedRatingAtSystemTimeMilis", systemTimeMilis);
         editor.commit();
     }
+
+    public static void setIsBatterySavingNoteDismissed(Context ctx, boolean b) {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(ctx);
+        SharedPreferences.Editor editor = prefs.edit();
+
+        editor.putBoolean("is_batter_note_dismissed", b);
+        editor.commit();
+    }
+
+    public static boolean isBatterySavingNoteDismissed(Context ctx) {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(ctx);
+        return prefs.getBoolean("is_batter_note_dismissed", false);
+    }
 }
