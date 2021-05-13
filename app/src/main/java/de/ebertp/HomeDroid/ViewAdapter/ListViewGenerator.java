@@ -501,7 +501,7 @@ public class ListViewGenerator {
             } else if (hmc.channelIndex == 15) {
                 IpWeekProgramView(v, hmc);
             }
-        } else if (type.equals("HmIP-FALMOT-C12")) {
+        } else if (type.equals("HmIP-FALMOT-C12") || type.equals("HmIPW-FALMOT")) {
             if (hmc.channelIndex <= 12) {
                 FloorHeatingLevel(v, hmc);
             }
