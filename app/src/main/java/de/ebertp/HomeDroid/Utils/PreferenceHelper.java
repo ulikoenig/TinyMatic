@@ -290,8 +290,16 @@ public class PreferenceHelper {
 
     public static String getServer(Context ctx) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(ctx);
-        return prefs.getString("server", "homematic-ccu2");
+        return prefs.getString("server", "homematic-ccu3");
     }
+
+    public static void setServer(Context ctx, String address) {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(ctx);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString("server", address);
+        editor.commit();
+    }
+
 
     public static boolean isRemotePortUsed(Context ctx) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(ctx);

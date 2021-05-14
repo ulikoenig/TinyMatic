@@ -288,14 +288,15 @@
     <string name="executed_last">Executed last:\n</string>
     <string name="advanced_settings">Advanced Settings</string>
     <string name="enable_update_service">Enable Update Service</string>
-    <string name="wizard_tutorial_intro">TinyMatic allows you to control your HomeMatic System. To do so, it requires the XML-API Patch to be installed on the HomeMatic CCU. Installation Instructions can be found at www.tinymatic.de/installation</string>
+    <string name="wizard_tutorial_intro">TinyMatic allows you to control your HomeMatic System. To do so, it requires the XML-API Addon to be installed on the HomeMatic CCU.\n\nPlease install the XML-API Addon before you proceed.</string>
+    <string name="wizard_tutorial_address_prompt">Please input the local IP address of your CCU (for example 192.168.0.123).\n\nYou can also use the hostname, which is homematic-ccu2 for the CCU2 and homematic-ccu3 for the CCU3.\n\nYou can change this again later.</string>
     <string name="wizard_tutorial_installation_btn">Installation Guide</string>
-    <string name="wizard_tutorial_licence">TinyMatic is not free, but you can try the app for an unlimited amount of time.</string>
+    <string name="wizard_tutorial_licence">TinyMatic is not free, but you can try the app for an <u>unlimited amount of time</u>.</string>
     <string name="wizard_tutorial_licence_btn">More information</string>
     <string name="wizard_tutorial_help">If you have further questions, you can check the help screen. Have fun with TinyMatic</string>
     <string name="wizard_tutorial_btn">Help &amp; Feedback</string>
-    <string name="wizard_terms_text">Welcome to TinyMatic! By clicking next you accept the terms of use</string>
-    <string name="wizard_terms_btn">Terms of Use</string>
+    <string name="wizard_terms_intro">Welcome to TinyMatic! This wizard will help you set up the app.</string>
+    <string name="wizard_terms_text">Please be aware of the terms of the <u>Terms of Use</u></string>
     <string name="welcome_to_homedroid">Welcome to TinyMatic!</string>
     <string name="back">Back</string>
     <string name="next">Next</string>
@@ -412,6 +413,7 @@
     <string name="wifi_name_input_description">Exact name of your Wifi network (SSID)\n\nSeparate multiple SSIDs by comma</string>
     <string name="wifi_name_input_hint">Wifi SSID</string>
     <string name="wifi_name_input_title">Home Wifi Name</string>
+    <string name="wizard_tutorial_finished">Setup is finished!</string>
 
 
 </resources>

@@ -3,10 +3,12 @@ package de.ebertp.HomeDroid.Activities.Wizard;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+
+import androidx.fragment.app.Fragment;
 
 import de.ebertp.HomeDroid.R;
 
@@ -30,6 +32,12 @@ public class WizardTermsFragment extends Fragment {
                 builder.show();
             }
         });
+
+        Button leftButton = rootView.findViewById(R.id.btn_left);
+        leftButton.setVisibility(View.GONE);
+
+        Button rightButton = rootView.findViewById(R.id.btn_right);
+        rightButton.setOnClickListener(v -> ((WizardActivity) getActivity()).next());
 
         return rootView;
     }

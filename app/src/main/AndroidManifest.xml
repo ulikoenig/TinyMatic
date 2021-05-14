@@ -49,9 +49,9 @@
         android:hardwareAccelerated="true"
         android:icon="@mipmap/icon"
         android:label="@string/app_name"
+        android:requestLegacyExternalStorage="true"
         android:theme="@style/HomeDroidLight"
         android:usesCleartextTraffic="true"
-        android:requestLegacyExternalStorage="true"
         tools:replace="android:icon">
 
         <receiver android:name="de.ebertp.HomeDroid.Communication.Public.SyncReceiver">
@@ -206,7 +206,7 @@
         <activity
             android:name="de.ebertp.HomeDroid.Activities.Wizard.WizardActivity"
             android:label="@string/first_start_title"
-            android:theme="@style/DialogThemeLight" />
+            android:theme="@style/HomeDroidDark" />
         <activity
             android:name="de.ebertp.HomeDroid.Activities.WidgetClickActivity"
             android:excludeFromRecents="true"
