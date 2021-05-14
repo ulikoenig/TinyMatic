@@ -1,27 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:layout_margin="8dp"
     android:orientation="vertical">
 
+    <RelativeLayout
+        android:id="@+id/batterySavingLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="8dp"
+        android:visibility="gone"
+        tools:visibility="visible">
+
+        <ImageView
+            android:id="@+id/batterySavingCloseButton"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:padding="8dp"
+            android:src="@drawable/ic_action_menu_sync_cancel"
+            tools:tint="@color/dark_gray" />
+
+        <TextView
+            android:id="@+id/batterySavingText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:background="#22FFFFFF"
+            android:padding="20dp"
+            android:text="@string/battery_saving_enabled_description" />
+
+    </RelativeLayout>
+
     <Button
         android:id="@+id/refreshAllButton"
-        android:text="@string/full_refresh"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center" />
-
-    <TextView
-        android:id="@+id/refreshButtonText"
-        android:text="@string/full_refresh_description"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:gravity="center" />
+        android:text="@string/full_refresh" />
 
     <FrameLayout
         android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
+
+
+    <TextView
+        android:id="@+id/refreshButtonText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="@string/full_refresh_description" />
 </LinearLayout>

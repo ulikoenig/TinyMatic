@@ -6,18 +6,24 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.res.ColorStateList;
 import android.os.Build;
 import android.os.Bundle;
-import androidx.localbroadcastmanager.content.LocalBroadcastManager;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
+import android.os.PowerManager;
 import android.text.InputType;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+import androidx.core.widget.ImageViewCompat;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import de.ebertp.HomeDroid.Communication.Sync.SyncJobIntentService;
 import de.ebertp.HomeDroid.Connection.BroadcastHelper;
@@ -30,6 +36,38 @@ import timber.log.Timber;
 import static de.ebertp.HomeDroid.Communication.DbRefreshManager.EXTRA_SYNC_RES;
 
 public class NewPreferenceActivity extends AppCompatActivity {
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (PreferenceHelper.getPeriodicUpdatesEnabled(this)) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && !PreferenceHelper.isBatterySavingNoteDismissed(this)) {
+                PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
+                if (!pm.isIgnoringBatteryOptimizations(getPackageName())) {
+                    showBatterySavingHint();
+                }
+            }
+        }
+    }
+
+    private void showBatterySavingHint() {
+        ViewGroup layout = findViewById(R.id.batterySavingLayout);
+        layout.setVisibility(View.VISIBLE);
+
+        findViewById(R.id.batterySavingCloseButton).setOnClickListener(v -> {
+                    layout.setVisibility(View.GONE);
+                    PreferenceHelper.setIsBatterySavingNoteDismissed(this, true);
+                }
+        );
+
+        if (!PreferenceHelper.isDarkTheme(this)) {
+            ImageViewCompat.setImageTintList(
+                    findViewById(R.id.batterySavingCloseButton),
+                    ColorStateList.valueOf(
+                            ContextCompat.getColor(this, R.color.dark_gray)
+                    ));
+        }
+    }
 
     protected void onCreate(Bundle savedInstanceState) {
         if (PreferenceHelper.isDarkTheme(this)) {
@@ -55,11 +93,8 @@ public class NewPreferenceActivity extends AppCompatActivity {
                     Toast.makeText(getBaseContext(), getString(R.string.wait_for_refresh), Toast.LENGTH_LONG).show();
                 } else {
                     doFullSync();
-
                 }
             }
-
-
         });
     }
 

@@ -51,6 +51,7 @@
     <string name="next_update">Nächstes Update</string>
     <string name="help">Hilfe</string>
     <string name="configuration">Einstellungen</string>
+    <string name="battery_saving_enabled_description">Hinweis: Bei Problemen mit der Hintergrundsychronisierung bitte eine Ausnahme für TinyMatic in den Energiesparoptionen des Geräts einrichten.</string>
 
     <!-- Room Controls -->
     <string name="cancel">Abbrechen</string>
