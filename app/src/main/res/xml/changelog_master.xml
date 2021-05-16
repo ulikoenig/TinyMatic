@@ -5,10 +5,10 @@
         versioncode="2170000">
         <change>HmIPW-FALMOT</change>
         <change>HmIP-STE2-PCB</change>
-        <change>Improved support for HmIP-MP3</change>
+        <change>Improved support for HmIP-MP3P</change>
         <change>Show battery status for some devices</change>
         <change>Energy saving exception hint added</change>
-        <change>Improved alphabetical sortinng</change>
+        <change>Improved alphabetical sorting</change>
         <change>More default icons</change>
         <change>Bug fixes and small improvements</change>
     </release>
