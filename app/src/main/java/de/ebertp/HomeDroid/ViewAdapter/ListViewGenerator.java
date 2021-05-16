@@ -501,6 +501,10 @@ public class ListViewGenerator {
             } else if (hmc.channelIndex == 15) {
                 IpWeekProgramView(v, hmc);
             }
+        } else if (type.equalsIgnoreCase("HmIP-SFD")) {
+            if (hmc.channelIndex == 1) {
+                DustView(v, hmc);
+            }
         } else if (type.equals("HmIP-FALMOT-C12") || type.equals("HmIPW-FALMOT")) {
             if (hmc.channelIndex <= 12) {
                 FloorHeatingLevel(v, hmc);
@@ -1018,6 +1022,23 @@ public class ListViewGenerator {
         } else if (DbUtil.hasDatapoint(hmc.rowId, "WEEK_PROGRAM_CHANNEL_LOCKS")) {
             IpWeekProgramView(v, hmc);
         }
+    }
+
+    /**
+     * Try for handling all devices in a generic, dynamic way
+     **/
+    private View TemperatureView(View v, HMChannel hmc) {
+        Double temperature = DbUtil.getDatapointDouble(hmc.rowId, "ACTUAL_TEMPERATURE");
+        if (temperature != null) {
+            mViewAdder.addNewValue(v, R.drawable.flat_temp, Math.round(temperature * 10) / 10. + "°C");
+        }
+
+        Double humidity = DbUtil.getDatapointDouble(hmc.rowId, "HUMIDITY");
+        if (humidity != null) {
+            mViewAdder.addNewValue(v, R.drawable.flat_humidity, humidity + "%");
+        }
+
+        return v;
     }
 
     private View ErrorView(View v, HMChannel hmc) {
@@ -1610,6 +1631,37 @@ public class ListViewGenerator {
         Double concentration = DbUtil.getDatapointDouble(hmc.rowId, "CONCENTRATION");
         if (concentration != null) {
             mViewAdder.addNewValue(v, R.drawable.flat_humidity, (int) Math.round(concentration) + " ppm");
+        }
+
+        return v;
+    }
+
+    private View DustView(View v, HMChannel hmc) {
+        TemperatureView(v, hmc);
+
+        Double particleSize = DbUtil.getDatapointDouble(hmc.rowId, "TYPICAL_PARTICLE_SIZE");
+        if (particleSize != null) {
+            mViewAdder.addNewValue(v, Math.round(particleSize * 10) / 10. + "µm");
+        }
+
+        Double massConcentration25 = DbUtil.getDatapointDouble(hmc.rowId, "MASS_CONCENTRATION_PM_2_5");
+        if (massConcentration25 != null) {
+            mViewAdder.addNewValue(v, Math.round(massConcentration25 * 10) / 10. + "µg/m³");
+        }
+
+        Double numberConcentration25 = DbUtil.getDatapointDouble(hmc.rowId, "NUMBER_CONCENTRATION_PM_2_5");
+        if (numberConcentration25 != null) {
+            mViewAdder.addNewValue(v, Math.round(numberConcentration25 * 10) / 10. + "1/cm³");
+        }
+
+        Double massConcentration10 = DbUtil.getDatapointDouble(hmc.rowId, "MASS_CONCENTRATION_PM_10");
+        if (massConcentration10 != null) {
+            mViewAdder.addNewValue(v, Math.round(massConcentration10 * 10) / 10. + "µg/m³");
+        }
+
+        Double numberConcentration10 = DbUtil.getDatapointDouble(hmc.rowId, "NUMBER_CONCENTRATION_PM_10");
+        if (numberConcentration10 != null) {
+            mViewAdder.addNewValue(v, Math.round(numberConcentration10 * 10) / 10. + "1/cm³");
         }
 
         return v;
