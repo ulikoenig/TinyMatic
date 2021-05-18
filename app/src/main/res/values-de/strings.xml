@@ -287,14 +287,15 @@
     <string name="advanced_settings">Erweiterte Einstellungen</string>
     <string name="enable_update_service">Update-Service aktivieren</string>
 
-    <string name="wizard_tutorial_intro">Für die Kommunikation mit dem HomeMatic-System muss der XML-API Patch auf die HomeMatic CCU installiert werden. Zur Anleitung: www.tinymatic.de/installation</string>
+    <string name="wizard_tutorial_intro">Für die Kommunikation mit dem HomeMatic-System ist das XML-API Addon für die CCU erforderlich.\n\nBitte installieren Sie zunächst das XML-API Addon auf der CCU bevor Sie vorfahren.</string>
+    <string name="wizard_tutorial_address_prompt">Bitte geben Sie unten die lokale IP-Adresse der CCU ein.\n(zum Beispiel 192.168.0.123)\n\nAlternativ können Sie den Hostnamen der CCU verwenden: "homematic-ccu2" für die CCU2 oder "homematic-ccu3" für die CCU3.\n\nSie können diese Einstellung jederzeit ändern.</string>
     <string name="wizard_tutorial_installation_btn">Anleitung</string>
-    <string name="wizard_tutorial_licence">TinyMatic ist nicht kostenlos, sie können die App aber unbegrenzt testen.</string>
+    <string name="wizard_tutorial_licence">TinyMatic ist nicht kostenlos, sie können die App aber <u>unbegrenzt testen</u>.</string>
     <string name="wizard_tutorial_licence_btn">Mehr Informationen</string>
     <string name="wizard_tutorial_help">Weitere Informationen finden Sie in der Hilfe. Viel Spaß mit TinyMatic!</string>
     <string name="wizard_tutorial_btn">Hilfe &amp; Feedback</string>
-    <string name="wizard_terms_text">Willkommen zu TinyMatic! Mit dem Klick auf Weiter akzeptieren Sie die Nutzungbedingungen</string>
-    <string name="wizard_terms_btn">Nutzungsbedingungen</string>
+    <string name="wizard_terms_intro">Willkommen zu TinyMatic! Dieser Assistent führt Sie durch die Einrichtung der App.</string>
+    <string name="wizard_terms_text">Bitte beachten Sie außerdem die <u>Nutzungsbedingungen</u></string>
     <string name="welcome_to_homedroid">Willkommen zu TinyMatic!</string>
     <string name="back">Zurück</string>
     <string name="next">Weiter</string>
@@ -398,4 +399,5 @@
     <string name="wifi_name_input_description">Exakter Name des WLAN-Netzwerks (SSID)\n\nMehrere Netzwerke mit Komma trennen</string>
     <string name="wifi_name_input_hint">WLAN SSID</string>
     <string name="wifi_name_input_title">Heimnetzwerk festlegen</string>
+    <string name="wizard_tutorial_finished">Einrichtung abgeschlossen!</string>
 </resources>
