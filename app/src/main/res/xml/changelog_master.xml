@@ -5,6 +5,7 @@
         versioncode="2170000">
         <change>HmIPW-FALMOT</change>
         <change>HmIP-STE2-PCB</change>
+        <change>HmIP-SFD</change>
         <change>Improved support for HmIP-MP3P</change>
         <change>Show battery status for some devices</change>
         <change>Energy saving exception hint added</change>
