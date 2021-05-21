@@ -1,5 +1,7 @@
 package de.ebertp.HomeDroid.Model;
 
+import de.ebertp.HomeDroid.Utils.Util;
+
 public class HMChannel extends HMObject {
 
     public int channelIndex;
@@ -90,5 +92,7 @@ public class HMChannel extends HMObject {
         this.isOperate = isOperate;
     }
 
-
+    public boolean isIPDevice() {
+        return Util.startsWithIgnoreCase(type, "HmIP-");
+    }
 }

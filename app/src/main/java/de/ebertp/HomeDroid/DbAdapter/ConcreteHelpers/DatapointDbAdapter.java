@@ -28,15 +28,19 @@ public class DatapointDbAdapter extends BaseDbAdapter {
     protected String KEY_CHANNEL = "channel_id";
     protected String KEY_VALUE = "value";
     protected String KEY_VALUETYPE = "value_type";
+    protected String KEY_VALUEUNIT = "value_unit";
+    protected String KEY_OPERATIONS = "operations";
     protected String KEY_TIMESTAMP = "timestamp";
 
-    public long createItem(int id, String name, String point_type, int channel_id, String value, int value_type, String timestamp) {
+    public long createItem(int id, String name, String point_type, int channel_id, String value, int value_type, String value_unit, Integer operations, String timestamp) {
         ContentValues initialValues = new ContentValues();
         initialValues.put(KEY_ROWID, id);
         initialValues.put(KEY_NAME, name);
         initialValues.put(KEY_PTYPE, point_type);
         initialValues.put(KEY_CHANNEL, channel_id);
         initialValues.put(KEY_VALUE, value);
+        initialValues.put(KEY_VALUEUNIT, value_unit);
+        initialValues.put(KEY_OPERATIONS, operations);
         initialValues.put(KEY_VALUETYPE, value_type);
         initialValues.put(KEY_TIMESTAMP, timestamp);
 
@@ -44,13 +48,15 @@ public class DatapointDbAdapter extends BaseDbAdapter {
         return mDb.insert(tableName, null, initialValues);
     }
 
-    public long replaceItem(int id, String name, String point_type, int channel_id, String value, int value_type, String timestamp) {
+    public long replaceItem(int id, String name, String point_type, int channel_id, String value, int value_type, String value_unit, int operations, String timestamp) {
         ContentValues initialValues = new ContentValues();
         initialValues.put(KEY_ROWID, id);
         initialValues.put(KEY_NAME, name);
         initialValues.put(KEY_PTYPE, point_type);
         initialValues.put(KEY_CHANNEL, channel_id);
         initialValues.put(KEY_VALUE, value);
+        initialValues.put(KEY_VALUEUNIT, value_unit);
+        initialValues.put(KEY_OPERATIONS, operations);
         initialValues.put(KEY_VALUETYPE, value_type);
         initialValues.put(KEY_TIMESTAMP, timestamp);
 
@@ -61,13 +67,13 @@ public class DatapointDbAdapter extends BaseDbAdapter {
         }
     }
 
-    public boolean updateIfDifferent(int id, String name, String point_type, int channel_id, String value, int value_type, String timestamp) {
+    public boolean updateIfDifferent(int id, String name, String point_type, int channel_id, String value, int value_type, String value_unit, Integer operations, String timestamp) {
 
         Cursor mCursor = mDb.query(true, tableName, new String[]{KEY_VALUE}, KEY_ROWID + "=" + "?",
                 new String[]{Long.toString(id)}, null, null, null, null);
 
         if (!mCursor.moveToFirst()) {
-            createItem(id, name, point_type, channel_id, value, value_type, timestamp);
+            createItem(id, name, point_type, channel_id, value, value_type, value_unit, operations, timestamp);
             mCursor.close();
             return true;
         }
@@ -126,7 +132,7 @@ public class DatapointDbAdapter extends BaseDbAdapter {
         return mCursor;
     }
 
-    private static String sql = "INSERT OR REPLACE INTO datapoints (_id, name, point_type, channel_id, value, value_type, timestamp) VALUES (?,?,?,?,?,?,?)";
+    private static String sql = "INSERT OR REPLACE INTO datapoints (_id, name, point_type, channel_id, value, value_type, value_unit, operations, timestamp) VALUES (?,?,?,?,?,?,?,?,?)";
 
     public void updateBulk(ArrayList<HmDatapoint> data) {
         SQLiteStatement st = mDb.compileStatement(sql);
@@ -142,7 +148,9 @@ public class DatapointDbAdapter extends BaseDbAdapter {
                 st.bindLong(4, data.get(i).getChannel_id());
                 st.bindString(5, data.get(i).getValue());
                 st.bindLong(6, data.get(i).getValue_type());
-                st.bindString(7, data.get(i).getTimestamp());
+                st.bindString(7, data.get(i).getValue_unit());
+                st.bindLong(8, data.get(i).getOperations());
+                st.bindString(9, data.get(i).getTimestamp());
                 st.executeInsert();
 
             }

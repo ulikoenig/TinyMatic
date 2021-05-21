@@ -112,8 +112,10 @@ public class XmlToDbParser {
                 String name;
                 int ise_id;
                 int ise_id_room = 0;
+                Integer operations;
                 boolean isVisible, isOperate;
                 String value;
+                String valueUnit;
                 String timestamp;
 
                 XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
@@ -323,6 +325,14 @@ public class XmlToDbParser {
                                         name = xpp.getAttributeValue(null, "name");
                                         type = xpp.getAttributeValue(null, "type");
                                         value = xpp.getAttributeValue(null, "value");
+                                        valueUnit = xpp.getAttributeValue(null, "valueunit");
+
+                                        String operationsValue = xpp.getAttributeValue(null, "operations");
+                                        if (operationsValue != null) {
+                                            operations = Integer.parseInt(operationsValue);
+                                        } else {
+                                            operations = null;
+                                        }
 
                                         ise_id = Integer.parseInt(xpp.getAttributeValue(null, "ise_id"))
                                                 + fullPrefix;
@@ -332,7 +342,7 @@ public class XmlToDbParser {
                                         timestamp = xpp.getAttributeValue(null, "timestamp");
                                         datapoints.add(
                                                 new HmDatapoint(ise_id, channel_id, value_type, name, type,
-                                                        value, timestamp));
+                                                        value, valueUnit, operations, timestamp));
                                     }
                                 }
                             }
@@ -464,6 +474,8 @@ public class XmlToDbParser {
                 int ise_id;
                 String value;
                 String type;
+                Integer operations;
+                String valueUnit;
 
                 XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
                 factory.setNamespaceAware(true);
@@ -498,11 +510,20 @@ public class XmlToDbParser {
                                 name = xpp.getAttributeValue(null, "name");
                                 type = xpp.getAttributeValue(null, "type");
                                 value = xpp.getAttributeValue(null, "value");
+                                valueUnit = xpp.getAttributeValue(null, "valueunit");
                                 ise_id = Integer.parseInt(xpp.getAttributeValue(null, "ise_id")) + fullPrefix;
                                 value_type = Integer.parseInt(xpp.getAttributeValue(null, "valuetype"));
                                 timestamp = xpp.getAttributeValue(null, "timestamp");
+
+                                String operationsValue = xpp.getAttributeValue(null, "operations");
+                                if (operationsValue != null) {
+                                    operations = Integer.parseInt(operationsValue);
+                                } else {
+                                    operations = null;
+                                }
+
                                 dbM.datapointDbAdapter.updateIfDifferent(ise_id, name, type, channel_id, value,
-                                        value_type, timestamp);
+                                        value_type, valueUnit, operations, timestamp);
                             }
                         }
                     }
@@ -579,6 +600,8 @@ public class XmlToDbParser {
                 int ise_id, channel_id = 0, value_type;
                 boolean gotChannel = false;
                 String timestamp;
+                String valueUnit;
+                Integer operations;
 
                 while (xpp.getEventType() != XmlPullParser.END_DOCUMENT && !isCancelSync()) {
                     if (xpp.getEventType() == XmlPullParser.START_TAG) {
@@ -591,11 +614,20 @@ public class XmlToDbParser {
                                 name = xpp.getAttributeValue(null, "name");
                                 type = xpp.getAttributeValue(null, "type");
                                 value = xpp.getAttributeValue(null, "value");
+                                valueUnit = xpp.getAttributeValue(null, "valueunit");
                                 ise_id = Integer.parseInt(xpp.getAttributeValue(null, "ise_id")) + fullPrefix;
                                 value_type = Integer.parseInt(xpp.getAttributeValue(null, "valuetype"));
                                 timestamp = xpp.getAttributeValue(null, "timestamp");
+
+                                String operationsValue = xpp.getAttributeValue(null, "operations");
+                                if (operationsValue != null) {
+                                    operations = Integer.parseInt(operationsValue);
+                                } else {
+                                    operations = null;
+                                }
+
                                 dbM.datapointDbAdapter.updateIfDifferent(ise_id, name, type, channel_id, value,
-                                        value_type, timestamp);
+                                        value_type, valueUnit, operations, timestamp);
                             }
                         }
                     }

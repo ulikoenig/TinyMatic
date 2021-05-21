@@ -5,6 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
 
+import de.ebertp.HomeDroid.Communication.Control.HmDatapoint;
 import de.ebertp.HomeDroid.HomeDroidApp;
 import de.ebertp.HomeDroid.Model.HMObject;
 import de.ebertp.HomeDroid.Model.HMVariable;
@@ -97,6 +98,32 @@ public class DbUtil {
             cursor.close();
         }
         return null;
+    }
+
+    public static ArrayList<HmDatapoint> getDatapoints(int rowId) {
+        Cursor cursor = HomeDroidApp.db().datapointDbAdapter.fetchItemsByChannel(rowId);
+
+        if (cursor == null || !cursor.moveToFirst()) {
+            return null;
+        }
+
+        ArrayList<HmDatapoint> datapoints = new ArrayList<>();
+
+        do {
+            int ise_id = cursor.getInt(cursor.getColumnIndex("_id"));
+            int channel_id = cursor.getInt(cursor.getColumnIndex("channel_id"));
+            int value_type = cursor.getInt(cursor.getColumnIndex("value_type"));
+            String name = cursor.getString(cursor.getColumnIndex("name"));
+            String type = cursor.getString(cursor.getColumnIndex("point_type"));
+            String value = cursor.getString(cursor.getColumnIndex("value"));
+            String value_unit = cursor.getString(cursor.getColumnIndex("value_unit"));
+            String timestamp = cursor.getString(cursor.getColumnIndex("timestamp"));
+            Integer operations = cursor.getInt(cursor.getColumnIndex("operations"));
+
+            datapoints.add(new HmDatapoint(ise_id, channel_id, value_type, name, type, value, value_unit, operations, timestamp));
+        } while (cursor.moveToNext());
+
+        return datapoints;
     }
 
     public static ArrayList<HMObject> getConnectedVariables(int rowId) {

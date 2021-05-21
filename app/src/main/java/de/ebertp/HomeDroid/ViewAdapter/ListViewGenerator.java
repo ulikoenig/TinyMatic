@@ -28,6 +28,7 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 import de.ebertp.HomeDroid.Activities.SeekBarWithButtonsDialog;
@@ -36,6 +37,7 @@ import de.ebertp.HomeDroid.Communication.Control.ControlHelper;
 import de.ebertp.HomeDroid.Communication.Control.HMCheckable;
 import de.ebertp.HomeDroid.Communication.Control.HMControllable;
 import de.ebertp.HomeDroid.Communication.Control.HMControllableVar;
+import de.ebertp.HomeDroid.Communication.Control.HmDatapoint;
 import de.ebertp.HomeDroid.Communication.Control.HmType;
 import de.ebertp.HomeDroid.DbAdapter.ConcreteHelpers.DatapointDbAdapter;
 import de.ebertp.HomeDroid.DbAdapter.DataBaseAdapterManager;
@@ -489,7 +491,7 @@ public class ListViewGenerator {
             if (hmc.channelIndex == 1) {
                 CO2View(v, hmc);
             } else if (hmc.channelIndex == 4) {
-                ClimateControlIpView(v, hmc, 5, 35, "°C");
+                DynamicDatapoints(v, hmc);
             } else if (hmc.channelIndex == 7) {
                 StateView(v, hmc, R.drawable.btn_check_on_holo_dark_hm, R.drawable.btn_check_off_holo_dark_hm);
             } else if (hmc.channelIndex <= 10) {
@@ -518,15 +520,7 @@ public class ListViewGenerator {
                 IpWeekProgramView(v, hmc);
             }
         } else if (Util.startsWithIgnoreCase(type, "HmIP-PSM")) {
-            if (hmc.channelIndex == 2) {
-                StateView(v, hmc, R.drawable.btn_check_on_holo_dark_hm, R.drawable.btn_check_off_holo_dark_hm);
-            } else if (hmc.channelIndex <= 5) {
-                SwitchView(v, hmc);
-            } else if (hmc.channelIndex == 6) {
-                PowerMeterView(v, hmc);
-            } else if (hmc.channelIndex == 8) {
-                IpWeekProgramView(v, hmc);
-            }
+            DynamicDatapoints(v, hmc);
         } else if (type.equalsIgnoreCase("HmIP-BSM") || Util.startsWithIgnoreCase(type, "HmIP-FSM")) {
             selectIPPowerMeterView(v, hmc);
         } else if (type.equals("HmIP-BDT") || type.equals("HmIP-PDT")) {
@@ -1027,6 +1021,120 @@ public class ListViewGenerator {
     /**
      * Try for handling all devices in a generic, dynamic way
      **/
+    private void DynamicDatapoints(View view, HMChannel hmc) {
+        ArrayList<HmDatapoint> datapoints = DbUtil.getDatapoints(hmc.getRowId());
+
+        if (datapoints == null) {
+            return;
+        }
+
+        for (HmDatapoint datapoint : datapoints) {
+            switch (datapoint.getPoint_type()) {
+                case "ACTUAL_TEMPERATURE":
+                    double temperature = Double.parseDouble(datapoint.getValue());
+
+                    // TODO: get valueunit from api, store it to database, extend the model and use here instead of fixed "°C"
+                    mViewAdder.addNewValue(view, R.drawable.flat_temp, Math.round(temperature * 10) / 10. + "°C");
+                    break;
+
+                case "HUMIDITY":
+                    int humidity = Integer.parseInt(datapoint.getValue());
+
+                    // TODO: get valueunit from api, store it to database, extend the model and use here instead of fixed "%"
+                    mViewAdder.addNewValue(view, R.drawable.flat_humidity, humidity + "%");
+                    break;
+
+                case "OPERATING_VOLTAGE":
+                    double operatingVoltage = Double.parseDouble(datapoint.getValue());
+                    if (operatingVoltage > 0) {
+                        View setPointView = mViewAdder.addNewValue(view, R.drawable.flat_battery, Math.round(operatingVoltage * 10) / 10. + " V");
+
+                        Boolean lowBattery = DbUtil.getDatapointBoolean(hmc.rowId, "LOW_BAT"); // TODO: Use datapoint from datapoints array list
+                        if (lowBattery != null && lowBattery) {
+                            ((TextView) setPointView.findViewById(R.id.value)).setTextColor(ctx.getResources().getColor(R.color.orange));
+                        }
+                    }
+                    break;
+
+                case "ENERGY_COUNTER":
+                    double energyCounter = Double.parseDouble(datapoint.getValue());
+
+                    // TODO: get valueunit from api, store it to database, extend the model and use here instead of fixed "Wh"
+                    mViewAdder.addNewValue(view, R.drawable.flat_counter, Math.round(energyCounter * 10) / 10. + "Wh");
+                    break;
+
+                case "POWER":
+                    double power = Double.parseDouble(datapoint.getValue());
+
+                    // TODO: get valueunit from api, store it to database, extend the model and use here instead of fixed "W"
+                    mViewAdder.addNewValue(view, R.drawable.flat_power, Math.round(power * 10) / 10. + "W");
+                    break;
+
+                case "CURRENT":
+                    double current = Double.parseDouble(datapoint.getValue());
+
+                    // TODO: get valueunit from api, store it to database, extend the model and use here instead of fixed "mA"
+                    mViewAdder.addNewValue(view, R.drawable.flat_power, Math.round(current * 10) / 10. + "mA");
+                    break;
+
+                /*case "FREQUENCY":
+                    double frequency = Double.parseDouble(datapoint.getValue());
+
+                    // TODO: get valueunit from api, store it to database, extend the model and use here instead of fixed "Hz"
+                    mViewAdder.addNewValue(view, R.drawable.flat_power, Math.round(frequency * 100) / 100. + "Hz");
+                    break;*/
+
+                /*case "VOLTAGE":
+                    double voltage = Double.parseDouble(datapoint.getValue());
+
+                    // TODO: get valueunit from api, store it to database, extend the model and use here instead of fixed "V"
+                    mViewAdder.addNewValue(view, R.drawable.flat_power, Math.round(voltage * 100) / 100. + "V");
+                    break;*/
+
+                case "CONCENTRATION":
+                    int concentration = Integer.parseInt(datapoint.getValue());
+
+                    // TODO: get valueunit from api, store it to database, extend the model and use here instead of fixed "ppm"
+                    mViewAdder.addNewValue(view, R.drawable.flat_humidity, concentration + "ppm");
+                    break;
+
+                case "LEVEL":
+                    double level = Double.parseDouble(datapoint.getValue());
+
+                    mViewAdder.addNewValue(view, R.drawable.flat_humidity, Math.round(level * 100) + "%");
+                    break;
+
+                case "STATE":
+                    switch(datapoint.getOperations()) {
+                        case 5: // show state only
+                            StateView(view, hmc, R.drawable.btn_check_on_holo_dark_hm, R.drawable.btn_check_off_holo_dark_hm);
+                            break;
+
+                        case 7: // switchable state
+                            SwitchView(view, hmc);
+                            break;
+
+                        default:
+                            boolean state = Boolean.parseBoolean(datapoint.getValue());
+
+                            if (state) {
+                                mViewAdder.addNewValue(view, R.drawable.flat_unlocked, ViewAdder.IconSize.BIG);
+                            } else {
+                                mViewAdder.addNewValue(view, R.drawable.flat_locked, ViewAdder.IconSize.BIG);
+                            }
+                            break;
+                    }
+                    break;
+
+                case "WEEK_PROGRAM_CHANNEL_LOCKS":
+                    if (hmc.isIPDevice()) {
+                        IpWeekProgramView(view, hmc);
+                    }
+                    break;
+            }
+        }
+    }
+
     private View TemperatureView(View v, HMChannel hmc) {
         Double temperature = DbUtil.getDatapointDouble(hmc.rowId, "ACTUAL_TEMPERATURE");
         if (temperature != null) {

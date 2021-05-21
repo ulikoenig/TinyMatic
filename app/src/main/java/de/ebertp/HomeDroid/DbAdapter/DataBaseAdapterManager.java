@@ -44,7 +44,7 @@ import timber.log.Timber;
 public class DataBaseAdapterManager extends OrmLiteSqliteOpenHelper {
 
     public static final String DATABASE_NAME = "data";
-    public static final int DATABASE_VERSION = 35;
+    public static final int DATABASE_VERSION = 36;
     private static final String TAG = "HomeDroid Database";
 
     private SQLiteDatabase mDb;
@@ -325,6 +325,16 @@ public class DataBaseAdapterManager extends OrmLiteSqliteOpenHelper {
 
             if (!columnExists(database, "system_variables", "timestamp")) {
                 database.execSQL("ALTER TABLE " + "system_variables" + " ADD COLUMN " + "timestamp" + " text");
+            }
+        }
+
+        if(oldVersion < 36) {
+            if (!columnExists(database, "datapoints", "operations")) {
+                database.execSQL("ALTER TABLE " + "datapoints" + " ADD COLUMN " + "operations" + " integer");
+            }
+
+            if (!columnExists(database, "datapoints", "valueunit")) {
+                database.execSQL("ALTER TABLE " + "datapoints" + " ADD COLUMN " + "value_unit" + " text");
             }
         }
     }
