@@ -488,21 +488,7 @@ public class ListViewGenerator {
                 StateView(v, hmc, R.drawable.btn_check_on_holo_dark_hm, R.drawable.btn_check_off_holo_dark_hm);
             }
         } else if (type.equalsIgnoreCase("HmIP-SCTH230")) {
-            if (hmc.channelIndex == 1) {
-                CO2View(v, hmc);
-            } else if (hmc.channelIndex == 4) {
-                DynamicDatapoints(v, hmc);
-            } else if (hmc.channelIndex == 7) {
-                StateView(v, hmc, R.drawable.btn_check_on_holo_dark_hm, R.drawable.btn_check_off_holo_dark_hm);
-            } else if (hmc.channelIndex <= 10) {
-                SwitchView(v, hmc);
-            } else if (hmc.channelIndex == 11) {
-                ColorLevelIpView(v, hmc);
-            } else if (hmc.channelIndex <= 14) {
-                VariableView(v, hmc, 0, 100, "%", HmType.DIMMER_IP, R.drawable.flat_light_off_2, R.drawable.flat_light_on_2);
-            } else if (hmc.channelIndex == 15) {
-                IpWeekProgramView(v, hmc);
-            }
+            DynamicDatapoints(v, hmc);
         } else if (type.equalsIgnoreCase("HmIP-SFD")) {
             if (hmc.channelIndex == 1) {
                 DustView(v, hmc);
@@ -1092,7 +1078,7 @@ public class ListViewGenerator {
                     break;*/
 
                 case "CONCENTRATION":
-                    int concentration = Integer.parseInt(datapoint.getValue());
+                    double concentration = Double.parseDouble(datapoint.getValue());
 
                     // TODO: get valueunit from api, store it to database, extend the model and use here instead of fixed "ppm"
                     mViewAdder.addNewValue(view, R.drawable.flat_humidity, concentration + "ppm");
@@ -1101,7 +1087,19 @@ public class ListViewGenerator {
                 case "LEVEL":
                     double level = Double.parseDouble(datapoint.getValue());
 
-                    mViewAdder.addNewValue(view, R.drawable.flat_humidity, Math.round(level * 100) + "%");
+                    switch(datapoint.getOperations()) {
+                        case 5: // show state only
+                            mViewAdder.addNewValue(view, R.drawable.flat_counter, Math.round(level * 100) + "%");
+                            break;
+
+                        case 7: // switchable state
+                            VariableView(view, hmc, 0, 100, "%", HmType.DIMMER_IP, R.drawable.flat_light_off_2, R.drawable.flat_light_on_2);
+                            break;
+
+                        default:
+                            mViewAdder.addNewValue(view, R.drawable.flat_counter, Math.round(level * 100) + "%");
+                            break;
+                    }
                     break;
 
                 case "STATE":
