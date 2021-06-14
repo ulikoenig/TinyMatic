@@ -35,17 +35,10 @@ public class NumberAwareStringComparator implements Comparator<CharSequence> {
                 return +1;
             }
 
-            String string1 = m1.group(2);
-            String string2 = m2.group(2);
-
             BigInteger n1 = new BigInteger(m1.group(2));
             BigInteger n2 = new BigInteger(m2.group(2));
             int numberCompare = n1.compareTo(n2);
-            if (string1.length() > string2.length()) {
-                return -1;
-            } else if (string1.length() < string2.length()) {
-                return 1;
-            } else if (0 != numberCompare) {
+            if (0 != numberCompare) {
                 return numberCompare;
             }
         }
