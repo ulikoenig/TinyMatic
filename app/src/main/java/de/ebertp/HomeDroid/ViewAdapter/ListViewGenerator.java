@@ -463,7 +463,7 @@ public class ListViewGenerator {
             if (hmc.channelIndex == 0) {
                 BatteryView(v, hmc);
             } else if (hmc.channelIndex == 1) {
-                ThermostatIpView(v, hmc, 6, 30, "°C");
+                ThermostatIpView(v, hmc, 5, 30, "°C");
             } else {
                 v = null;
             }
@@ -471,7 +471,7 @@ public class ListViewGenerator {
             if (hmc.channelIndex == 0) {
                 BatteryView(v, hmc);
             } else if (hmc.channelIndex == 1) {
-                ClimateControlIpView(v, hmc, 6, 30, "°C");
+                ClimateControlIpView(v, hmc, 5, 30, "°C");
             } else if (hmc.channelIndex >= 9) {
                 StateView(v, hmc, R.drawable.btn_check_on_holo_dark_hm, R.drawable.btn_check_off_holo_dark_hm);
             } else {
@@ -479,7 +479,7 @@ public class ListViewGenerator {
             }
         } else if (type.equalsIgnoreCase("HmIP-HEATING")) {
             if (hmc.channelIndex == 1) {
-                ClimateControlIpView(v, hmc, 6, 30, "°C");
+                ClimateControlIpView(v, hmc, 5, 30, "°C");
             } else if (hmc.channelIndex == 3) {
                 WindowView(v, hmc);
             } else if (hmc.channelIndex == 4) {
