@@ -507,6 +507,8 @@ public class ListViewGenerator {
             }
         } else if (Util.startsWithIgnoreCase(type, "HmIP-PSM")) {
             DynamicDatapoints(v, hmc);
+        } else if (Util.startsWithIgnoreCase(type, "HmIP-USBSM")) {
+            DynamicDatapoints(v, hmc);
         } else if (type.equalsIgnoreCase("HmIP-BSM") || Util.startsWithIgnoreCase(type, "HmIP-FSM")) {
             selectIPPowerMeterView(v, hmc);
         } else if (type.equals("HmIP-BDT") || type.equals("HmIP-PDT")) {
