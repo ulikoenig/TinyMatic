@@ -1056,6 +1056,8 @@ public class ListViewGenerator {
 
                     // TODO: get valueunit from api, store it to database, extend the model and use here instead of fixed "W"
                     mViewAdder.addNewValue(view, R.drawable.flat_power, Math.round(power * 10) / 10. + "W");
+
+                    setIcon(view, R.drawable.icon16);
                     break;
 
                 case "CURRENT":
@@ -1107,7 +1109,23 @@ public class ListViewGenerator {
                 case "STATE":
                     switch(datapoint.getOperations()) {
                         case 5: // show state only
-                            StateView(view, hmc, R.drawable.btn_check_on_holo_dark_hm, R.drawable.btn_check_off_holo_dark_hm);
+                            String viewableState = DbUtil.getDatapointString(hmc.rowId, "STATE");
+
+                            if (viewableState != null) {
+                                switch (viewableState) {
+                                    case "true":
+                                        mViewAdder.addNewValue(view, R.drawable.btn_check_on_holo_dark_hm, ViewAdder.IconSize.BIG);
+                                        break;
+                                    case "false":
+                                        mViewAdder.addNewValue(view, R.drawable.btn_check_off_holo_dark_hm, ViewAdder.IconSize.BIG);
+                                        break;
+                                }
+                            }
+
+                            setIcon(view, R.drawable.icon_new30);
+
+                            view.setTag(new HMControllable(hmc.rowId, hmc.name, HmType.PASSIV));
+
                             break;
 
                         case 7: // switchable state
