@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <changelog>
     <release
-        version="2.xx.x"
-        versioncode="2xxx">
+        version="2.17.1"
+        versioncode="2171000">
         <change>HmIP-USBSM</change>
         <change>Fehlerbehebungen und kleinere Verbesserungen</change>
     </release>
