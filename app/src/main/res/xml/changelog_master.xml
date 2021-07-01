@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <changelog>
     <release
+        version="2.xx.x"
+        versioncode="2xxx">
+        <change>HmIP-USBSM</change>
+        <change>Bug fixes and small improvements</change>
+    </release>
+    <release
         version="2.17.0"
         versioncode="2170000">
         <change>HmIPW-FALMOT</change>
