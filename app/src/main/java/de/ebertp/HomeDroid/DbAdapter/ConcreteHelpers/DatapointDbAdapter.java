@@ -21,7 +21,8 @@ public class DatapointDbAdapter extends BaseDbAdapter {
 
         this.createTableCommand = "create table if not exists datapoints (_id integer primary key, "
                 + "name text not null, point_type text not null , channel_id int not null,"
-                + "value text not null, value_type int not null, timestamp text not null);";
+                + "value text not null, value_type int not null, timestamp text not null, " +
+                "operations int, value_unit text not null);";
     }
 
     protected String KEY_PTYPE = "point_type";
