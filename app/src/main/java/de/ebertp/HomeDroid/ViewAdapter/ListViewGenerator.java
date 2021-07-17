@@ -721,6 +721,8 @@ public class ListViewGenerator {
             //nothing to do here, just show the name
         } else if (type.equals("VIR-LG-ONOFF")) {
             LightifyPlugView(v, hmc);
+        } else if (type.equals("VIR-LG-WHITE")) {
+            SwitchView(v, hmc);
         } else if (type.equals("VIR-LG-WHITE-DIM") || type.equals("VIR-LG-DIM") || type.equals("VIR-OL-GTW")) {
             VariableView(v, hmc, 0, 100, "%", HmType.LIGHTIFY_DIMMER, R.drawable.flat_light_off_2, R.drawable.flat_light_on_2);
         } else if (type.equals("VIR-LG-RGBW-DIM") || type.equals("VIR-LG-RGB-DIM") || type.equals("VIR-LG-GROUP")) {
