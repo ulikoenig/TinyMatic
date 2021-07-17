@@ -493,7 +493,7 @@ public class ListViewGenerator {
             if (hmc.channelIndex == 1) {
                 DustView(v, hmc);
             }
-        } else if (type.equals("HmIP-FALMOT-C12") || type.equals("HmIPW-FALMOT")) {
+        } else if (type.equals("HmIP-FALMOT-C12") || type.equals("HmIPW-FALMOT-C12")) {
             if (hmc.channelIndex <= 12) {
                 FloorHeatingLevel(v, hmc);
             }
@@ -533,7 +533,7 @@ public class ListViewGenerator {
             } else {
                 v = null;
             }
-        } else if (Util.startsWithIgnoreCase(type, "HmIP-WRC")) {
+        } else if (Util.startsWithIgnoreCase(type, "HmIP-WRC") || Util.startsWithIgnoreCase(type, "HmIPW-WRC")) {
             if (hmc.channelIndex == 0) {
                 BatteryView(v, hmc);
             } else {
@@ -887,6 +887,8 @@ public class ListViewGenerator {
             if (hmc.channelIndex == 1 || hmc.channelIndex == 3) {
                 TasterView(v, hmc);
             }
+        } else if (type.equals("RPI-RF-MOD") || type.equals("HmIP-HAP")) {
+            v = null;
         } else {
             if (PreferenceHelper.isHideUnsupported(ctx)) {
                 v = null;
@@ -1091,7 +1093,7 @@ public class ListViewGenerator {
                 case "LEVEL":
                     double level = Double.parseDouble(datapoint.getValue());
 
-                    switch(datapoint.getOperations()) {
+                    switch (datapoint.getOperations()) {
                         case 5: // show state only
                             mViewAdder.addNewValue(view, R.drawable.flat_counter, Math.round(level * 100) + "%");
                             break;
@@ -1107,7 +1109,7 @@ public class ListViewGenerator {
                     break;
 
                 case "STATE":
-                    switch(datapoint.getOperations()) {
+                    switch (datapoint.getOperations()) {
                         case 5: // show state only
                             String viewableState = DbUtil.getDatapointString(hmc.rowId, "STATE");
 
