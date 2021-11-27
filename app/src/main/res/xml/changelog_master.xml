@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <changelog>
     <release
+        version="2.18.0"
+        versioncode="2180000">
+        <change>Reimplemented Backup functionality for Android 10+</change>
+    </release>
+    <release
         version="2.17.2"
         versioncode="2172000">
         <change>HmIPW-WRC6</change>
