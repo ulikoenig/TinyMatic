@@ -10,6 +10,7 @@ import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.location.Location;
+import android.net.Uri;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
 import android.os.Build;
@@ -34,7 +35,9 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.Toolbar;
+import androidx.documentfile.provider.DocumentFile;
 
+import com.anggrayudi.storage.SimpleStorageHelper;
 import com.github.machinarius.preferencefragment.PreferenceFragment;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -45,6 +48,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import de.ebertp.HomeDroid.Backup.BackupHelper;
+import de.ebertp.HomeDroid.Backup.LegacyBackupHelper;
 import de.ebertp.HomeDroid.Communication.Rpc.RpcForegroundService;
 import de.ebertp.HomeDroid.Communication.Utils;
 import de.ebertp.HomeDroid.Connection.IpAdressHelper;
@@ -71,9 +75,12 @@ public class NewPreferenceFragment extends PreferenceFragment implements SharedP
     private static final int REQUEST_PERMISSION_LOCATION_WIFI_SWITCH = 6;
     private static final int REQUEST_PERMISSION_LOCATION_HOME = 7;
 
+    private SimpleStorageHelper storageHelper = new SimpleStorageHelper(this);
+
     private EditTextPreference mServerAddressPreference;
     private Preference mSelectWifiPref;
     private BackupHelper mBackupHelper;
+    private LegacyBackupHelper mLegacyBackupHelper;
     private CheckBoxPreference syncOnHomeWifiOnlyPref;
     private CheckBoxPreference autoSwitchModePref;
 
@@ -145,29 +152,59 @@ public class NewPreferenceFragment extends PreferenceFragment implements SharedP
 
     private void initBackupPrefs() {
         mBackupHelper = new BackupHelper(getActivity());
+        mLegacyBackupHelper = new LegacyBackupHelper(getActivity());
+
+        Preference backupFolderPref = findPreference("backup_folder");
+
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
+            PreferenceScreen backupPreferences = (PreferenceScreen) findPreference("backup_preferences");
+            backupPreferences.removePreference(backupFolderPref);
+        } else {
+            backupFolderPref.setOnPreferenceClickListener(preference -> {
+                storageHelper.setOnFolderSelected((requestCode, folder) -> {
+                    PreferenceHelper.setBackupAddress(getContext(), folder.getUri().toString());
+                    return null;
+                });
+                storageHelper.openFolderPicker();
+                return true;
+            });
+        }
+
 
         Preference backupImport = findPreference("backup_import");
-        backupImport.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
 
-            public boolean onPreferenceClick(Preference preference) {
-                importBackup();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            backupImport.setSummary("");
+        }
 
-                return true;
-            }
+        backupImport.setOnPreferenceClickListener(preference -> {
+            importBackup();
+            return true;
         });
 
         Preference backupExport = findPreference("backup_export");
-        backupExport.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            backupExport.setSummary("");
+        }
 
-            public boolean onPreferenceClick(Preference preference) {
-                exportBackup();
-                return true;
-            }
+        backupExport.setOnPreferenceClickListener(preference -> {
+            exportBackup();
+            return true;
         });
     }
 
+    private DocumentFile getBackupFolder() {
+        try {
+            String uri = PreferenceHelper.getBackupAddress(getContext());
+            return DocumentFile.fromTreeUri(getContext(), Uri.parse(uri));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     public void importBackup() {
-        if (!PermissionUtil.hasFilePermissions(getActivity())) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q && !PermissionUtil.hasFilePermissions(getActivity())) {
             PermissionUtil.requestFilePermission(this, REQUEST_PERMISSION_FILESYSTEM_IMPORT);
             return;
         }
@@ -177,7 +214,16 @@ public class NewPreferenceFragment extends PreferenceFragment implements SharedP
                 .setCancelable(true)
                 .setPositiveButton(NewPreferenceFragment.this.getString(R.string.yes), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        mBackupHelper.importAll();
+                        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
+                            mLegacyBackupHelper.importAll();
+                        } else {
+                            DocumentFile backupFolder = getBackupFolder();
+                            if (backupFolder == null) {
+                                Toast.makeText(getContext(), getContext().getString(R.string.backup_folder_error), Toast.LENGTH_LONG).show();
+                            } else {
+                                mBackupHelper.importAll(backupFolder);
+                            }
+                        }
                     }
                 })
                 .setNegativeButton(NewPreferenceFragment.this.getString(R.string.no), new DialogInterface.OnClickListener() {
@@ -189,7 +235,7 @@ public class NewPreferenceFragment extends PreferenceFragment implements SharedP
     }
 
     public void exportBackup() {
-        if (!PermissionUtil.hasFilePermissions(getActivity())) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q && !PermissionUtil.hasFilePermissions(getActivity())) {
             PermissionUtil.requestFilePermission(this, REQUEST_PERMISSION_FILESYSTEM_EXPORT);
             return;
         }
@@ -197,17 +243,21 @@ public class NewPreferenceFragment extends PreferenceFragment implements SharedP
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), getDialogTheme());
         builder.setMessage(NewPreferenceFragment.this.getString(R.string.backup_export_quest))
                 .setCancelable(true)
-                .setPositiveButton(NewPreferenceFragment.this.getString(R.string.yes), new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        mBackupHelper.exportAll();
+                .setPositiveButton(NewPreferenceFragment.this.getString(R.string.yes), (dialog, id) -> {
+                    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
+                        mLegacyBackupHelper.exportAll();
                         Util.restart2(getActivity());
+                    } else {
+                        DocumentFile backupFolder = getBackupFolder();
+                        if (backupFolder == null) {
+                            Toast.makeText(getContext(), getContext().getString(R.string.backup_folder_error), Toast.LENGTH_LONG).show();
+                        } else {
+                            mBackupHelper.exportAll(backupFolder);
+                            Util.restart2(getActivity());
+                        }
                     }
                 })
-                .setNegativeButton(NewPreferenceFragment.this.getString(R.string.no), new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        dialog.cancel();
-                    }
-                });
+                .setNegativeButton(NewPreferenceFragment.this.getString(R.string.no), (dialog, id) -> dialog.cancel());
         builder.create().show();
     }
 
@@ -260,7 +310,9 @@ public class NewPreferenceFragment extends PreferenceFragment implements SharedP
         }
         getPreferenceScreen().getSharedPreferences().registerOnSharedPreferenceChangeListener(this);
 
-        updateHomeWifiConnectionIcon();
+        if (PreferenceHelper.isSyncOnHomeWifiOnly(getContext())) {
+            updateHomeWifiConnectionIcon();
+        }
     }
 
     private void updateHomeWifiConnectionIcon() {
@@ -731,7 +783,7 @@ public class NewPreferenceFragment extends PreferenceFragment implements SharedP
         for (String wifiName : oldWifiNames) {
             boolean isLast = oldWifiNames.indexOf(wifiName) == oldWifiNames.size() - 1;
             flattened.append(wifiName);
-            if(!isLast) {
+            if (!isLast) {
                 flattened.append(",");
             }
         }
@@ -740,7 +792,7 @@ public class NewPreferenceFragment extends PreferenceFragment implements SharedP
         EditText wifiNamesEditText = dialogView.findViewById(R.id.wifiNamesEditText);
         builder.setView(dialogView);
 
-        if(flattened.length() >= 0) {
+        if (flattened.length() >= 0) {
             wifiNamesEditText.setText(flattened);
         }
 
@@ -750,7 +802,7 @@ public class NewPreferenceFragment extends PreferenceFragment implements SharedP
                 String value = wifiNamesEditText.getText().toString();
                 List<String> items = Arrays.asList(value.split(","));
                 List<String> trimmed = new ArrayList();
-                for(String item : items) {
+                for (String item : items) {
                     trimmed.add(item.trim());
                 }
                 PreferenceHelper.setHomeWifi(getContext(), trimmed);

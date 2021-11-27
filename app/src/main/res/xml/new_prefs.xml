@@ -233,11 +233,11 @@
                 android:title="@string/use_https" />
 
             <!--<CheckBoxPreference-->
-                <!--android:defaultValue="false"-->
-                <!--android:key="sslCheckOn"-->
-                <!--android:dependency="httpsOn"-->
-                <!--android:visibility="gone"-->
-                <!--android:title="@string/validate_ssl" />-->
+            <!--android:defaultValue="false"-->
+            <!--android:key="sslCheckOn"-->
+            <!--android:dependency="httpsOn"-->
+            <!--android:visibility="gone"-->
+            <!--android:title="@string/validate_ssl" />-->
 
         </PreferenceCategory>
 
@@ -326,7 +326,13 @@
             android:targetPackage="de.ebertp.HomeDroid" />
     </Preference>
 
-    <PreferenceScreen android:title="@string/backup">
+    <PreferenceScreen
+        android:key="backup_preferences"
+        android:title="@string/backup">
+        <Preference
+            android:key="backup_folder"
+            android:summary="@string/backup_folder_summary"
+            android:title="@string/backup_folder_title" />
         <Preference
             android:key="backup_export"
             android:summary="@string/backup_export_sum"

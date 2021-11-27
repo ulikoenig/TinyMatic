@@ -849,4 +849,17 @@ public class PreferenceHelper {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(ctx);
         return prefs.getBoolean("is_batter_note_dismissed", false);
     }
+
+    public static String getBackupAddress(Context ctx) {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(ctx);
+        return prefs.getString("backup_folder", "");
+    }
+
+    public static void setBackupAddress(Context ctx, String address) {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(ctx);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString("backup_folder", address);
+        editor.commit();
+    }
+
 }

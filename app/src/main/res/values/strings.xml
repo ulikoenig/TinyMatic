@@ -414,6 +414,9 @@
     <string name="wifi_name_input_hint">Wifi SSID</string>
     <string name="wifi_name_input_title">Home Wifi Name</string>
     <string name="wizard_tutorial_finished">Setup is finished!</string>
+    <string name="backup_folder_title">Pick or Create Backup Directory</string>
+    <string name="backup_folder_summary">To restore backups created on old app versions, pick \"HomeDroidBackup\"</string>
+    <string name="backup_folder_error">Error accessing directory</string>
 
 
 </resources>

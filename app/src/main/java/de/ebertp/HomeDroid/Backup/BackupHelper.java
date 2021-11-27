@@ -7,11 +7,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.widget.Toast;
+
+import androidx.documentfile.provider.DocumentFile;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -21,11 +22,10 @@ import org.xml.sax.SAXException;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.channels.FileChannel;
+import java.io.OutputStream;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -43,103 +43,103 @@ public class BackupHelper {
     public String appPath;
     private String prefPath;
 
-    private Context mContext;
+    private Context context;
     private final DataBaseAdapterManager mDataBaseAdapterManager;
 
+    private static String MIME_BINARY = "application/octet-stream";
+
     public BackupHelper(Context context) {
-        mContext = context;
+        this.context = context;
         mDataBaseAdapterManager = HomeDroidApp.db();
-        appPath = "/data/" + mContext.getPackageName();
+        appPath = "/data/" + this.context.getPackageName();
         dbPath = appPath + "/databases/" + DataBaseAdapterManager.DATABASE_NAME;
-        prefPath = appPath + "/shared_prefs/" + Util.getSharedPrefName(mContext);
+        prefPath = appPath + "/shared_prefs/" + Util.getSharedPrefName(this.context);
     }
 
-    public boolean exportAll() {
+    public boolean exportAll(DocumentFile folder) {
+        File sourceDb = new File(Environment.getDataDirectory(), dbPath);
+        DocumentFile oldBackupDB = folder.findFile(DataBaseAdapterManager.DATABASE_NAME);
+        if (oldBackupDB != null) {
+            oldBackupDB.delete();
+        }
+        DocumentFile backupDB = folder.createFile(MIME_BINARY, DataBaseAdapterManager.DATABASE_NAME);
 
-        if (Environment.getExternalStorageDirectory().canWrite()) {
+        File sourcePrefs = new File(Environment.getDataDirectory(), prefPath);
+        DocumentFile oldBackupPrefs = folder.findFile(Util.SHARED_PREF_NAME);
+        if (oldBackupPrefs != null) {
+            oldBackupPrefs.delete();
+        }
+        DocumentFile backupPrefs = folder.createFile(MIME_BINARY, Util.SHARED_PREF_NAME);
 
-            File sd = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/HomeDroidBackup/");
-            sd.mkdirs();
-
-            File sourceDb = new File(Environment.getDataDirectory(), dbPath);
-            File backupDB = new File(sd, DataBaseAdapterManager.DATABASE_NAME);
-
-            File sourcePrefs = new File(Environment.getDataDirectory(), prefPath);
-            File backupPrefs = new File(sd, Util.SHARED_PREF_NAME);
-
-            try {
-                if (exportDatabase(sourceDb, backupDB) && exportDatabase(sourcePrefs, backupPrefs)) {
-                    Toast.makeText(mContext, mContext.getString(R.string.backup_export_successful), Toast.LENGTH_LONG).show();
-                    HomeDroidApp.Instance().initDbHelper();
-                } else {
-                    Toast.makeText(mContext, mContext.getString(R.string.backup_export_failed), Toast.LENGTH_LONG).show();
-                    return false;
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
+        try {
+            if (exportDatabase(sourceDb, backupDB) && exportDatabase(sourcePrefs, backupPrefs)) {
+                Toast.makeText(context, context.getString(R.string.backup_export_successful), Toast.LENGTH_LONG).show();
+                HomeDroidApp.Instance().initDbHelper();
+            } else {
+                Toast.makeText(context, context.getString(R.string.backup_export_failed), Toast.LENGTH_LONG).show();
                 return false;
             }
-        } else {
-            Toast.makeText(mContext, mContext.getString(R.string.backup_card_error), Toast.LENGTH_LONG).show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
         }
 
         return true;
     }
 
-    public boolean importAll() {
-        if (Environment.getExternalStorageDirectory().canRead()) {
-            //			Toast.makeText(mContext, "Backup wird importiert..", Toast.LENGTH_LONG).show();
-            File backupDir =
-                    new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/HomeDroidBackup/");
+    public boolean importAll(DocumentFile folder) {
 
-            File destinationDB = new File(Environment.getDataDirectory(), dbPath);
-            File backupDB = new File(backupDir, DataBaseAdapterManager.DATABASE_NAME);
+        File destinationDB = new File(Environment.getDataDirectory(), dbPath);
 
-            //		File destinationPrefs = new File(Environment.getDataDirectory(), prefPath);
-            File backupPrefs = new File(backupDir, Util.SHARED_PREF_NAME);
-
-            try {
-                if (importDatabase(backupDB, destinationDB) && importUserPrefs(backupPrefs)) {
-
-                    Toast.makeText(mContext, mContext.getString(R.string.backup_import_successful), Toast.LENGTH_LONG).show();
-
-                    // Restart
-                    AlarmManager alm = (AlarmManager) mContext.getSystemService(Context.ALARM_SERVICE);
-                    alm.set(AlarmManager.RTC, System.currentTimeMillis() + 1000,
-                            PendingIntent.getActivity(mContext, 0, new Intent(mContext, MainActivity.class), 0));
-
-                    android.os.Process.sendSignal(android.os.Process.myPid(), android.os.Process.SIGNAL_KILL);
-                } else {
-                    Toast.makeText(mContext, mContext.getString(R.string.backup_import_failed), Toast.LENGTH_LONG).show();
-                    return false;
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-                return false;
-            }
-        } else {
-            Toast.makeText(mContext, mContext.getString(R.string.backup_card_error), Toast.LENGTH_LONG).show();
+        DocumentFile backupDB = folder.findFile(DataBaseAdapterManager.DATABASE_NAME);
+        if (backupDB == null) {
+            Toast.makeText(context, context.getString(R.string.backup_import_failed), Toast.LENGTH_LONG).show();
+            return false;
         }
 
+        DocumentFile backupPrefs = folder.findFile(Util.SHARED_PREF_NAME    );
+        if (backupPrefs == null) {
+            Toast.makeText(context, context.getString(R.string.backup_import_failed), Toast.LENGTH_LONG).show();
+            return false;
+        }
+
+        try {
+            if (importDatabase(backupDB, destinationDB) && importUserPrefs(backupPrefs)) {
+
+                Toast.makeText(context, context.getString(R.string.backup_import_successful), Toast.LENGTH_LONG).show();
+
+                // Restart
+                AlarmManager alm = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+                alm.set(AlarmManager.RTC, System.currentTimeMillis() + 1000,
+                        PendingIntent.getActivity(context, 0, new Intent(context, MainActivity.class), 0));
+
+                android.os.Process.sendSignal(android.os.Process.myPid(), android.os.Process.SIGNAL_KILL);
+            } else {
+                Toast.makeText(context, context.getString(R.string.backup_import_failed), Toast.LENGTH_LONG).show();
+                return false;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
         return true;
     }
 
 
-    public boolean exportDatabase(File source, File backup) throws IOException {
+    public boolean exportDatabase(File source, DocumentFile backup) throws IOException {
         Log.i(this.getClass().getName(), "Exporting from " + source + " to " + backup);
 
-        if (source.exists()) {
-            mDataBaseAdapterManager.close();
-            FileChannel src = new FileInputStream(source).getChannel();
-            FileChannel dst = new FileOutputStream(backup).getChannel();
-            dst.transferFrom(src, 0, src.size());
-            src.close();
-            dst.close();
+        mDataBaseAdapterManager.close();
 
-            Log.i(this.getClass().getName(), "Database Export finished successfully");
-            return true;
-        } else {
-            Log.i(this.getClass().getName(), "Database not found, URI:" + dbPath);
+        try (InputStream in = new FileInputStream(source)) {
+            try (OutputStream out = context.getContentResolver().openOutputStream(backup.getUri())) {
+                // Transfer bytes from in to out
+                byte[] buf = new byte[1024];
+                int len;
+                while ((len = in.read(buf)) > 0) {
+                    out.write(buf, 0, len);
+                }
+            }
         }
         return true;
     }
@@ -147,63 +147,36 @@ public class BackupHelper {
     /**
      * Copies the database file at the specified location over the current internal application database.
      */
-    public boolean importDatabase(File backup, File destination) throws IOException {
+    public boolean importDatabase(DocumentFile backup, File destination) throws IOException {
+        Log.i(this.getClass().getName(), "Importing from " + backup + " to " + destination);
         // Close the SQLiteOpenHelper so it will commit the created empty
         // database to internal storage.
         mDataBaseAdapterManager.getWritableDatabase().close();
 
-        Log.i(this.getClass().getName(), "Importing from " + backup + " to " + destination);
 
-        if (backup.exists()) {
-            copyFile(new FileInputStream(backup), new FileOutputStream(destination));
-            mDataBaseAdapterManager.close();
-            Log.i(this.getClass().getName(), "Database Import finished successfully");
-
-            SQLiteDatabase newDb = mDataBaseAdapterManager.getReadableDatabase();
-            Log.i(this.getClass().getName(), "DB version " + newDb.getVersion());
-            newDb.close();
-        } else {
-            Log.i(this.getClass().getName(), "Database not found, URI:" + dbPath);
-            return false;
-        }
-
-        return true;
-
-    }
-
-    public static void copyFile(FileInputStream fromFile, FileOutputStream toFile) throws IOException {
-        FileChannel fromChannel = null;
-        FileChannel toChannel = null;
-        try {
-            fromChannel = fromFile.getChannel();
-            toChannel = toFile.getChannel();
-            fromChannel.transferTo(0, fromChannel.size(), toChannel);
-        } finally {
-            try {
-                if (fromChannel != null) {
-                    fromChannel.close();
-                }
-            } finally {
-                if (toChannel != null) {
-                    toChannel.close();
+        try (InputStream in = context.getContentResolver().openInputStream(backup.getUri())) {
+            try (OutputStream out = new FileOutputStream(destination)) {
+                // Transfer bytes from in to out
+                byte[] buf = new byte[1024];
+                int len;
+                while ((len = in.read(buf)) > 0) {
+                    out.write(buf, 0, len);
                 }
             }
         }
-
+        return true;
     }
 
-
     @SuppressLint("NewApi")
-    public boolean importUserPrefs(File backup) {
+    public boolean importUserPrefs(DocumentFile backup) {
         Log.i(this.getClass().getName(), "Importing Prefs from " + backup);
-        String error = "";
 
         try {
-            SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(mContext);
+            SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
 
             Editor editor = sharedPreferences.edit();
 
-            InputStream inputStream = new FileInputStream(backup);
+            InputStream inputStream = context.getContentResolver().openInputStream(backup.getUri());
 
             DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
@@ -257,17 +230,7 @@ public class BackupHelper {
             }
             return true;
 
-        } catch (FileNotFoundException e) {
-            error = e.getMessage();
-            e.printStackTrace();
-        } catch (ParserConfigurationException e) {
-            error = e.getMessage();
-            e.printStackTrace();
-        } catch (SAXException e) {
-            error = e.getMessage();
-            e.printStackTrace();
-        } catch (IOException e) {
-            error = e.getMessage();
+        } catch (ParserConfigurationException | SAXException | IOException e) {
             e.printStackTrace();
         }
         return false;

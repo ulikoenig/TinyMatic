@@ -400,4 +400,7 @@
     <string name="wifi_name_input_hint">WLAN SSID</string>
     <string name="wifi_name_input_title">Heimnetzwerk festlegen</string>
     <string name="wizard_tutorial_finished">Einrichtung abgeschlossen!</string>
+    <string name="backup_folder_title">Ordner für Backups auswählen oder erstellen</string>
+    <string name="backup_folder_summary">Backups aus alten Versionen der App finden Sie unter \"HomeDroidBackup\"</string>
+    <string name="backup_folder_error">Ordner nicht gefunden</string>
 </resources>
