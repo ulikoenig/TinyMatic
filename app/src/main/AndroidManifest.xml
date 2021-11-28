@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="de.ebertp.HomeDroid"
     android:installLocation="auto"
-    android:versionCode="2180000"
+    android:versionCode="2180001"
     android:versionName="2.18.0">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -42,6 +42,10 @@
     <uses-feature
         android:name="com.google.android.tv"
         android:required="false" />
+
+    <queries>
+        <provider android:authorities="de.ebertp.HomeDroid.Donate.Auth" />
+    </queries>
 
     <application
         android:name=".HomeDroidApp"
