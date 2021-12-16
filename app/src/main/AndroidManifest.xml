@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="de.ebertp.HomeDroid"
     android:installLocation="auto"
-    android:versionCode="2180001"
+    android:versionCode="2180002"
     android:versionName="2.18.0">
 
     <uses-permission android:name="android.permission.INTERNET" />
