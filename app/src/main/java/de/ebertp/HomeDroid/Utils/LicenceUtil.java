@@ -1,6 +1,7 @@
 package de.ebertp.HomeDroid.Utils;
 
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
 import android.util.Log;
@@ -38,6 +39,20 @@ public class LicenceUtil {
                 return true;
             }
         }
+        de.ebertp.HomeDroid.Utils.Util.closeCursor(cursor);
+
+        PackageManager pm = ctx.getPackageManager();
+        boolean isInstalled = isPackageInstalled("de.ebertp.HomeDroid.Donate", pm);
+
+        if(isInstalled) {
+            Log.i(ctx.getClass().getName(), "Activation successful");
+            PreferenceHelper.setIsUnlocked(ctx, true);
+            if (notifiyUserOnSuccess) {
+                Toast.makeText(ctx, ctx.getString(R.string.activation_successful),
+                        Toast.LENGTH_LONG).show();
+            }
+            return true;
+        }
 
         if (notifiyUserOnError) {
             Toast.makeText(ctx, ctx.getString(R.string.activation_not_successful),
@@ -46,10 +61,17 @@ public class LicenceUtil {
 
         PreferenceHelper.setIsUnlocked(ctx, false);
         Log.i(ctx.getClass().getName(), "Activation not successful");
-
-        de.ebertp.HomeDroid.Utils.Util.closeCursor(cursor);
         return false;
 
+    }
+
+    private static boolean isPackageInstalled(String packageName, PackageManager packageManager) {
+        try {
+            packageManager.getPackageInfo(packageName, 0);
+            return true;
+        } catch (PackageManager.NameNotFoundException e) {
+            return false;
+        }
     }
 
 }
