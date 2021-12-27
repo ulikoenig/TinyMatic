@@ -16,6 +16,6 @@ To add support for a new device type, most likely the only place that needs chan
 
 ## Please Note
 
-*TinyMatic is 'All rights reserved', meaning that it is not licenced under an open-source licence (yet) and permission is explicitly not given to publish binaries based on any code in this repository to any app store. You are free to copy, fork and modify the source for private use and I welcome any upstream contribution!
+TinyMatic is 'All rights reserved', meaning that it is not licenced under an open-source licence (yet) and permission is explicitly not given to publish binaries based on any code in this repository to any app store. You are free to copy, fork and modify the source for private use and I welcome any upstream contribution!
 
 (Bottom line, I don't want some weird version of TinyMatic showing up on the Play Store)
