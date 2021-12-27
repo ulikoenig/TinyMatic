@@ -5,7 +5,7 @@ TinyMatic was formerly named `HomeDroid` and was created back when Android 2.1 w
 Even though the app has been updated to work with target SDK 30, most of the code is pretty old with a lot of technical debt.
 
 The app is database driven and the DB is synced with the CCU periodically. The entry point from which the flow can be followed is `PeriodSyncManager`.
-TinyMatic also supports push notifications by running a local XML-RPC server, entry point `RpcForegroundService`´.
+TinyMatic also supports push notifications by running a local XML-RPC server, entry point `RpcForegroundService`.
 
 On the UI Side, the main screen is `MainActivity`.
 All screens that show data are built on top of `ServiceContentActivity` and `DataFragment`.
