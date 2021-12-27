@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="de.ebertp.HomeDroid"
     android:installLocation="auto"
-    android:versionCode="2180002"
+    android:versionCode="2180003"
     android:versionName="2.18.0">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -45,6 +45,7 @@
 
     <queries>
         <provider android:authorities="de.ebertp.HomeDroid.Donate.Auth" />
+        <package android:name="de.ebertp.HomeDroid.Donate" />
     </queries>
 
     <application
