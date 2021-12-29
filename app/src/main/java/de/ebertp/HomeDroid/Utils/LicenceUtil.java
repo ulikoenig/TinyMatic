@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import de.ebertp.HomeDroid.BuildConfig;
 import de.ebertp.HomeDroid.R;
+import timber.log.Timber;
 
 public class LicenceUtil {
 
@@ -17,6 +18,7 @@ public class LicenceUtil {
             return true;
         }
 
+        // This may fail on some newer phones with Android 11+ for whatever reason
         int challenge = 4221;
 
         Uri auth = Uri.parse("content://de.ebertp.HomeDroid.Donate.Auth");
@@ -29,7 +31,7 @@ public class LicenceUtil {
             int rValue = cursor.getInt(0);
 
             if (rValue / 24 == challenge) {
-                Log.i(ctx.getClass().getName(), "Activation successful");
+                Timber.i("Activation successful");
                 PreferenceHelper.setIsUnlocked(ctx, true);
                 if (notifiyUserOnSuccess) {
                     Toast.makeText(ctx, ctx.getString(R.string.activation_successful),
@@ -41,11 +43,12 @@ public class LicenceUtil {
         }
         de.ebertp.HomeDroid.Utils.Util.closeCursor(cursor);
 
+        // fallbback check
         PackageManager pm = ctx.getPackageManager();
         boolean isInstalled = isPackageInstalled("de.ebertp.HomeDroid.Donate", pm);
 
         if(isInstalled) {
-            Log.i(ctx.getClass().getName(), "Activation successful");
+            Timber.i("Activation successful");
             PreferenceHelper.setIsUnlocked(ctx, true);
             if (notifiyUserOnSuccess) {
                 Toast.makeText(ctx, ctx.getString(R.string.activation_successful),
@@ -60,7 +63,7 @@ public class LicenceUtil {
         }
 
         PreferenceHelper.setIsUnlocked(ctx, false);
-        Log.i(ctx.getClass().getName(), "Activation not successful");
+        Timber.i("Activation not successful");
         return false;
 
     }
