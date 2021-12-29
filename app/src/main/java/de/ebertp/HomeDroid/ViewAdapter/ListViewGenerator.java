@@ -273,6 +273,12 @@ public class ListViewGenerator {
             } else if (hmc.channelIndex >= 2 && hmc.channelIndex <= 9) {
                 StateView(v, hmc, R.drawable.btn_check_on_holo_dark_hm, R.drawable.btn_check_off_holo_dark_hm);
             }
+        } else if (type.equals("HmIP-DLS")) {
+            if (hmc.channelIndex == 0) {
+                BatteryView(v, hmc);
+            } else if (hmc.channelIndex == 1) {
+                LockStateIpView(v, hmc);
+            }
         } else if (type.equalsIgnoreCase("HM-RC-4") || type.equalsIgnoreCase("HM-RC-4-B") || type.equalsIgnoreCase("HM-RC-4-3") || type.equalsIgnoreCase(
                 "HM-RC-8") || type.equalsIgnoreCase("HM-RC-P1") || type.equalsIgnoreCase("HM-RC-Sec3")
                 || type.equalsIgnoreCase("HM-RC-Sec3-B") || type.equalsIgnoreCase("HM-RC-Key3")
@@ -547,9 +553,9 @@ public class ListViewGenerator {
             } else {
                 MotionIPOnlyView(v, hmc);
             }
-        } else if (type.equals("HmIP-SMI55") || type.equals("HmIPW-SMI55")) {
+        } else if (type.equals("HmIP-SMI55") || type.startsWith("HmIPW-SMI55")) {
             if (hmc.channelIndex == 0) {
-                MotionIPView(v, hmc);
+                BatteryView(v, hmc);
             } else if (hmc.channelIndex <= 2) {
                 TasterView(v, hmc);
             } else {
@@ -649,7 +655,7 @@ public class ListViewGenerator {
             } else {
                 VariableView(v, hmc, 0, 100, "%", HmType.BLIND_WITH_LAMELLA_IP, R.drawable.flat_blinds_closed, R.drawable.flat_blinds_up);
             }
-        } else if (type.equals("HmIP-HDM1")) {
+        } else if (type.equals("HmIP-HDM1") || type.equals("HmIP-HDM2")) {
             if (hmc.channelIndex == 2) {
                 IpWeekProgramView(v, hmc);
             } else {
@@ -2270,6 +2276,34 @@ public class ListViewGenerator {
         return v;
     }
 
+    private View LockStateIpView(View v, HMChannel hmc) {
+        Integer readValue = DbUtil.getDatapointInt(hmc.rowId, "LOCK_STATE");
+
+        if (readValue != null) {
+            switch (readValue) {
+                case 0:
+                    mViewAdder.addNewValue(v, R.drawable.hvac_unkown, ViewAdder.IconSize.BIG);
+                    break;
+
+                case 1:
+                    mViewAdder.addNewValue(v, R.drawable.flat_locked, ViewAdder.IconSize.BIG);
+                    break;
+
+                case 2:
+                    mViewAdder.addNewValue(v, R.drawable.flat_unlocked, ViewAdder.IconSize.BIG);
+                    break;
+            }
+
+            if (!PreferenceHelper.isDisableNotOperate(ctx) || hmc.isOperate()) {
+                setOnClickListener(v, lockIpHandler);
+            }
+        }
+
+        setIcon(v, R.drawable.icon14);
+        v.setTag(new HMControllable(hmc.rowId, hmc.name, HmType.PASSIV));
+        return v;
+    }
+
     private View LockIpView(View v, HMChannel hmc) {
         Integer readValue = DbUtil.getDatapointInt(hmc.rowId, "LOCK_STATE");
         Integer writeDatapointId = DbUtil.getDatapointId(hmc.rowId, "LOCK_TARGET_LEVEL");
@@ -2537,7 +2571,6 @@ public class ListViewGenerator {
         return v;
     }
 
-
     private View PresenceIPView(View v, HMChannel hmc) {
         Double illumination = DbUtil.getDatapointDouble(hmc.rowId, "ILLUMINATION");
         if (illumination != null) {
@@ -2548,6 +2581,15 @@ public class ListViewGenerator {
         Boolean motion = DbUtil.getDatapointBoolean(hmc.rowId, "PRESENCE_DETECTION_STATE");
         if (motion != null && motion) {
             mViewAdder.addNewValue(v, R.drawable.flat_alarm, ViewAdder.IconSize.SMALL);
+        }
+
+        Boolean active = DbUtil.getDatapointBoolean(hmc.rowId, "PRESENCE_DETECTION_ACTIVE");
+        if (active != null) {
+            if (active) {
+                mViewAdder.addNewValue(v, R.drawable.flat_sound_on, ViewAdder.IconSize.SMALL);
+            } else {
+                mViewAdder.addNewValue(v, R.drawable.flat_sound_off, ViewAdder.IconSize.SMALL);
+            }
         }
 
         setIcon(v, R.drawable.icon_new30);
