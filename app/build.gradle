@@ -12,9 +12,6 @@ android {
         buildConfigField 'boolean', 'LICENSE_CHECK', 'true'
     }
 
-    aaptOptions {
-        cruncherEnabled = false
-    }
 
     buildTypes {
         debug {
@@ -29,15 +26,16 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-
     packagingOptions {
-        exclude 'META-INF/LICENSE.txt'
-        exclude 'META-INF/NOTICE.txt'
+        resources {
+            excludes += ['META-INF/LICENSE.txt', 'META-INF/NOTICE.txt']
+        }
     }
 
-    lintOptions {
+    lint {
         abortOnError false
     }
+
 }
 
 dependencies {
