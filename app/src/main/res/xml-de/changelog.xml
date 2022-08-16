@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <changelog>
     <release
+        version="2.18.2"
+        versioncode="2182000">
+        <change>HmIP-PS-2</change>
+    </release>
+    <release
         version="2.18.1"
         versioncode="2181000">
         <change>HmIP-DLS</change>
