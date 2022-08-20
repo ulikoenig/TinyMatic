@@ -503,7 +503,7 @@ public class ListViewGenerator {
             if (hmc.channelIndex <= 12) {
                 FloorHeatingLevel(v, hmc);
             }
-        } else if (Util.startsWithIgnoreCase(type, "HMIP-PS")) {
+        } else if (type.equals("HmIP-PS") || type.equals("HmIP-PS-2")) {
             if (hmc.channelIndex == 2) {
                 StateView(v, hmc, R.drawable.btn_check_on_holo_dark_hm, R.drawable.btn_check_off_holo_dark_hm);
             } else if (hmc.channelIndex <= 5) {
