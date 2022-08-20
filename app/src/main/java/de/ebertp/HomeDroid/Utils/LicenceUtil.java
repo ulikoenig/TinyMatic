@@ -13,9 +13,10 @@ import timber.log.Timber;
 
 public class LicenceUtil {
 
-    public static boolean checkLicence(Context ctx, boolean notifiyUserOnError, boolean notifiyUserOnSuccess) {
+    public static void checkLicence(Context ctx, boolean notifiyUserOnError, boolean notifiyUserOnSuccess) {
         if (!BuildConfig.LICENSE_CHECK) {
-            return true;
+            PreferenceHelper.setIsUnlocked(ctx, true);
+            return;
         }
 
         // This may fail on some newer phones with Android 11+ for whatever reason
@@ -38,7 +39,7 @@ public class LicenceUtil {
                             Toast.LENGTH_LONG).show();
                 }
                 de.ebertp.HomeDroid.Utils.Util.closeCursor(cursor);
-                return true;
+                return;
             }
         }
         de.ebertp.HomeDroid.Utils.Util.closeCursor(cursor);
@@ -54,7 +55,7 @@ public class LicenceUtil {
                 Toast.makeText(ctx, ctx.getString(R.string.activation_successful),
                         Toast.LENGTH_LONG).show();
             }
-            return true;
+            return;
         }
 
         if (notifiyUserOnError) {
@@ -64,8 +65,6 @@ public class LicenceUtil {
 
         PreferenceHelper.setIsUnlocked(ctx, false);
         Timber.i("Activation not successful");
-        return false;
-
     }
 
     private static boolean isPackageInstalled(String packageName, PackageManager packageManager) {

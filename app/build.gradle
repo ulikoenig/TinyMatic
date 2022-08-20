@@ -9,7 +9,7 @@ android {
     defaultConfig {
         minSdkVersion 19
         targetSdkVersion 30
-        buildConfigField 'boolean', 'LICENSE_CHECK', 'true'
+        buildConfigField 'boolean', 'LICENSE_CHECK', 'false'
     }
 
 
