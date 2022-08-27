@@ -891,6 +891,9 @@ public class ListViewGenerator {
             TemperatureView2(v, hmc);
         } else if (type.equals("HB-UNI-Sen-CAP-MOIST")) {
             HumidityView(v, hmc);
+        } else if (type.equalsIgnoreCase("HB-UNI-Sen-RainCounter")) {
+            WeatherStationView(v, hmc);
+            BatteryView(v, hmc);
         } else if (type.equals("HB-UNI-DMX-Master")) {
             if (hmc.channelIndex == 1 || hmc.channelIndex == 3) {
                 TasterView(v, hmc);
@@ -1904,8 +1907,22 @@ public class ListViewGenerator {
 
         Double rainCounter = DbUtil.getDatapointDouble(hmc.rowId, "RAIN_COUNTER");
         if (rainCounter != null) {
-            mViewAdder.addNewValue(v, R.drawable.flat_rain_counter,
-                    Double.toString(Math.round(rainCounter * 10) / 10.) + "mm");
+            // HB-UNI-SEN-RainCounter: do we have vales for today and yesterday?
+            Double rainToday = DbUtil.getDatapointDoubleByName(hmc.rowId, "Regen heute");
+            Double rainYesterday = DbUtil.getDatapointDoubleByName(hmc.rowId, "Regen gestern");
+
+            if ((rainToday != null) && (rainYesterday != null)) { // HB-UNI-SEN-RainCounter
+                mViewAdder.addNewValue(v, R.drawable.flat_rain,
+                        "Summe:\t", Double.toString(Math.round(rainCounter * 10) / 10.) + " mm");
+                mViewAdder.addNewValue(v, R.drawable.flat_rain_counter,
+                        "Heute: \t\t", Double.toString(Math.round(rainToday * 10) / 10.) + " mm");
+                mViewAdder.addNewValue(v, R.drawable.flat_rain_counter,
+                        "Gestern:\t", Double.toString(Math.round(rainYesterday * 10) / 10.) + " mm");
+            }
+            else { // other RainCounters
+                mViewAdder.addNewValue(v, R.drawable.flat_rain_counter,
+                        Double.toString(Math.round(rainCounter * 10) / 10.) + "mm");
+            }
         }
 
         Double rainToday = DbUtil.getDatapointDoubleByName(hmc.rowId, "${sysVarRainToday}");
@@ -1939,6 +1956,9 @@ public class ListViewGenerator {
         Boolean lowBattery = DbUtil.getDatapointBoolean(hmc.rowId, "LOW_BAT");
 
         Double battery = DbUtil.getDatapointDouble(hmc.rowId, "OPERATING_VOLTAGE");
+        if (battery == null) {
+            battery = DbUtil.getDatapointDouble(hmc.rowId, "BATTERY_VOLTAGE");
+        }
         if (battery != null && battery > 0) {
             View setPointView = mViewAdder.addNewValue(v, R.drawable.flat_battery, Math.round(battery * 10) / 10. + " V");
 
